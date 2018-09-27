@@ -1,0 +1,372 @@
+
+PH_sim.elf:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000290  0c000000  0c000000  00008000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000080  0c000290  0c000290  00008290  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000008  0c000310  0c000310  00008310  2**2
+                  ALLOC
+  3 .ARM.attributes 0000002e  00000000  00000000  00008310  2**0
+                  CONTENTS, READONLY
+  4 .comment      0000002a  00000000  00000000  0000833e  2**0
+                  CONTENTS, READONLY
+  5 .debug_line   00000383  00000000  00000000  00008368  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   0000028e  00000000  00000000  000086eb  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000104  00000000  00000000  00008979  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_aranges 00000060  00000000  00000000  00008a80  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_macinfo 00003f41  00000000  00000000  00008ae0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000084  00000000  00000000  0000ca21  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_pubnames 0000006b  00000000  00000000  0000caa5  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_pubtypes 00000021  00000000  00000000  0000cb10  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_str    000000d6  00000000  00000000  0000cb31  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 14 .debug_frame  00000070  00000000  00000000  0000cc08  2**2
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+0c000000 <start>:
+
+    .extern main
+    .equ STACK, 0x0c7ff000
+
+start: 
+    ldr sp,=STACK
+ c000000:	e59fd00c 	ldr	sp, [pc, #12]	; c000014 <End+0x4>
+    mov fp,#0
+ c000004:	e3a0b000 	mov	fp, #0
+    
+    mov lr,pc
+ c000008:	e1a0e00f 	mov	lr, pc
+    ldr pc,=main
+ c00000c:	e59ff004 	ldr	pc, [pc, #4]	; c000018 <End+0x8>
+
+0c000010 <End>:
+
+End:
+    B End
+ c000010:	eafffffe 	b	c000010 <End>
+ c000014:	0c7ff000 	.word	0x0c7ff000
+ c000018:	0c000164 	.word	0x0c000164
+
+0c00001c <NumPacientes>:
+
+struct Descriptor* Seleccionadas;
+int nselec;
+
+int NumPacientes(struct Descriptor* P)
+{
+ c00001c:	e1a0c00d 	mov	ip, sp
+ c000020:	e92dd800 	push	{fp, ip, lr, pc}
+ c000024:	e24cb004 	sub	fp, ip, #4
+ c000028:	e24dd010 	sub	sp, sp, #16
+ c00002c:	e50b0018 	str	r0, [fp, #-24]	; 0xffffffe8
+	int i;
+
+	for( i = 0; i < MAX_PACIENTES; i++ )
+ c000030:	e3a03000 	mov	r3, #0
+ c000034:	e50b3010 	str	r3, [fp, #-16]
+ c000038:	ea000012 	b	c000088 <NumPacientes+0x6c>
+		if( (P[i].prioridad == 0) && ( P[i].pid == 0 ) )
+ c00003c:	e51b3010 	ldr	r3, [fp, #-16]
+ c000040:	e1a03183 	lsl	r3, r3, #3
+ c000044:	e51b2018 	ldr	r2, [fp, #-24]	; 0xffffffe8
+ c000048:	e0823003 	add	r3, r2, r3
+ c00004c:	e5933000 	ldr	r3, [r3]
+ c000050:	e3530000 	cmp	r3, #0
+ c000054:	1a000008 	bne	c00007c <NumPacientes+0x60>
+ c000058:	e51b3010 	ldr	r3, [fp, #-16]
+ c00005c:	e1a03183 	lsl	r3, r3, #3
+ c000060:	e51b2018 	ldr	r2, [fp, #-24]	; 0xffffffe8
+ c000064:	e0823003 	add	r3, r2, r3
+ c000068:	e5933004 	ldr	r3, [r3, #4]
+ c00006c:	e3530000 	cmp	r3, #0
+ c000070:	1a000001 	bne	c00007c <NumPacientes+0x60>
+			return i;
+ c000074:	e51b3010 	ldr	r3, [fp, #-16]
+ c000078:	ea000006 	b	c000098 <NumPacientes+0x7c>
+
+int NumPacientes(struct Descriptor* P)
+{
+	int i;
+
+	for( i = 0; i < MAX_PACIENTES; i++ )
+ c00007c:	e51b3010 	ldr	r3, [fp, #-16]
+ c000080:	e2833001 	add	r3, r3, #1
+ c000084:	e50b3010 	str	r3, [fp, #-16]
+ c000088:	e51b3010 	ldr	r3, [fp, #-16]
+ c00008c:	e353000f 	cmp	r3, #15
+ c000090:	daffffe9 	ble	c00003c <NumPacientes+0x20>
+		if( (P[i].prioridad == 0) && ( P[i].pid == 0 ) )
+			return i;
+
+	return MAX_PACIENTES - 1;
+ c000094:	e3a0300f 	mov	r3, #15
+}
+ c000098:	e1a00003 	mov	r0, r3
+ c00009c:	e24bd00c 	sub	sp, fp, #12
+ c0000a0:	e89d6800 	ldm	sp, {fp, sp, lr}
+ c0000a4:	e12fff1e 	bx	lr
+
+0c0000a8 <PosMinPrioridad>:
+
+int PosMinPrioridad(struct Descriptor* P,int ini, int num)
+{
+ c0000a8:	e1a0c00d 	mov	ip, sp
+ c0000ac:	e92dd800 	push	{fp, ip, lr, pc}
+ c0000b0:	e24cb004 	sub	fp, ip, #4
+ c0000b4:	e24dd020 	sub	sp, sp, #32
+ c0000b8:	e50b0020 	str	r0, [fp, #-32]	; 0xffffffe0
+ c0000bc:	e50b1024 	str	r1, [fp, #-36]	; 0xffffffdc
+ c0000c0:	e50b2028 	str	r2, [fp, #-40]	; 0xffffffd8
+	int minpos = ini;
+ c0000c4:	e51b3024 	ldr	r3, [fp, #-36]	; 0xffffffdc
+ c0000c8:	e50b3010 	str	r3, [fp, #-16]
+	int min = P[ini].prioridad;
+ c0000cc:	e51b3024 	ldr	r3, [fp, #-36]	; 0xffffffdc
+ c0000d0:	e1a03183 	lsl	r3, r3, #3
+ c0000d4:	e51b2020 	ldr	r2, [fp, #-32]	; 0xffffffe0
+ c0000d8:	e0823003 	add	r3, r2, r3
+ c0000dc:	e5933000 	ldr	r3, [r3]
+ c0000e0:	e50b3014 	str	r3, [fp, #-20]	; 0xffffffec
+	int i;
+
+	for( i = ini+1; i < num; i++)
+ c0000e4:	e51b3024 	ldr	r3, [fp, #-36]	; 0xffffffdc
+ c0000e8:	e2833001 	add	r3, r3, #1
+ c0000ec:	e50b3018 	str	r3, [fp, #-24]	; 0xffffffe8
+ c0000f0:	ea000012 	b	c000140 <PosMinPrioridad+0x98>
+		if( P[i].prioridad < min ){
+ c0000f4:	e51b3018 	ldr	r3, [fp, #-24]	; 0xffffffe8
+ c0000f8:	e1a03183 	lsl	r3, r3, #3
+ c0000fc:	e51b2020 	ldr	r2, [fp, #-32]	; 0xffffffe0
+ c000100:	e0823003 	add	r3, r2, r3
+ c000104:	e5932000 	ldr	r2, [r3]
+ c000108:	e51b3014 	ldr	r3, [fp, #-20]	; 0xffffffec
+ c00010c:	e1520003 	cmp	r2, r3
+ c000110:	2a000007 	bcs	c000134 <PosMinPrioridad+0x8c>
+		   minpos = i;	
+ c000114:	e51b3018 	ldr	r3, [fp, #-24]	; 0xffffffe8
+ c000118:	e50b3010 	str	r3, [fp, #-16]
+		   min = P[i].prioridad;
+ c00011c:	e51b3018 	ldr	r3, [fp, #-24]	; 0xffffffe8
+ c000120:	e1a03183 	lsl	r3, r3, #3
+ c000124:	e51b2020 	ldr	r2, [fp, #-32]	; 0xffffffe0
+ c000128:	e0823003 	add	r3, r2, r3
+ c00012c:	e5933000 	ldr	r3, [r3]
+ c000130:	e50b3014 	str	r3, [fp, #-20]	; 0xffffffec
+{
+	int minpos = ini;
+	int min = P[ini].prioridad;
+	int i;
+
+	for( i = ini+1; i < num; i++)
+ c000134:	e51b3018 	ldr	r3, [fp, #-24]	; 0xffffffe8
+ c000138:	e2833001 	add	r3, r3, #1
+ c00013c:	e50b3018 	str	r3, [fp, #-24]	; 0xffffffe8
+ c000140:	e51b2018 	ldr	r2, [fp, #-24]	; 0xffffffe8
+ c000144:	e51b3028 	ldr	r3, [fp, #-40]	; 0xffffffd8
+ c000148:	e1520003 	cmp	r2, r3
+ c00014c:	baffffe8 	blt	c0000f4 <PosMinPrioridad+0x4c>
+		if( P[i].prioridad < min ){
+		   minpos = i;	
+		   min = P[i].prioridad;
+		}
+
+	return minpos;
+ c000150:	e51b3010 	ldr	r3, [fp, #-16]
+}
+ c000154:	e1a00003 	mov	r0, r3
+ c000158:	e24bd00c 	sub	sp, fp, #12
+ c00015c:	e89d6800 	ldm	sp, {fp, sp, lr}
+ c000160:	e12fff1e 	bx	lr
+
+0c000164 <main>:
+	else return &(P[i]);
+}
+*/
+
+int main(void)
+{
+ c000164:	e1a0c00d 	mov	ip, sp
+ c000168:	e92dd800 	push	{fp, ip, lr, pc}
+ c00016c:	e24cb004 	sub	fp, ip, #4
+ c000170:	e24dd008 	sub	sp, sp, #8
+	int num;
+
+	num = NumPacientes(Pacientes);
+ c000174:	e59f0044 	ldr	r0, [pc, #68]	; c0001c0 <main+0x5c>
+ c000178:	ebffffa7 	bl	c00001c <NumPacientes>
+ c00017c:	e50b0010 	str	r0, [fp, #-16]
+
+	OrdenaPorPrioridad( Pacientes, num );
+ c000180:	e59f0038 	ldr	r0, [pc, #56]	; c0001c0 <main+0x5c>
+ c000184:	e51b1010 	ldr	r1, [fp, #-16]
+ c000188:	eb00002c 	bl	c000240 <OrdenaPorPrioridad>
+
+	Seleccionadas = SeleccionarPID( Pacientes, num, &nselec, 127 );
+ c00018c:	e59f002c 	ldr	r0, [pc, #44]	; c0001c0 <main+0x5c>
+ c000190:	e51b1010 	ldr	r1, [fp, #-16]
+ c000194:	e59f2028 	ldr	r2, [pc, #40]	; c0001c4 <main+0x60>
+ c000198:	e3a0307f 	mov	r3, #127	; 0x7f
+ c00019c:	eb000018 	bl	c000204 <SeleccionarPID>
+ c0001a0:	e1a02000 	mov	r2, r0
+ c0001a4:	e59f301c 	ldr	r3, [pc, #28]	; c0001c8 <main+0x64>
+ c0001a8:	e5832000 	str	r2, [r3]
+			
+	return 0;
+ c0001ac:	e3a03000 	mov	r3, #0
+}
+ c0001b0:	e1a00003 	mov	r0, r3
+ c0001b4:	e24bd00c 	sub	sp, fp, #12
+ c0001b8:	e89d6800 	ldm	sp, {fp, sp, lr}
+ c0001bc:	e12fff1e 	bx	lr
+ c0001c0:	0c000290 	.word	0x0c000290
+ c0001c4:	0c000314 	.word	0x0c000314
+ c0001c8:	0c000310 	.word	0x0c000310
+
+0c0001cc <Intercambiar>:
+	.global Intercambiar
+
+Intercambiar:
+	mov ip,sp
+ c0001cc:	e1a0c00d 	mov	ip, sp
+	stmdb sp!,{fp,ip,lr,pc}
+ c0001d0:	e92dd800 	push	{fp, ip, lr, pc}
+    sub fp,ip,#4
+ c0001d4:	e24cb004 	sub	fp, ip, #4
+
+	add r1, r0, r1, lsl #3     @ r1 <- &(T[i])
+ c0001d8:	e0801181 	add	r1, r0, r1, lsl #3
+	add r2, r0, r2, lsl #3     @ r2 <- &(T[j])
+ c0001dc:	e0802182 	add	r2, r0, r2, lsl #3
+	ldrb r3, [r1]              @ r3 <- T[i].prioridad
+ c0001e0:	e5d13000 	ldrb	r3, [r1]
+	ldrb ip, [r2]              @ ip <- T[j].prioridad
+ c0001e4:	e5d2c000 	ldrb	ip, [r2]
+	strb r3, [r2]              @ T[j].prioridad <- r3
+ c0001e8:	e5c23000 	strb	r3, [r2]
+	strb ip, [r1]              @ T[i].prioridad <- ip
+ c0001ec:	e5c1c000 	strb	ip, [r1]
+	ldr r3,[r1,#4]             @ r3 <- T[i].id
+ c0001f0:	e5913004 	ldr	r3, [r1, #4]
+    ldr ip,[r2,#4]             @ ip <- T[j].id
+ c0001f4:	e592c004 	ldr	ip, [r2, #4]
+    str r3,[r2,#4]             @ T[j].id <- r3
+ c0001f8:	e5823004 	str	r3, [r2, #4]
+    str ip,[r1,#4]             @ T[i].id <- ip
+ c0001fc:	e581c004 	str	ip, [r1, #4]
+
+	ldmdb fp,{fp,sp,pc}
+ c000200:	e91ba800 	ldmdb	fp, {fp, sp, pc}
+
+0c000204 <SeleccionarPID>:
+
+	.global SeleccionarPID
+
+SeleccionarPID:
+	mov ip,sp
+ c000204:	e1a0c00d 	mov	ip, sp
+	stmdb sp!,{fp,ip,lr,pc}
+ c000208:	e92dd800 	push	{fp, ip, lr, pc}
+	sub fp,ip,#4
+ c00020c:	e24cb004 	sub	fp, ip, #4
+
+	mov ip,#0
+ c000210:	e3a0c000 	mov	ip, #0
+
+0c000214 <LOOP1>:
+LOOP1:
+	ldrb lr,[r0,ip,lsl #2]
+ c000214:	e7d0e10c 	ldrb	lr, [r0, ip, lsl #2]
+	cmp lr, r3
+ c000218:	e15e0003 	cmp	lr, r3
+	cmplt ip, r1
+ c00021c:	b15c0001 	cmplt	ip, r1
+	addlt ip,ip,#1
+ c000220:	b28cc001 	addlt	ip, ip, #1
+	blt LOOP1
+ c000224:	bafffffa 	blt	c000214 <LOOP1>
+
+	sub lr,r1,ip
+ c000228:	e041e00c 	sub	lr, r1, ip
+	str lr,[r2]
+ c00022c:	e582e000 	str	lr, [r2]
+	
+	cmp ip, r1
+ c000230:	e15c0001 	cmp	ip, r1
+	moveq r0, #0
+ c000234:	03a00000 	moveq	r0, #0
+	addne r0, r0, ip, lsl #2
+ c000238:	1080010c 	addne	r0, r0, ip, lsl #2
+
+	ldmdb fp,{fp,sp,pc}
+ c00023c:	e91ba800 	ldmdb	fp, {fp, sp, pc}
+
+0c000240 <OrdenaPorPrioridad>:
+	.extern PosMinPrioridad
+	.extern Intercambiar
+	.global OrdenaPorPrioridad
+
+OrdenaPorPrioridad:
+	mov ip,sp
+ c000240:	e1a0c00d 	mov	ip, sp
+	stmdb sp!,{r4,fp,ip,lr,pc}
+ c000244:	e92dd810 	push	{r4, fp, ip, lr, pc}
+	sub fp,ip,#4
+ c000248:	e24cb004 	sub	fp, ip, #4
+	sub sp, sp, #8
+ c00024c:	e24dd008 	sub	sp, sp, #8
+
+	str r0,[fp,#-16]
+ c000250:	e50b0010 	str	r0, [fp, #-16]
+	str r1,[fp,#-20]
+ c000254:	e50b1014 	str	r1, [fp, #-20]	; 0xffffffec
+
+	mov r4,#0
+ c000258:	e3a04000 	mov	r4, #0
+
+0c00025c <LOOP2>:
+LOOP2:
+	ldr r2,[fp,#-20]
+ c00025c:	e51b2014 	ldr	r2, [fp, #-20]	; 0xffffffec
+	cmp r4,r2
+ c000260:	e1540002 	cmp	r4, r2
+	bge B1
+ c000264:	aa000008 	bge	c00028c <B1>
+	
+	ldr r0, [fp,#-16]
+ c000268:	e51b0010 	ldr	r0, [fp, #-16]
+	mov r1, r4
+ c00026c:	e1a01004 	mov	r1, r4
+	bl PosMinPrioridad
+ c000270:	ebffff8c 	bl	c0000a8 <PosMinPrioridad>
+	mov r2, r0
+ c000274:	e1a02000 	mov	r2, r0
+	mov r1, r4
+ c000278:	e1a01004 	mov	r1, r4
+	ldr r0, [fp,#-16]
+ c00027c:	e51b0010 	ldr	r0, [fp, #-16]
+	bl Intercambiar
+ c000280:	ebffffd1 	bl	c0001cc <Intercambiar>
+	add r4, r4, #1
+ c000284:	e2844001 	add	r4, r4, #1
+	b LOOP2
+ c000288:	eafffff3 	b	c00025c <LOOP2>
+
+0c00028c <B1>:
+
+B1:
+	ldmdb fp,{r4,fp,sp,pc}
+ c00028c:	e91ba810 	ldmdb	fp, {r4, fp, sp, pc}

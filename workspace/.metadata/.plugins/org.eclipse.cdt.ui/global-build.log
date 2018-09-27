@@ -1,0 +1,96 @@
+10:35:23 **** Incremental Build of configuration Debug for project PH_01_Placa ****
+cs-make all 
+'Invoking: ARM Sourcery Windows GNU Print Size'
+arm-none-eabi-size  --format=berkeley PH_01_Placa.elf
+   text	   data	    bss	    dec	    hex	filename
+   9756	     88	    100	   9944	   26d8	PH_01_Placa.elf
+'Finished building: PH_01_Placa.siz'
+' '
+10:42:22 **** Incremental Build of configuration Debug for project PH_01_Placa ****
+cs-make all 
+'Invoking: ARM Sourcery Windows GNU Print Size'
+arm-none-eabi-size  --format=berkeley PH_01_Placa.elf
+   text	   data	    bss	    dec	    hex	filename
+   9756	     88	    100	   9944	   26d8	PH_01_Placa.elf
+'Finished building: PH_01_Placa.siz'
+' '
+10:42:23 **** Incremental Build of configuration Debug for project PH_01_Sim ****
+cs-make all 
+'Invoking: ARM Sourcery Windows GNU Print Size'
+arm-none-eabi-size  --format=berkeley PH_01_Sim.elf
+   text	   data	    bss	    dec	    hex	filename
+   5092	      0	     72	   5164	   142c	PH_01_Sim.elf
+'Finished building: PH_01_Sim.siz'
+' '
+10:42:24 **** Incremental Build of configuration Debug for project PH_sim ****
+cs-make all 
+'Invoking: ARM Sourcery Windows GNU Print Size'
+arm-none-eabi-size  --format=berkeley PH_sim.elf
+   text	   data	    bss	    dec	    hex	filename
+    656	    128	      8	    792	    318	PH_sim.elf
+'Finished building: PH_sim.siz'
+' '
+10:42:31 **** Incremental Build of configuration Debug for project PH_01_Placa ****
+cs-make all 
+'Invoking: ARM Sourcery Windows GNU Print Size'
+arm-none-eabi-size  --format=berkeley PH_01_Placa.elf
+   text	   data	    bss	    dec	    hex	filename
+   9756	     88	    100	   9944	   26d8	PH_01_Placa.elf
+'Finished building: PH_01_Placa.siz'
+' '
+10:48:08 **** Incremental Build of configuration Debug for project PH_01_Placa ****
+cs-make all 
+'Invoking: ARM Sourcery Windows GNU Print Size'
+arm-none-eabi-size  --format=berkeley PH_01_Placa.elf
+   text	   data	    bss	    dec	    hex	filename
+   9756	     88	    100	   9944	   26d8	PH_01_Placa.elf
+'Finished building: PH_01_Placa.siz'
+' '
+10:48:54 **** Incremental Build of configuration Debug for project PH_01_Placa ****
+cs-make all 
+'Invoking: ARM Sourcery Windows GNU Print Size'
+arm-none-eabi-size  --format=berkeley PH_01_Placa.elf
+   text	   data	    bss	    dec	    hex	filename
+   9756	     88	    100	   9944	   26d8	PH_01_Placa.elf
+'Finished building: PH_01_Placa.siz'
+' '
+10:48:55 **** Incremental Build of configuration Debug for project PH_01_Sim ****
+cs-make all 
+'Invoking: ARM Sourcery Windows GNU Print Size'
+arm-none-eabi-size  --format=berkeley PH_01_Sim.elf
+   text	   data	    bss	    dec	    hex	filename
+   5092	      0	     72	   5164	   142c	PH_01_Sim.elf
+'Finished building: PH_01_Sim.siz'
+' '
+10:48:56 **** Incremental Build of configuration Debug for project PH_sim ****
+cs-make all 
+'Invoking: ARM Sourcery Windows GNU Print Size'
+arm-none-eabi-size  --format=berkeley PH_sim.elf
+   text	   data	    bss	    dec	    hex	filename
+    656	    128	      8	    792	    318	PH_sim.elf
+'Finished building: PH_sim.siz'
+' '
+10:49:41 **** Incremental Build of configuration Debug for project PH_01_Placa ****
+cs-make all 
+'Invoking: ARM Sourcery Windows GNU Print Size'
+arm-none-eabi-size  --format=berkeley PH_01_Placa.elf
+   text	   data	    bss	    dec	    hex	filename
+   9756	     88	    100	   9944	   26d8	PH_01_Placa.elf
+'Finished building: PH_01_Placa.siz'
+' '
+10:50:38 **** Incremental Build of configuration Debug for project PH_01_Placa ****
+cs-make all 
+'Invoking: ARM Sourcery Windows GNU Print Size'
+arm-none-eabi-size  --format=berkeley PH_01_Placa.elf
+   text	   data	    bss	    dec	    hex	filename
+   9756	     88	    100	   9944	   26d8	PH_01_Placa.elf
+'Finished building: PH_01_Placa.siz'
+' '
+10:50:42 **** Incremental Build of configuration Debug for project PH_01_Placa ****
+cs-make all 
+'Invoking: ARM Sourcery Windows GNU Print Size'
+arm-none-eabi-size  --format=berkeley PH_01_Placa.elf
+   text	   data	    bss	    dec	    hex	filename
+   9756	     88	    100	   9944	   26d8	PH_01_Placa.elf
+'Finished building: PH_01_Placa.siz'
+' '

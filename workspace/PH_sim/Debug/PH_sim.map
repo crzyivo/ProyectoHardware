@@ -1,0 +1,130 @@
+
+Allocating common symbols
+Common symbol       size              file
+
+Seleccionadas       0x4               ./main.o
+nselec              0x4               ./main.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD ./init.o
+LOAD ./main.o
+LOAD ./rutinas_asm.o
+START GROUP
+LOAD d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a
+LOAD d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib\libc.a
+END GROUP
+                0x0c000000                . = 0xc000000
+
+.text           0x0c000000      0x290
+ *(.text)
+ .text          0x0c000000       0x1c ./init.o
+ .text          0x0c00001c      0x1b0 ./main.o
+                0x0c00001c                NumPacientes
+                0x0c0000a8                PosMinPrioridad
+                0x0c000164                main
+ .text          0x0c0001cc       0xc4 ./rutinas_asm.o
+                0x0c0001cc                Intercambiar
+                0x0c000204                SeleccionarPID
+                0x0c000240                OrdenaPorPrioridad
+                0x0c000290                _bdata = .
+
+.glue_7         0x0c000290        0x0
+ .glue_7        0x00000000        0x0 linker stubs
+
+.glue_7t        0x0c000290        0x0
+ .glue_7t       0x00000000        0x0 linker stubs
+
+.vfp11_veneer   0x0c000290        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x0c000290        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.data           0x0c000290       0x80
+ *(.data)
+ .data          0x0c000290        0x0 ./init.o
+ .data          0x0c000290       0x80 ./main.o
+                0x0c000290                Pacientes
+ .data          0x0c000310        0x0 ./rutinas_asm.o
+                0x0c000310                _edata = .
+
+.rodata
+ *(.rodata)
+                0x0c000310                _bbss = .
+
+.bss            0x0c000310        0x8
+ *(.bss)
+ .bss           0x0c000310        0x0 ./init.o
+ .bss           0x0c000310        0x0 ./main.o
+ .bss           0x0c000310        0x0 ./rutinas_asm.o
+ COMMON         0x0c000310        0x8 ./main.o
+                0x0c000310                Seleccionadas
+                0x0c000314                nselec
+                0x0c000318                _ebss = .
+OUTPUT(PH_sim.elf elf32-littlearm)
+
+.ARM.attributes
+                0x00000000       0x2e
+ .ARM.attributes
+                0x00000000       0x22 ./init.o
+ .ARM.attributes
+                0x00000022       0x32 ./main.o
+ .ARM.attributes
+                0x00000054       0x22 ./rutinas_asm.o
+
+.comment        0x00000000       0x2a
+ .comment       0x00000000       0x2a ./main.o
+                                 0x2b (size before relaxing)
+
+.debug_line     0x00000000      0x383
+ .debug_line    0x00000000       0x3d ./init.o
+ .debug_line    0x0000003d      0x2d6 ./main.o
+ .debug_line    0x00000313       0x70 ./rutinas_asm.o
+
+.debug_info     0x00000000      0x28e
+ .debug_info    0x00000000       0x52 ./init.o
+ .debug_info    0x00000052      0x1e3 ./main.o
+ .debug_info    0x00000235       0x59 ./rutinas_asm.o
+
+.debug_abbrev   0x00000000      0x104
+ .debug_abbrev  0x00000000       0x14 ./init.o
+ .debug_abbrev  0x00000014       0xdc ./main.o
+ .debug_abbrev  0x000000f0       0x14 ./rutinas_asm.o
+
+.debug_aranges  0x00000000       0x60
+ .debug_aranges
+                0x00000000       0x20 ./init.o
+ .debug_aranges
+                0x00000020       0x20 ./main.o
+ .debug_aranges
+                0x00000040       0x20 ./rutinas_asm.o
+
+.debug_macinfo  0x00000000     0x3f41
+ .debug_macinfo
+                0x00000000     0x3f41 ./main.o
+
+.debug_loc      0x00000000       0x84
+ .debug_loc     0x00000000       0x84 ./main.o
+
+.debug_pubnames
+                0x00000000       0x6b
+ .debug_pubnames
+                0x00000000       0x6b ./main.o
+
+.debug_pubtypes
+                0x00000000       0x21
+ .debug_pubtypes
+                0x00000000       0x21 ./main.o
+
+.debug_str      0x00000000       0xd6
+ .debug_str     0x00000000       0xd6 ./main.o
+                                0x119 (size before relaxing)
+
+.debug_frame    0x00000000       0x70
+ .debug_frame   0x00000000       0x70 ./main.o

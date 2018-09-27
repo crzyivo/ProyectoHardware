@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Armregview Plug-in
+Bundle-SymbolicName: org.eclipse.cdt.embsysregview;singleton:=true
+Bundle-Version: 0.2.3
+Bundle-Activator: org.eclipse.cdt.embsysregview.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.debug.ui,
+ org.eclipse.cdt.debug.core,
+ org.eclipse.cdt.debug.mi.core;bundle-version="5.0.1",
+ org.eclipse.cdt.launch,
+ org.eclipse.cdt.dsf.ui,
+ org.eclipse.cdt.dsf.gdb,
+ org.eclipse.cdt.dsf
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ClassPath: jdom.jar,
+ .,
+ miglayout-3.7-swt.jar

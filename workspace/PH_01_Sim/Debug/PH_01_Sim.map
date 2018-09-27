@@ -1,0 +1,119 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD ./init_b_2018.o
+LOAD ./reversi8_2018.o
+START GROUP
+LOAD d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a
+LOAD d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib\libc.a
+END GROUP
+                0x0c000000                . = 0xc000000
+
+.text           0x0c000000     0x138c
+ *(.text)
+ .text          0x0c000000       0x1c ./init_b_2018.o
+                0x0c000000                start
+ .text          0x0c00001c     0x1370 ./reversi8_2018.o
+                0x0c00001c                init_table
+                0x0c000230                esperar_mov
+                0x0c000270                ficha_valida
+                0x0c000324                patron_volteo
+                0x0c000438                voltear
+                0x0c0004c8                actualizar_tablero
+                0x0c0005c0                elegir_mov
+                0x0c0007d8                contar
+                0x0c0008d4                actualizar_candidatas
+                0x0c000c2c                reversi8
+                0x0c00138c                _bdata = .
+
+.glue_7         0x0c00138c        0x0
+ .glue_7        0x00000000        0x0 linker stubs
+
+.glue_7t        0x0c00138c        0x0
+ .glue_7t       0x00000000        0x0 linker stubs
+
+.vfp11_veneer   0x0c00138c        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x0c00138c        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.data           0x0c00138c        0x0
+ *(.data)
+ .data          0x0c00138c        0x0 ./init_b_2018.o
+ .data          0x0c00138c        0x0 ./reversi8_2018.o
+                0x0c00138c                _edata = .
+
+.rodata         0x0c001390       0x58
+ *(.rodata)
+ .rodata        0x0c001390       0x58 ./reversi8_2018.o
+                0x0c001390                NO
+                0x0c001391                SI
+                0x0c001392                CASILLA_OCUPADA
+                0x0c0013d8                vSF
+                0x0c0013e0                vSC
+                0x0c0013e8                _bbss = .
+
+.bss            0x0c0013e8       0x48
+ *(.bss)
+ .bss           0x0c0013e8        0x0 ./init_b_2018.o
+ .bss           0x0c0013e8       0x48 ./reversi8_2018.o
+                0x0c0013e8                tablero
+                0x0c001428                fila
+                0x0c001429                columna
+                0x0c00142a                ready
+                0x0c001430                _ebss = .
+OUTPUT(PH_01_Sim.elf elf32-littlearm)
+
+.ARM.attributes
+                0x00000000       0x2e
+ .ARM.attributes
+                0x00000000       0x22 ./init_b_2018.o
+ .ARM.attributes
+                0x00000022       0x32 ./reversi8_2018.o
+
+.comment        0x00000000       0x2a
+ .comment       0x00000000       0x2a ./reversi8_2018.o
+                                 0x2b (size before relaxing)
+
+.debug_line     0x00000000      0x211
+ .debug_line    0x00000000       0x47 ./init_b_2018.o
+ .debug_line    0x00000047      0x1ca ./reversi8_2018.o
+
+.debug_info     0x00000000      0x70f
+ .debug_info    0x00000000       0x5c ./init_b_2018.o
+ .debug_info    0x0000005c      0x6b3 ./reversi8_2018.o
+
+.debug_abbrev   0x00000000      0x1b2
+ .debug_abbrev  0x00000000       0x14 ./init_b_2018.o
+ .debug_abbrev  0x00000014      0x19e ./reversi8_2018.o
+
+.debug_aranges  0x00000000       0x40
+ .debug_aranges
+                0x00000000       0x20 ./init_b_2018.o
+ .debug_aranges
+                0x00000020       0x20 ./reversi8_2018.o
+
+.debug_macinfo  0x00000000     0x20fc
+ .debug_macinfo
+                0x00000000     0x20fc ./reversi8_2018.o
+
+.debug_loc      0x00000000      0x1b8
+ .debug_loc     0x00000000      0x1b8 ./reversi8_2018.o
+
+.debug_pubnames
+                0x00000000      0x115
+ .debug_pubnames
+                0x00000000      0x115 ./reversi8_2018.o
+
+.debug_str      0x00000000      0x1a3
+ .debug_str     0x00000000      0x1a3 ./reversi8_2018.o
+                                0x1b6 (size before relaxing)
+
+.debug_frame    0x00000000      0x168
+ .debug_frame   0x00000000      0x168 ./reversi8_2018.o
