@@ -1,4 +1,3 @@
-//Version simulador 0.1
 // Tamaño del tablero
 enum { DIM=8 };
 
