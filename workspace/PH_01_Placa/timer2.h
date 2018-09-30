@@ -14,7 +14,7 @@ void timer2_inicializar(void);
 
 void timer2_empezar(void);
 
-void timer2_parar(void);
+unsigned int timer2_parar(void);
 
 unsigned int timer2_leer();
 
