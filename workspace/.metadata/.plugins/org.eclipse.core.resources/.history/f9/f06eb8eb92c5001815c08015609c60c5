@@ -1,7 +1,8 @@
 /*********************************************************************************************
 * Fichero:		timer2.c
+* Autor:
 * Descrip:		funciones de control del timer2 del s3c44b0x
-* Version: 1.0
+* Version:
 *********************************************************************************************/
 
 /*--- ficheros de cabecera ---*/
@@ -17,7 +18,6 @@ volatile unsigned int timer2_num_int=0;
 void timer_ISR(void) __attribute__((interrupt("IRQ")));
 
 /*--- codigo de las funciones ---*/
-/* Rutina de servicio de interrupción para timer2 */
 void timer_ISR(void)
 {
 	timer2_num_int++;
@@ -26,7 +26,6 @@ void timer_ISR(void)
 	rI_ISPC |= BIT_TIMER2; // BIT_TIMER2 está definido en 44b.h y pone un uno en el bit 11 que correponde al Timer2
 }
 
-/* Función que inicializa el timer2, dejandolo listo para empezar la cuenta con timer2_empezar() */
 void timer2_inicializar(void)
 {
 	/* Configuraion controlador de interrupciones */
@@ -39,42 +38,25 @@ void timer2_inicializar(void)
 
 	/* Configura el Timer2 */
 	rTCFG0 = 0x00001100; // Preescalado del timer2 en bits [15:8] de TCFG0
-
-	/*****************************************
-	 * Bits de seleccion del MUX timer 2:	 *
-	 * 1/2 -> 0000	1/4-> 0001				 *
-	 * 1/8 -> 0010	1/16-> 0011	1/32 -> 0100 *
-	 *****************************************/
-	rTCFG1 = rTCFG1 & 0xfffff0ff; // Selección del mux para el divisor de frecuencia, bits [11:8] para timer2.
+	rTCFG1 = 0x0; // selecciona la entrada del mux que proporciona el reloj. La 00 corresponde a un divisor de 1/2.
 	rTCNTB2 = 65535;// valor inicial de cuenta (la cuenta es descendente)
-	rTCMPB2 = 0 ;// valor de comparación (valor original 12800)
+	rTCMPB2 = 12800 ;// valor de comparación
 	//Timer control register, para timer2 bits [15:12] -> [15] auto-reload, [14] output inverter, [13] manual update, [12] start/stop
 	/* establecer update=manual (bit 13), inverter=off (0 en bit 14) y auto-reload (bit 15)*/
 	rTCON = 0x0000A000;
 }
 
-/* Funcion que inicia la cuenta mediante timer2*/
 void timer2_empezar(void)
 {
-	// Reiniciar variable contador
-	timer2_num_int=0;
-	//Reiniciar registro intermedio
-	rTCNTO2 = 0;
 	/* iniciar timer2 (bit 12)*/
 	rTCON = rTCON | 0x00001000;
 }
-/* Funcion que obtiene el tiempo en microsegundos que se ha contado mediante el timer2.
- * Para obtener el tiempo sumaremos las veces que se ha realizado la resta con la fraccion de resta
- * que queda en el momento de leer. Este resultado le dividiremos la frecuencia de reloj en Mhz para obtener
- * microsegundos. En este caso la frecuencia es 64Mhz y le aplicamos un divisor 1/2, con lo que tendremos
- * que dividir entre 32. La operación resultante es (timer2_num_int+(rTCNTB2-rTCNTO2/rTCNTB2))/(frecuencia/2)
- */
+
 unsigned int timer2_leer()
 {
-	return (timer2_num_int+((rTCNTB2-rTCNTO2)/rTCNTB2))/32;
+
 }
 
-/* Funcion que para el timer y devuelve el tiempo transcurrido, pero no lo reinicia*/
 unsigned int timer2_parar(void)
 {
 	/*parar timer2, desactivamos bit 12 en TCON*/

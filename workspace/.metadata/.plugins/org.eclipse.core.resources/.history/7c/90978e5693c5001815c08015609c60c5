@@ -1,7 +1,8 @@
 /*********************************************************************************************
 * Fichero:		timer2.c
+* Autor:
 * Descrip:		funciones de control del timer2 del s3c44b0x
-* Version: 1.0
+* Version:
 *********************************************************************************************/
 
 /*--- ficheros de cabecera ---*/
@@ -71,10 +72,9 @@ void timer2_empezar(void)
  */
 unsigned int timer2_leer()
 {
-	return (timer2_num_int+((rTCNTB2-rTCNTO2)/rTCNTB2))/32;
+	return (timer2_num_int+((rTCNTB2-rTCNTO2)/rTCNTB2));
 }
 
-/* Funcion que para el timer y devuelve el tiempo transcurrido, pero no lo reinicia*/
 unsigned int timer2_parar(void)
 {
 	/*parar timer2, desactivamos bit 12 en TCON*/
