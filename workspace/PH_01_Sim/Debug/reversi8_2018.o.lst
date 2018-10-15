@@ -132,61 +132,61 @@
  1098              		.global	init_table
  1100              	init_table:
  1101              	.LFB0:
-   1:../reversi8_2018.c **** // Tamaño del tablero
-   2:../reversi8_2018.c **** enum { DIM=8 };
-   3:../reversi8_2018.c **** 
-   4:../reversi8_2018.c **** // Valores que puede devolver la función patron_volteo())
-   5:../reversi8_2018.c **** enum {
-   6:../reversi8_2018.c **** 	NO_HAY_PATRON = 0,
-   7:../reversi8_2018.c ****   PATRON_ENCONTRADO = 1
-   8:../reversi8_2018.c **** };
-   9:../reversi8_2018.c **** 
-  10:../reversi8_2018.c **** // Estados de las casillas del tablero
-  11:../reversi8_2018.c **** enum {
-  12:../reversi8_2018.c **** CASILLA_VACIA = 0,
-  13:../reversi8_2018.c **** FICHA_BLANCA = 1,
-  14:../reversi8_2018.c **** FICHA_NEGRA = 2
-  15:../reversi8_2018.c **** };
-  16:../reversi8_2018.c **** 
-  17:../reversi8_2018.c **** // candidatas: indica las posiciones a explorar
-  18:../reversi8_2018.c **** // Se usa para no explorar todo el tablero innecesariamente
-  19:../reversi8_2018.c **** // Sus posibles valores son NO, SI, CASILLA_OCUPADA
-  20:../reversi8_2018.c **** const char  NO              = 0;
-  21:../reversi8_2018.c **** const char  SI              = 1;
-  22:../reversi8_2018.c **** const char  CASILLA_OCUPADA = 2;
-  23:../reversi8_2018.c **** 
-  24:../reversi8_2018.c **** /////////////////////////////////////////////////////////////////////////////
-  25:../reversi8_2018.c **** // TABLAS AUXILIARES
-  26:../reversi8_2018.c **** // declaramos las siguientes tablas como globales para que sean más fáciles visualizarlas en el sim
-  27:../reversi8_2018.c **** // __attribute__ ((aligned (8))): specifies a minimum alignment for the variable or structure field
-  28:../reversi8_2018.c **** 
-  29:../reversi8_2018.c **** static const char __attribute__ ((aligned (8))) tabla_valor[DIM][DIM] =
-  30:../reversi8_2018.c **** {
-  31:../reversi8_2018.c ****     {8,2,7,3,3,7,2,8},
-  32:../reversi8_2018.c ****     {2,1,4,4,4,4,1,2},
-  33:../reversi8_2018.c ****     {7,4,6,5,5,6,4,7},
-  34:../reversi8_2018.c ****     {3,4,5,0,0,5,4,3},
+   1:../reversi8_2018.c **** //Version simulador 0.1
+   2:../reversi8_2018.c **** // Tamaño del tablero
+   3:../reversi8_2018.c **** enum { DIM=8 };
+   4:../reversi8_2018.c **** 
+   5:../reversi8_2018.c **** // Valores que puede devolver la función patron_volteo())
+   6:../reversi8_2018.c **** enum {
+   7:../reversi8_2018.c **** 	NO_HAY_PATRON = 0,
+   8:../reversi8_2018.c ****   PATRON_ENCONTRADO = 1
+   9:../reversi8_2018.c **** };
+  10:../reversi8_2018.c **** 
+  11:../reversi8_2018.c **** // Estados de las casillas del tablero
+  12:../reversi8_2018.c **** enum {
+  13:../reversi8_2018.c **** CASILLA_VACIA = 0,
+  14:../reversi8_2018.c **** FICHA_BLANCA = 1,
+  15:../reversi8_2018.c **** FICHA_NEGRA = 2
+  16:../reversi8_2018.c **** };
+  17:../reversi8_2018.c **** 
+  18:../reversi8_2018.c **** // candidatas: indica las posiciones a explorar
+  19:../reversi8_2018.c **** // Se usa para no explorar todo el tablero innecesariamente
+  20:../reversi8_2018.c **** // Sus posibles valores son NO, SI, CASILLA_OCUPADA
+  21:../reversi8_2018.c **** const char  NO              = 0;
+  22:../reversi8_2018.c **** const char  SI              = 1;
+  23:../reversi8_2018.c **** const char  CASILLA_OCUPADA = 2;
+  24:../reversi8_2018.c **** 
+  25:../reversi8_2018.c **** /////////////////////////////////////////////////////////////////////////////
+  26:../reversi8_2018.c **** // TABLAS AUXILIARES
+  27:../reversi8_2018.c **** // declaramos las siguientes tablas como globales para que sean más fáciles visualizarlas en el sim
+  28:../reversi8_2018.c **** // __attribute__ ((aligned (8))): specifies a minimum alignment for the variable or structure field
+  29:../reversi8_2018.c **** 
+  30:../reversi8_2018.c **** static const char __attribute__ ((aligned (8))) tabla_valor[DIM][DIM] =
+  31:../reversi8_2018.c **** {
+  32:../reversi8_2018.c ****     {8,2,7,3,3,7,2,8},
+  33:../reversi8_2018.c ****     {2,1,4,4,4,4,1,2},
+  34:../reversi8_2018.c ****     {7,4,6,5,5,6,4,7},
   35:../reversi8_2018.c ****     {3,4,5,0,0,5,4,3},
-  36:../reversi8_2018.c ****     {7,4,6,5,5,6,4,7},
-  37:../reversi8_2018.c ****     {2,1,4,4,4,4,1,2},
-  38:../reversi8_2018.c ****     {8,2,7,3,3,7,2,8}
-  39:../reversi8_2018.c **** };
-  40:../reversi8_2018.c **** 
+  36:../reversi8_2018.c ****     {3,4,5,0,0,5,4,3},
+  37:../reversi8_2018.c ****     {7,4,6,5,5,6,4,7},
+  38:../reversi8_2018.c ****     {2,1,4,4,4,4,1,2},
+  39:../reversi8_2018.c ****     {8,2,7,3,3,7,2,8}
+  40:../reversi8_2018.c **** };
   41:../reversi8_2018.c **** 
-  42:../reversi8_2018.c **** // Tabla de direcciones. Contiene los desplazamientos de las 8 direcciones posibles
-  43:../reversi8_2018.c **** const char vSF[DIM] = {-1,-1, 0, 1, 1, 1, 0,-1};
-  44:../reversi8_2018.c **** const char vSC[DIM] = { 0, 1, 1, 1, 0,-1,-1,-1};
-  45:../reversi8_2018.c **** 
-  46:../reversi8_2018.c **** //////////////////////////////////////////////////////////////////////////////////////
-  47:../reversi8_2018.c **** // Variables globales que no deberían serlo
-  48:../reversi8_2018.c **** // tablero, fila, columna y ready son varibles que se deberían definir como locales dentro de rever
-  49:../reversi8_2018.c **** // Sin embargo, las hemos definido como globales para que sea más fácil visualizar el tablero y las
-  50:../reversi8_2018.c **** //////////////////////////////////////////////////////////////////////////////////////
-  51:../reversi8_2018.c **** ////////////////////////////////////////////////////////////////////
-  52:../reversi8_2018.c **** // Tablero sin inicializar
-  53:../reversi8_2018.c **** ////////////////////////////////////////////////////////////////////
-  54:../reversi8_2018.c **** char __attribute__ ((aligned (8))) tablero[DIM][DIM] = {
-  55:../reversi8_2018.c **** 	        {CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASIL
+  42:../reversi8_2018.c **** 
+  43:../reversi8_2018.c **** // Tabla de direcciones. Contiene los desplazamientos de las 8 direcciones posibles
+  44:../reversi8_2018.c **** const char vSF[DIM] = {-1,-1, 0, 1, 1, 1, 0,-1};
+  45:../reversi8_2018.c **** const char vSC[DIM] = { 0, 1, 1, 1, 0,-1,-1,-1};
+  46:../reversi8_2018.c **** 
+  47:../reversi8_2018.c **** //////////////////////////////////////////////////////////////////////////////////////
+  48:../reversi8_2018.c **** // Variables globales que no deberían serlo
+  49:../reversi8_2018.c **** // tablero, fila, columna y ready son varibles que se deberían definir como locales dentro de rever
+  50:../reversi8_2018.c **** // Sin embargo, las hemos definido como globales para que sea más fácil visualizar el tablero y las
+  51:../reversi8_2018.c **** //////////////////////////////////////////////////////////////////////////////////////
+  52:../reversi8_2018.c **** ////////////////////////////////////////////////////////////////////
+  53:../reversi8_2018.c **** // Tablero sin inicializar
+  54:../reversi8_2018.c **** ////////////////////////////////////////////////////////////////////
+  55:../reversi8_2018.c **** char __attribute__ ((aligned (8))) tablero[DIM][DIM] = {
   56:../reversi8_2018.c **** 	        {CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASIL
   57:../reversi8_2018.c **** 	        {CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASIL
   58:../reversi8_2018.c **** 	        {CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASIL
@@ -194,17 +194,17 @@
   60:../reversi8_2018.c **** 	        {CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASIL
   61:../reversi8_2018.c **** 	        {CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASIL
   62:../reversi8_2018.c **** 	        {CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASIL
-  63:../reversi8_2018.c **** 	    };
-  64:../reversi8_2018.c **** 
-  65:../reversi8_2018.c ****   ////////////////////////////////////////////////////////////////////
-  66:../reversi8_2018.c ****      // VARIABLES PARA INTERACCIONAR CON LA ENTRADA SALIDA
-  67:../reversi8_2018.c ****      // Pregunta: ¿hay que hacer algo con ellas para que esto funcione bien?
-  68:../reversi8_2018.c ****      // (por ejemplo añadir alguna palabra clave para garantizar que la sincronización a través de 
-  69:../reversi8_2018.c ****   char fila=0, columna=0, ready = 0;
-  70:../reversi8_2018.c **** 
+  63:../reversi8_2018.c **** 	        {CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASILLA_VACIA,CASIL
+  64:../reversi8_2018.c **** 	    };
+  65:../reversi8_2018.c **** 
+  66:../reversi8_2018.c ****   ////////////////////////////////////////////////////////////////////
+  67:../reversi8_2018.c ****      // VARIABLES PARA INTERACCIONAR CON LA ENTRADA SALIDA
+  68:../reversi8_2018.c ****      // Pregunta: ¿hay que hacer algo con ellas para que esto funcione bien?
+  69:../reversi8_2018.c ****      // (por ejemplo añadir alguna palabra clave para garantizar que la sincronización a través de 
+  70:../reversi8_2018.c ****   char fila=0, columna=0, ready = 0;
   71:../reversi8_2018.c **** 
   72:../reversi8_2018.c **** 
-  73:../reversi8_2018.c **** // extern int patron_volteo(char tablero[][8], int *longitud,char f, char c, char SF, char SC, char
+  73:../reversi8_2018.c **** extern int patron_volteo_arm_c(char tablero[][8], int *longitud,char f, char c, char SF, char SC, c
   74:../reversi8_2018.c **** 
   75:../reversi8_2018.c **** ///////////////////////////////////////////////////////////////////////////////////////////////////
   76:../reversi8_2018.c **** // 0 indica CASILLA_VACIA, 1 indica FICHA_BLANCA y 2 indica FICHA_NEGRA
@@ -907,7 +907,7 @@
  1616              		.loc 1 262 0
  1617 0500 0030A0E3 		mov	r3, #0
  1618 0504 1C300BE5 		str	r3, [fp, #-28]
- 263:../reversi8_2018.c ****         patron = patron_volteo(tablero, &flip, f, c, SF, SC, color);
+ 263:../reversi8_2018.c ****         patron = patron_volteo_arm_c(tablero, &flip, f, c, SF, SC, color);
  1619              		.loc 1 263 0
  1620 0508 1C104BE2 		sub	r1, fp, #28
  1621 050c 21205BE5 		ldrb	r2, [fp, #-33]	@ zero_extendqisi2
@@ -919,7 +919,7 @@
  1627 0524 23005BE5 		ldrb	r0, [fp, #-35]	@ zero_extendqisi2
  1628 0528 08008DE5 		str	r0, [sp, #8]
  1629 052c 20001BE5 		ldr	r0, [fp, #-32]
- 1630 0530 FEFFFFEB 		bl	patron_volteo
+ 1630 0530 FEFFFFEB 		bl	patron_volteo_arm_c
  1631 0534 18000BE5 		str	r0, [fp, #-24]
  264:../reversi8_2018.c ****         //printf("Flip: %d \n", flip);
  265:../reversi8_2018.c ****         if (patron == PATRON_ENCONTRADO )
@@ -1099,7 +1099,7 @@
  1757              		.loc 1 313 0
  1758 0678 0030A0E3 		mov	r3, #0
  1759 067c 30300BE5 		str	r3, [fp, #-48]
- 314:../reversi8_2018.c ****                         patron = patron_volteo(tablero, &longitud, i, j, SF, SC, FICHA_BLANCA);
+ 314:../reversi8_2018.c ****                         patron = patron_volteo_arm_c(tablero, &longitud, i, j, SF, SC, FICHA_BLANCA
  1760              		.loc 1 314 0
  1761 0680 10301BE5 		ldr	r3, [fp, #-16]
  1762 0684 FF2003E2 		and	r2, r3, #255
@@ -1113,7 +1113,7 @@
  1770 06a4 0100A0E3 		mov	r0, #1
  1771 06a8 08008DE5 		str	r0, [sp, #8]
  1772 06ac 3C001BE5 		ldr	r0, [fp, #-60]
- 1773 06b0 FEFFFFEB 		bl	patron_volteo
+ 1773 06b0 FEFFFFEB 		bl	patron_volteo_arm_c
  1774 06b4 2C000BE5 		str	r0, [fp, #-44]
  315:../reversi8_2018.c ****                         //  //printf("%d ", patron);
  316:../reversi8_2018.c ****                         if (patron == PATRON_ENCONTRADO)
@@ -2272,38 +2272,39 @@
  2770              	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 reversi8_2018.c
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:968    .rodata:00000000 NO
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:969    .rodata:00000000 $d
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:973    .rodata:00000001 SI
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:978    .rodata:00000002 CASILLA_OCUPADA
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:983    .rodata:00000008 tabla_valor
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:1052   .rodata:00000048 vSF
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:1065   .rodata:00000050 vSC
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:1079   .bss:00000000 tablero
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:1076   .bss:00000000 $d
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:1084   .bss:00000040 fila
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:1089   .bss:00000041 columna
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:1094   .bss:00000042 ready
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:1097   .text:00000000 $a
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:1100   .text:00000000 init_table
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:1280   .text:0000020c $d
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:1285   .text:00000214 $a
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:1288   .text:00000214 esperar_mov
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:1329   .text:00000254 ficha_valida
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:1404   .text:00000308 patron_volteo
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:1512   .text:0000041c voltear
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:1577   .text:000004ac actualizar_tablero
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:1668   .text:0000059c $d
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:1673   .text:000005a4 $a
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:1676   .text:000005a4 elegir_mov
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:1861   .text:000007ac $d
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:1868   .text:000007bc $a
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:1871   .text:000007bc contar
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:1973   .text:000008b8 actualizar_candidatas
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:2236   .text:00000c08 $d
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:2241   .text:00000c10 $a
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:2244   .text:00000c10 reversi8
-C:\Users\Ivo\AppData\Local\Temp\ccKlwtTW.s:2762   .text:0000135c $d
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:968    .rodata:00000000 NO
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:969    .rodata:00000000 $d
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:973    .rodata:00000001 SI
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:978    .rodata:00000002 CASILLA_OCUPADA
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:983    .rodata:00000008 tabla_valor
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:1052   .rodata:00000048 vSF
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:1065   .rodata:00000050 vSC
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:1079   .bss:00000000 tablero
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:1076   .bss:00000000 $d
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:1084   .bss:00000040 fila
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:1089   .bss:00000041 columna
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:1094   .bss:00000042 ready
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:1097   .text:00000000 $a
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:1100   .text:00000000 init_table
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:1280   .text:0000020c $d
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:1285   .text:00000214 $a
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:1288   .text:00000214 esperar_mov
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:1329   .text:00000254 ficha_valida
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:1404   .text:00000308 patron_volteo
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:1512   .text:0000041c voltear
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:1577   .text:000004ac actualizar_tablero
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:1668   .text:0000059c $d
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:1673   .text:000005a4 $a
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:1676   .text:000005a4 elegir_mov
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:1861   .text:000007ac $d
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:1868   .text:000007bc $a
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:1871   .text:000007bc contar
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:1973   .text:000008b8 actualizar_candidatas
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:2236   .text:00000c08 $d
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:2241   .text:00000c10 $a
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:2244   .text:00000c10 reversi8
+C:\Users\Ivo\AppData\Local\Temp\ccBu9HwW.s:2762   .text:0000135c $d
                      .debug_frame:00000010 $d
 
-NO UNDEFINED SYMBOLS
+UNDEFINED SYMBOLS
+patron_volteo_arm_c

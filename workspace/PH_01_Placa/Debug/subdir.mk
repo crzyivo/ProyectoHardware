@@ -9,7 +9,8 @@ C_SRCS += \
 ../led.c \
 ../main.c \
 ../reversi8_2018.c \
-../timer.c 
+../timer.c \
+../timer2.c 
 
 OBJS += \
 ./8led.o \
@@ -17,7 +18,8 @@ OBJS += \
 ./led.o \
 ./main.o \
 ./reversi8_2018.o \
-./timer.o 
+./timer.o \
+./timer2.o 
 
 C_DEPS += \
 ./8led.d \
@@ -25,7 +27,8 @@ C_DEPS += \
 ./led.d \
 ./main.d \
 ./reversi8_2018.d \
-./timer.d 
+./timer.d \
+./timer2.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

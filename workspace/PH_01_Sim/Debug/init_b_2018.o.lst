@@ -34,7 +34,7 @@
   30 0004 01D9A0E3 	        MOV     sp, #0x4000      /*  set up stack pointer (r13) */ 
   31              	
   32              	.extern     reversi8
-  33 0008 08509FE5 	        ldr         r5, = reversi8
+  33 0008 B4509FE5 	        ldr         r5, = reversi8
   34 000c 0FE0A0E1 	        mov         lr, pc 
   35 0010 15FF2FE1 	        bx          r5 
   36              	
@@ -43,18 +43,91 @@
   39 0014 FEFFFFEA 	 		B     	stop    	/*  end of program */
   40              	
   41              	###################################################################################################
-  42              	.data
-  43              	
-  44              	
-  45              	
-  46              	.end
+  42              	#Funcion patron_volteo_arm_c
+  43              	###################################################################################################
+  44              	.section .text
+  45              	.global patron_volteo_arm_c
+  46              	patron_volteo_arm_c:
+  47 0018 0DC0A0E1 		mov ip, sp
+  48 001c F0EF2DE9 		stmdb sp!, {r4-r10,fp, sp, lr, pc}
+****  Warning:if writeback register is in list, it must be the lowest reg in the list
+  49 0020 04B04CE2 		sub fp, ip, #4
+  50              		//Guardamos los parametros iniciales que vamos a modificar en otros registros
+  51 0024 00A0A0E1 		mov r10,r0 //@tablero
+  52 0028 0190A0E1 		mov r9,r1 //@longitud
+  53              		//Inicializamos variables con las que vamos a trabajar
+  54 002c 0040A0E3 		mov r4,#0 ;posicion_valida=0
+  55              		//SF y SC se deben leer de la pila
+  56 0030 D460DBE1 		ldrsb r6,[fp,#4] //SF
+  57 0034 D850DBE1 		ldrsb r5,[fp,#8] //SC
+  58              	
+  59 0038 028086E0 		add r8,r6,r2 //FA = FA + SF
+  60 003c 037085E0 		add r7,r5,r3 //CA = CA + SC
+  61              		//Preparamos llamada a ficha valida, r0=tablero, r1=FA , r2=CA ,r3=@posicion_valida
+  62 0040 0A00A0E1 		mov r0,r10
+  63 0044 0810A0E1 		mov r1,r8
+  64 0048 0720A0E1 		mov r2,r7
+  65 004c 04404DE5 		strb r4,[sp,#-4]
+  66 0050 04304DE2 		sub r3,sp,#4 //@posicion_valida
+  67 0054 0340A0E1 		mov r4,r3 //Nos guardamos la direccion para el retorno de la llamada
+  68              	
+  69 0058 FEFFFFEB 		bl ficha_valida
+  70              		//Volvemos de la funcion ficha_valida, casilla se encuentra en r0 y @posicion_valida en r4
+  71 005c 0030D4E5 		ldrb r3,[r4]
+  72 0060 010053E3 		cmp r3,#1 //posicion==1
+  73 0064 0700001A 		bne no_patron
+  74              		//cargamos color de la pila
+  75 0068 0C40DBE5 		ldrb r4,[fp,#12] //r4=color
+  76 006c 040050E1 		cmp r0,r4 //casilla==color
+  77 0070 0600001A 		bne llamada_recursiva
+  78 0074 0000D9E5 		ldrb r0,[r9]
+  79 0078 000050E3 		cmp r0,#0 //longitud>0
+  80 007c 0100A0C3 		movgt r0,#1 //PATRON_ENCONTRADO
+  81 0080 0000A0D3 		movle r0,#0 //NO_HAY_PATRON
+  82 0084 0C0000EA 		b return_patron_volteo_arm_c
+  83              	
+  84              	no_patron:
+  85 0088 0000A0E3 		mov r0,#0
+  86 008c 0A0000EA 		b return_patron_volteo_arm_c
+  87              	
+  88              	llamada_recursiva:
+  89              	
+  90 0090 0000D9E5 		ldrb r0,[r9]	//cargamos valor de longitud
+  91 0094 010080E2 		add r0,r0,#1	//*longitud=*longitud+1
+  92 0098 0000C9E5 		strb r0,[r9]
+  93              	
+  94 009c 0A00A0E1 		mov r0,r10		//r0=@tablero
+  95 00a0 0910A0E1 		mov r1,r9		//r1=@longitud
+  96 00a4 0820A0E1 		mov r2,r8		//r2=FA
+  97 00a8 0730A0E1 		mov r3,r7		//r3=CA
+  98 00ac 0060CDE5 		strb r6,[sp]	//str SF
+  99 00b0 0450CDE5 		strb r5,[sp,#4] //str SC
+ 100 00b4 0840CDE5 	 	strb r4,[sp,#8] //str color
+ 101              	
+ 102 00b8 FEFFFFEB 		bl patron_volteo_arm_c
+ 103              	
+ 104              	return_patron_volteo_arm_c:
+ 105 00bc F0AF1BE9 		ldmdb fp,{r4-r10,fp,sp,pc}
+ 106 00c0 1EFF2FE1 		bx lr
+ 107              	###################################################################################################
+ 108              	.data
+ 109              	
+ 110              	
+ 111              	
+ 112              	.end
 DEFINED SYMBOLS
   ../init_b_2018.asm:4      .text:00000000 start
   ../init_b_2018.asm:28     .text:00000004 Reset_Handler
   ../init_b_2018.asm:8      .text:00000000 $a
   ../init_b_2018.asm:38     .text:00000014 stop
-  ../init_b_2018.asm:42     .text:00000018 $d
+  ../init_b_2018.asm:46     .text:00000018 patron_volteo_arm_c
+  ../init_b_2018.asm:54     *ABS*:00000000 posicion_valida
+  ../init_b_2018.asm:84     .text:00000088 no_patron
+  ../init_b_2018.asm:88     .text:00000090 llamada_recursiva
+  ../init_b_2018.asm:104    .text:000000bc return_patron_volteo_arm_c
+  ../init_b_2018.asm:108    .text:000000c4 $d
                    .debug_aranges:0000000c $d
 
 UNDEFINED SYMBOLS
 reversi8
+ficha_valida

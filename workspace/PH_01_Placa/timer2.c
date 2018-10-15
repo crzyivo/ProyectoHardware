@@ -10,15 +10,15 @@
 #include "44blib.h"
 
 /*--- variables globales ---*/
-volatile unsigned int timer2_num_int=0;
+volatile unsigned int timer2_num_int;
 
 /* declaración de función que es rutina de servicio de interrupción
  * https://gcc.gnu.org/onlinedocs/gcc/ARM-Function-Attributes.html */
-void timer_ISR(void) __attribute__((interrupt("IRQ")));
+void timer2_ISR(void) __attribute__((interrupt("IRQ")));
 
 /*--- codigo de las funciones ---*/
 /* Rutina de servicio de interrupción para timer2 */
-void timer_ISR(void)
+void timer2_ISR(void)
 {
 	timer2_num_int++;
 
@@ -32,13 +32,13 @@ void timer2_inicializar(void)
 	/* Configuraion controlador de interrupciones */
 	rINTMOD = 0x0; // Configura las linas como de tipo IRQ
 	rINTCON = 0x1; // Habilita int. vectorizadas y la linea IRQ (FIQ no)
-	rINTMSK &= ~(BIT_TIMER2); // habilitamos en vector de mascaras de interrupcion el Timer2 (bits 26 y 13, BIT_GLOBAL y BIT_TIMER2 están definidos en 44b.h)
+	rINTMSK &= ~(BIT_TIMER2); // habilitamos en vector de mascaras de interrupcion el Timer2 (bits 26 y 11, BIT_GLOBAL y BIT_TIMER2 están definidos en 44b.h)
 
 	/* Establece la rutina de servicio para TIMER2 */
-	pISR_TIMER2 = (unsigned) timer_ISR;
+	pISR_TIMER2 = (unsigned) timer2_ISR;
 
 	/* Configura el Timer2 */
-	rTCFG0 = 0x00001100; // Preescalado del timer2 en bits [15:8] de TCFG0
+	rTCFG0 = rTCFG0 & 0xffff00ff; // Preescalado del timer2 en bits [15:8] de TCFG0. Dividimos entre 1 para el maximo valor
 
 	/*****************************************
 	 * Bits de seleccion del MUX timer 2:	 *
@@ -49,8 +49,8 @@ void timer2_inicializar(void)
 	rTCNTB2 = 65535;// valor inicial de cuenta (la cuenta es descendente)
 	rTCMPB2 = 0 ;// valor de comparación (valor original 12800)
 	//Timer control register, para timer2 bits [15:12] -> [15] auto-reload, [14] output inverter, [13] manual update, [12] start/stop
-	/* establecer update=manual (bit 13), inverter=off (0 en bit 14) y auto-reload (bit 15)*/
-	rTCON = 0x0000A000;
+	/* establecer update=manual (bit 13), inverter=off (0 en bit 14)*/
+	rTCON = 0x00002000;
 }
 
 /* Funcion que inicia la cuenta mediante timer2*/
@@ -59,9 +59,9 @@ void timer2_empezar(void)
 	// Reiniciar variable contador
 	timer2_num_int=0;
 	//Reiniciar registro intermedio
-	rTCNTO2 = 0;
-	/* iniciar timer2 (bit 12)*/
-	rTCON = rTCON | 0x00001000;
+	//rTCNTO2 = 0;
+	/* iniciar timer2 (bit 12) y auto-reload (bit 15)*/
+	rTCON = 0x00009000;
 }
 /* Funcion que obtiene el tiempo en microsegundos que se ha contado mediante el timer2.
  * Para obtener el tiempo sumaremos las veces que se ha realizado la resta con la fraccion de resta
@@ -71,7 +71,12 @@ void timer2_empezar(void)
  */
 unsigned int timer2_leer()
 {
-	return (timer2_num_int+((rTCNTB2-rTCNTO2)/rTCNTB2))/32;
+	//unsigned int cuenta=(rTCNTB2*(timer2_num_int+((rTCNTB2-rTCNTO2))/rTCNTB2))/32;
+	unsigned int cuenta1 = (rTCNTB2)*timer2_num_int;
+	unsigned int cuenta2 = (rTCNTB2-rTCNTO2);
+	unsigned int cuenta3 = cuenta1+cuenta2;
+	unsigned int res = cuenta3/32;
+	return res;
 }
 
 /* Funcion que para el timer y devuelve el tiempo transcurrido, pero no lo reinicia*/

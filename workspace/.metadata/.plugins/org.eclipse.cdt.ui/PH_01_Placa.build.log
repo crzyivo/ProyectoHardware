@@ -1,11 +1,11 @@
-11:40:34 **** Incremental Build of configuration Debug for project PH_01_Placa ****
+11:58:05 **** Incremental Build of configuration Debug for project PH_01_Placa ****
 cs-make all 
 'Invoking: ARM Sourcery Windows GNU Print Size'
 arm-none-eabi-size  --format=berkeley PH_01_Placa.elf
    text	   data	    bss	    dec	    hex	filename
-   9756	     88	    100	   9944	   26d8	PH_01_Placa.elf
+  10300	     88	    104	  10492	   28fc	PH_01_Placa.elf
 'Finished building: PH_01_Placa.siz'
 ' '
 
-11:40:34 Build Finished (took 378ms)
+11:58:06 Build Finished (took 378ms)
 

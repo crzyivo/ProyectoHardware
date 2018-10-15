@@ -29,4 +29,6 @@
 			<item value="org.eclipse.rse.ui.view"/>
 		</list>
 	</section>
+	<section name="ImportExportAction">
+	</section>
 </section>
