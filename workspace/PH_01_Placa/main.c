@@ -17,6 +17,21 @@
 
 
 /*--- codigo de funciones ---*/
+
+void test_timer2(){
+	timer2_empezar();
+	Delay(10);
+	unsigned int tiempo = timer2_parar();
+//	Delay(10);
+//	tiempo = timer2_leer();
+//	timer2_parar();
+	timer2_empezar();
+	Delay(15);
+	tiempo=timer2_parar();
+	timer2_empezar();
+	Delay(10000);
+	tiempo=timer2_parar();
+}
 void Main(void)
 {
 	/* Inicializa controladores */
@@ -29,12 +44,9 @@ void Main(void)
 
 	/* Valor inicial de los leds */
 	leds_off();
-	unsigned int tiempo=0;
+	test_timer2();
 	//Dejamos los leds apagados
 	//led1_on();
-	timer2_empezar();
-	Delay(100000);
-	tiempo = timer2_leer();
 	//Iniciar reversi8;
 	reversi8();
 

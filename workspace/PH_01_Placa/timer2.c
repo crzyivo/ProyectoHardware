@@ -59,7 +59,7 @@ void timer2_empezar(void)
 	// Reiniciar variable contador
 	timer2_num_int=0;
 	//Reiniciar registro intermedio
-	//rTCNTO2 = 0;
+	rTCNTO2 = 0;
 	/* iniciar timer2 (bit 12) y auto-reload (bit 15)*/
 	rTCON = 0x00009000;
 }
@@ -72,11 +72,11 @@ void timer2_empezar(void)
 unsigned int timer2_leer()
 {
 	//unsigned int cuenta=(rTCNTB2*(timer2_num_int+((rTCNTB2-rTCNTO2))/rTCNTB2))/32;
-	unsigned int cuenta1 = (rTCNTB2)*timer2_num_int;
-	unsigned int cuenta2 = (rTCNTB2-rTCNTO2);
-	unsigned int cuenta3 = cuenta1+cuenta2;
-	unsigned int res = cuenta3/32;
-	return res;
+//	unsigned int cuenta1 = (rTCNTB2)*timer2_num_int;
+//	unsigned int cuenta2 = (rTCNTB2-rTCNTO2);
+//	unsigned int res = (cuenta1/32)+(cuenta2/32);
+	return timer2_num_int * (rTCNTB2 * 0.03125) // Cuentas ya terminadas
+	        + ((rTCNTB2 - rTCNTO2) * 0.03125);
 }
 
 /* Funcion que para el timer y devuelve el tiempo transcurrido, pero no lo reinicia*/

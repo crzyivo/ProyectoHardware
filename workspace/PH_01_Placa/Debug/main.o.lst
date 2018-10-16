@@ -12,8 +12,8 @@
   21              	.Ltext0:
   22              		.file 1 "../main.c"
  1912              		.align	2
- 1913              		.global	Main
- 1915              	Main:
+ 1913              		.global	test_timer2
+ 1915              	test_timer2:
  1916              	.LFB0:
    1:../main.c     **** /*********************************************************************************************
    2:../main.c     **** * Fichero:	main.c
@@ -34,8 +34,8 @@
   17:../main.c     **** 
   18:../main.c     **** 
   19:../main.c     **** /*--- codigo de funciones ---*/
-  20:../main.c     **** void Main(void)
-  21:../main.c     **** {
+  20:../main.c     **** 
+  21:../main.c     **** void test_timer2(){
  1917              		.loc 1 21 0
  1918              		.cfi_startproc
  1919              		@ Function supports interworking.
@@ -52,85 +52,139 @@
  1930              	.LCFI1:
  1931              		.cfi_def_cfa 11, 4
  1932 000c 08D04DE2 		sub	sp, sp, #8
-  22:../main.c     **** 	/* Inicializa controladores */
-  23:../main.c     **** 	sys_init();         // Inicializacion de la placa, interrupciones y puertos
- 1933              		.loc 1 23 0
- 1934 0010 FEFFFFEB 		bl	sys_init
-  24:../main.c     **** 	//timer_init();	    // Inicializacion del temporizador
-  25:../main.c     **** 	Eint4567_init();	// inicializamos los pulsadores. Cada vez que se pulse se verá reflejado en el 8l
- 1935              		.loc 1 25 0
- 1936 0014 FEFFFFEB 		bl	Eint4567_init
-  26:../main.c     **** 	D8Led_init();       // inicializamos el 8led
- 1937              		.loc 1 26 0
- 1938 0018 FEFFFFEB 		bl	D8Led_init
-  27:../main.c     **** 	timer2_inicializar();
- 1939              		.loc 1 27 0
- 1940 001c FEFFFFEB 		bl	timer2_inicializar
-  28:../main.c     **** 
-  29:../main.c     **** 
-  30:../main.c     **** 	/* Valor inicial de los leds */
-  31:../main.c     **** 	leds_off();
- 1941              		.loc 1 31 0
- 1942 0020 FEFFFFEB 		bl	leds_off
-  32:../main.c     **** 	unsigned int tiempo=0;
- 1943              		.loc 1 32 0
- 1944 0024 0030A0E3 		mov	r3, #0
- 1945 0028 10300BE5 		str	r3, [fp, #-16]
-  33:../main.c     **** 	//Dejamos los leds apagados
-  34:../main.c     **** 	//led1_on();
-  35:../main.c     **** 	timer2_empezar();
- 1946              		.loc 1 35 0
- 1947 002c FEFFFFEB 		bl	timer2_empezar
-  36:../main.c     **** 	Delay(100000);
- 1948              		.loc 1 36 0
- 1949 0030 18009FE5 		ldr	r0, .L2
- 1950 0034 FEFFFFEB 		bl	Delay
-  37:../main.c     **** 	tiempo = timer2_leer();
- 1951              		.loc 1 37 0
- 1952 0038 FEFFFFEB 		bl	timer2_leer
- 1953 003c 10000BE5 		str	r0, [fp, #-16]
-  38:../main.c     **** 	//Iniciar reversi8;
-  39:../main.c     **** 	reversi8();
- 1954              		.loc 1 39 0
- 1955 0040 FEFFFFEB 		bl	reversi8
-  40:../main.c     **** 
-  41:../main.c     **** /*	Codigo para cambiar los leds segun el timer
-  42:../main.c     ****  * while (1)
-  43:../main.c     **** 	{
-  44:../main.c     **** 		// Cambia los leds con cada interrupcion del temporizador
-  45:../main.c     **** 		if (switch_leds == 1)
-  46:../main.c     **** 		{
-  47:../main.c     **** 			leds_switch();
-  48:../main.c     **** 			switch_leds = 0;
-  49:../main.c     **** 		}
-  50:../main.c     **** 	}*/
-  51:../main.c     **** }
- 1956              		.loc 1 51 0
- 1957 0044 0CD04BE2 		sub	sp, fp, #12
- 1958 0048 00689DE8 		ldmfd	sp, {fp, sp, lr}
- 1959 004c 1EFF2FE1 		bx	lr
- 1960              	.L3:
- 1961              		.align	2
- 1962              	.L2:
- 1963 0050 A0860100 		.word	100000
- 1964              		.cfi_endproc
- 1965              	.LFE0:
- 1967              	.Letext0:
+  22:../main.c     **** 	timer2_empezar();
+ 1933              		.loc 1 22 0
+ 1934 0010 FEFFFFEB 		bl	timer2_empezar
+  23:../main.c     **** 	Delay(10);
+ 1935              		.loc 1 23 0
+ 1936 0014 0A00A0E3 		mov	r0, #10
+ 1937 0018 FEFFFFEB 		bl	Delay
+  24:../main.c     **** 	unsigned int tiempo = timer2_parar();
+ 1938              		.loc 1 24 0
+ 1939 001c FEFFFFEB 		bl	timer2_parar
+ 1940 0020 10000BE5 		str	r0, [fp, #-16]
+  25:../main.c     **** //	Delay(10);
+  26:../main.c     **** //	tiempo = timer2_leer();
+  27:../main.c     **** //	timer2_parar();
+  28:../main.c     **** 	timer2_empezar();
+ 1941              		.loc 1 28 0
+ 1942 0024 FEFFFFEB 		bl	timer2_empezar
+  29:../main.c     **** 	Delay(15);
+ 1943              		.loc 1 29 0
+ 1944 0028 0F00A0E3 		mov	r0, #15
+ 1945 002c FEFFFFEB 		bl	Delay
+  30:../main.c     **** 	tiempo=timer2_parar();
+ 1946              		.loc 1 30 0
+ 1947 0030 FEFFFFEB 		bl	timer2_parar
+ 1948 0034 10000BE5 		str	r0, [fp, #-16]
+  31:../main.c     **** 	timer2_empezar();
+ 1949              		.loc 1 31 0
+ 1950 0038 FEFFFFEB 		bl	timer2_empezar
+  32:../main.c     **** 	Delay(10000);
+ 1951              		.loc 1 32 0
+ 1952 003c 14009FE5 		ldr	r0, .L2
+ 1953 0040 FEFFFFEB 		bl	Delay
+  33:../main.c     **** 	tiempo=timer2_parar();
+ 1954              		.loc 1 33 0
+ 1955 0044 FEFFFFEB 		bl	timer2_parar
+ 1956 0048 10000BE5 		str	r0, [fp, #-16]
+  34:../main.c     **** }
+ 1957              		.loc 1 34 0
+ 1958 004c 0CD04BE2 		sub	sp, fp, #12
+ 1959 0050 00689DE8 		ldmfd	sp, {fp, sp, lr}
+ 1960 0054 1EFF2FE1 		bx	lr
+ 1961              	.L3:
+ 1962              		.align	2
+ 1963              	.L2:
+ 1964 0058 10270000 		.word	10000
+ 1965              		.cfi_endproc
+ 1966              	.LFE0:
+ 1968              		.align	2
+ 1969              		.global	Main
+ 1971              	Main:
+ 1972              	.LFB1:
+  35:../main.c     **** void Main(void)
+  36:../main.c     **** {
+ 1973              		.loc 1 36 0
+ 1974              		.cfi_startproc
+ 1975              		@ Function supports interworking.
+ 1976              		@ args = 0, pretend = 0, frame = 0
+ 1977              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1978 005c 0DC0A0E1 		mov	ip, sp
+ 1979              	.LCFI2:
+ 1980              		.cfi_def_cfa_register 12
+ 1981 0060 00D82DE9 		stmfd	sp!, {fp, ip, lr, pc}
+ 1982 0064 04B04CE2 		sub	fp, ip, #4
+ 1983              		.cfi_offset 14, -8
+ 1984              		.cfi_offset 13, -12
+ 1985              		.cfi_offset 11, -16
+ 1986              	.LCFI3:
+ 1987              		.cfi_def_cfa 11, 4
+  37:../main.c     **** 	/* Inicializa controladores */
+  38:../main.c     **** 	sys_init();         // Inicializacion de la placa, interrupciones y puertos
+ 1988              		.loc 1 38 0
+ 1989 0068 FEFFFFEB 		bl	sys_init
+  39:../main.c     **** 	//timer_init();	    // Inicializacion del temporizador
+  40:../main.c     **** 	Eint4567_init();	// inicializamos los pulsadores. Cada vez que se pulse se verá reflejado en el 8l
+ 1990              		.loc 1 40 0
+ 1991 006c FEFFFFEB 		bl	Eint4567_init
+  41:../main.c     **** 	D8Led_init();       // inicializamos el 8led
+ 1992              		.loc 1 41 0
+ 1993 0070 FEFFFFEB 		bl	D8Led_init
+  42:../main.c     **** 	timer2_inicializar();
+ 1994              		.loc 1 42 0
+ 1995 0074 FEFFFFEB 		bl	timer2_inicializar
+  43:../main.c     **** 
+  44:../main.c     **** 
+  45:../main.c     **** 	/* Valor inicial de los leds */
+  46:../main.c     **** 	leds_off();
+ 1996              		.loc 1 46 0
+ 1997 0078 FEFFFFEB 		bl	leds_off
+  47:../main.c     **** 	test_timer2();
+ 1998              		.loc 1 47 0
+ 1999 007c FEFFFFEB 		bl	test_timer2
+  48:../main.c     **** 	//Dejamos los leds apagados
+  49:../main.c     **** 	//led1_on();
+  50:../main.c     **** 	//Iniciar reversi8;
+  51:../main.c     **** 	reversi8();
+ 2000              		.loc 1 51 0
+ 2001 0080 FEFFFFEB 		bl	reversi8
+  52:../main.c     **** 
+  53:../main.c     **** /*	Codigo para cambiar los leds segun el timer
+  54:../main.c     ****  * while (1)
+  55:../main.c     **** 	{
+  56:../main.c     **** 		// Cambia los leds con cada interrupcion del temporizador
+  57:../main.c     **** 		if (switch_leds == 1)
+  58:../main.c     **** 		{
+  59:../main.c     **** 			leds_switch();
+  60:../main.c     **** 			switch_leds = 0;
+  61:../main.c     **** 		}
+  62:../main.c     **** 	}*/
+  63:../main.c     **** }
+ 2002              		.loc 1 63 0
+ 2003 0084 0CD04BE2 		sub	sp, fp, #12
+ 2004 0088 00689DE8 		ldmfd	sp, {fp, sp, lr}
+ 2005 008c 1EFF2FE1 		bx	lr
+ 2006              		.cfi_endproc
+ 2007              	.LFE1:
+ 2009              	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
                             *COM*:00000004 switch_leds
-C:\Users\Ivo\AppData\Local\Temp\cc6q7gtc.s:1912   .text:00000000 $a
-C:\Users\Ivo\AppData\Local\Temp\cc6q7gtc.s:1915   .text:00000000 Main
-C:\Users\Ivo\AppData\Local\Temp\cc6q7gtc.s:1963   .text:00000050 $d
+C:\Users\Ivo\AppData\Local\Temp\ccRWXp8O.s:1912   .text:00000000 $a
+C:\Users\Ivo\AppData\Local\Temp\ccRWXp8O.s:1915   .text:00000000 test_timer2
+C:\Users\Ivo\AppData\Local\Temp\ccRWXp8O.s:1964   .text:00000058 $d
+C:\Users\Ivo\AppData\Local\Temp\ccRWXp8O.s:1968   .text:0000005c $a
+C:\Users\Ivo\AppData\Local\Temp\ccRWXp8O.s:1971   .text:0000005c Main
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
+timer2_empezar
+Delay
+timer2_parar
 sys_init
 Eint4567_init
 D8Led_init
 timer2_inicializar
 leds_off
-timer2_empezar
-Delay
-timer2_leer
 reversi8

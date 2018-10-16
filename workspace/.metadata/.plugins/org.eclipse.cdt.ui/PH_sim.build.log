@@ -1,4 +1,4 @@
-10:48:56 **** Incremental Build of configuration Debug for project PH_sim ****
+08:17:31 **** Incremental Build of configuration Debug for project PH_sim ****
 cs-make all 
 'Invoking: ARM Sourcery Windows GNU Print Size'
 arm-none-eabi-size  --format=berkeley PH_sim.elf
@@ -7,5 +7,5 @@ arm-none-eabi-size  --format=berkeley PH_sim.elf
 'Finished building: PH_sim.siz'
 ' '
 
-10:48:56 Build Finished (took 317ms)
+08:17:31 Build Finished (took 326ms)
 
