@@ -248,7 +248,7 @@ int patron_volteo_test(char tablero[][DIM], int *longitud, char FA, char CA, cha
     int timer2_arm_arm=timer2_parar();
 
     while(resultado_c != resultado_arm_c){}
-    while(resultado_c != resultado_arm_arm){} //Breakpoint aqui
+    while(resultado_c != resultado_arm_arm){}
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -448,7 +448,7 @@ int init_test(char tablero[][DIM],char candidatas[][DIM]){
 	candidatas[2][3]=CASILLA_OCUPADA;
     int longitud=0;
     patron_volteo_test(tablero,&longitud,2,3,-1,0,FICHA_NEGRA);
-    patron_volteo_test(tablero,&longitud,2,3,1,0,FICHA_NEGRA); //Patron encontrado
+    patron_volteo_test(tablero,&longitud,2,3,1,0,FICHA_NEGRA);
     patron_volteo_test(tablero,&longitud,2,3,1,1,FICHA_NEGRA);
     patron_volteo_test(tablero,&longitud,2,3,0,-1,FICHA_NEGRA);
     patron_volteo_test(tablero,&longitud,2,3,-1,-1,FICHA_NEGRA);
