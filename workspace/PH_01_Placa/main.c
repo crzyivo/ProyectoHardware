@@ -19,18 +19,32 @@
 /*--- codigo de funciones ---*/
 
 void test_timer2(){
+	unsigned int tiempos[9];	//Array para anotar tiempos del timer2
+	unsigned int tiempo_medido_1ms = 0;
+	unsigned int tiempo_medido_10ms = 0;
+	unsigned int tiempo_medido_1s = 0;
+	unsigned int tiempo_medido_10s = 0;
 	timer2_empezar();
-	Delay(10);
-	unsigned int tiempo = timer2_parar();
-//	Delay(10);
-//	tiempo = timer2_leer();
-//	timer2_parar();
-	timer2_empezar();
-	Delay(15);
-	tiempo=timer2_parar();
-	timer2_empezar();
-	Delay(10000);
-	tiempo=timer2_parar();
+
+	tiempos[0] = timer2_leer();
+	Delay(10); //1 ms
+	tiempos[1] = timer2_leer();
+	tiempo_medido_1ms = tiempos[1]-tiempos[0];
+
+	tiempos[2] = timer2_leer();
+	Delay(100); //10 ms
+	tiempos[3] = timer2_leer();
+	tiempo_medido_10ms = tiempos[3]-tiempos[2];
+
+	tiempos[4] = timer2_leer();
+	Delay(10000); //1 s
+	tiempos[5] = timer2_leer();
+	tiempo_medido_1s = tiempos[5]-tiempos[4];
+
+	tiempos[6] = timer2_leer();
+	Delay(100000); //10 s
+	tiempos[7] = timer2_leer();
+	tiempo_medido_10s = tiempos[7]-tiempos[6];
 }
 void Main(void)
 {

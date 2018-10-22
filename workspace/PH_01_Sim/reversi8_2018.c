@@ -442,20 +442,58 @@ void actualizar_candidatas(char candidatas[][DIM], char f, char c)
         candidatas[f][c+1] = SI;
 }
 
-int init_test(char tablero[][DIM],char candidatas[][DIM]){
-	char aux_tablero = tablero[2][3];
+void init_test(char tablero[][DIM],char candidatas[][DIM]){
+
+	//Caso de prueba basico, tablero inicial con ficha negra en 2,3
 	tablero[2][3]=FICHA_NEGRA;
-	char aux_candidatas = candidatas[2][3];
 	candidatas[2][3]=CASILLA_OCUPADA;
     int longitud=0;
     patron_volteo_test(tablero,&longitud,2,3,-1,0,FICHA_NEGRA);
-    patron_volteo_test(tablero,&longitud,2,3,1,0,FICHA_NEGRA);
-    patron_volteo_test(tablero,&longitud,2,3,1,1,FICHA_NEGRA);
+    patron_volteo_test(tablero,&longitud,2,3,1,0,FICHA_NEGRA); //Patron encontrado
+    patron_volteo_test(tablero,&longitud,2,3,1,1,FICHA_NEGRA);	//Patron encontrado
     patron_volteo_test(tablero,&longitud,2,3,0,-1,FICHA_NEGRA);
     patron_volteo_test(tablero,&longitud,2,3,-1,-1,FICHA_NEGRA);
     patron_volteo_test(tablero,&longitud,2,3,0,1,FICHA_NEGRA);
-    tablero[2][3]=aux_tablero;
-    candidatas[2][3]=aux_candidatas;
+    init_table(tablero,candidatas);
+
+    //Caso de prueba, tablero inicial con ficha negra en 0,0. No se deberia encontrar patron.
+	tablero[0][0]=FICHA_NEGRA;
+	candidatas[0][0]=CASILLA_OCUPADA;
+    longitud=0;
+    patron_volteo_test(tablero,&longitud,0,0,-1,0,FICHA_NEGRA);
+    patron_volteo_test(tablero,&longitud,0,0,1,0,FICHA_NEGRA);
+    patron_volteo_test(tablero,&longitud,0,0,1,1,FICHA_NEGRA);
+    patron_volteo_test(tablero,&longitud,0,0,0,-1,FICHA_NEGRA);
+    patron_volteo_test(tablero,&longitud,0,0,-1,-1,FICHA_NEGRA);
+    patron_volteo_test(tablero,&longitud,0,0,0,1,FICHA_NEGRA);
+    init_table(tablero,candidatas);
+
+    //Caso de prueba, tablero inicial con ficha negra en 7,7. No se deberia encontrar patron.
+	tablero[7][7]=FICHA_NEGRA;
+	candidatas[7][7]=CASILLA_OCUPADA;
+    longitud=0;
+    patron_volteo_test(tablero,&longitud,7,7,-1,0,FICHA_NEGRA);
+    patron_volteo_test(tablero,&longitud,7,7,1,0,FICHA_NEGRA);
+    patron_volteo_test(tablero,&longitud,7,7,1,1,FICHA_NEGRA);
+    patron_volteo_test(tablero,&longitud,7,7,0,-1,FICHA_NEGRA);
+    patron_volteo_test(tablero,&longitud,7,7,-1,-1,FICHA_NEGRA);
+    patron_volteo_test(tablero,&longitud,7,7,0,1,FICHA_NEGRA);
+    init_table(tablero,candidatas);
+
+    //Caso de prueba, patron en diagonal con ficha negra en 0,0 y 5,5 y el resto fichas blancas
+	tablero[0][0]=FICHA_NEGRA;
+	candidatas[0][0]=CASILLA_OCUPADA;
+	tablero[1][1]=FICHA_BLANCA;
+	candidatas[1][1]=CASILLA_OCUPADA;
+	tablero[2][2]=FICHA_BLANCA;
+	candidatas[2][2]=CASILLA_OCUPADA;
+	tablero[5][5]=FICHA_NEGRA;
+	candidatas[5][5]=CASILLA_OCUPADA;
+    longitud=0;
+    patron_volteo_test(tablero,&longitud,0,0,1,0,FICHA_NEGRA);
+    patron_volteo_test(tablero,&longitud,0,0,0,1,FICHA_NEGRA);
+    patron_volteo_test(tablero,&longitud,0,0,1,1,FICHA_NEGRA); //Patron encontrado
+    init_table(tablero,candidatas);
 
 }
 
@@ -499,7 +537,7 @@ void reversi8()
     char f, c;    // fila y columna elegidas por la máquina para su movimiento
 
 
-    int modo_patron_volteo = MODO_ARM_ARM;  //indica la funcion de patron_volteo que se va a usar para el juego.
+    int modo_patron_volteo = MODO_C;  //indica la funcion de patron_volteo que se va a usar para el juego.
 
     init_table(tablero, candidatas);
     init_test(tablero,candidatas);

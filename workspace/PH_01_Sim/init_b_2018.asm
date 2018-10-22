@@ -38,8 +38,16 @@ Reset_Handler:
 stop: 	
  		B     	stop    	/*  end of program */
 
+/*********************************************************************************************
+* Fichero:		arm_functions.asm
+* Autores:		Yasmina Albero e Iván Escuín
+* Descrip:		funciones arm de patron_volteo
+* Version: 1.0
+*********************************************************************************************/
+
 #################################################################################################################
 #Funcion patron_volteo_arm_c
+#Parametros: r0=@tablero, r1=@longitud, r2=FA, r3=CA, pila: SF,SC,color almacenados en ese orden
 #################################################################################################################
 .section .text
 .global patron_volteo_arm_c
@@ -61,8 +69,7 @@ patron_volteo_arm_c:
 	mov r0,r10
 	mov r1,r8
 	mov r2,r7
-	mov r6,#0 //posicion_valida=0
-	//strb r6,[sp,#-4]
+	//posicion_valida=0
 	sub r3,sp,#4 //@posicion_valida
 	mov r6,r3 //Nos guardamos la direccion para el retorno de la llamada
 
@@ -74,7 +81,7 @@ patron_volteo_arm_c:
 	//cargamos color de la pila
 	ldrb r6,[fp,#12] //r4=color
 	cmp r0,r6 //casilla==color
-	ldrb r0,[r9]
+	ldrb r0,[r9] //cargamos el valor de longitud
 	bne llamada_recursiva
 	cmp r0,#0 //longitud>0
 	movgt r0,#1 //PATRON_ENCONTRADO
@@ -86,8 +93,6 @@ no_patron:
 	b return_patron_volteo_arm_c
 
 llamada_recursiva:
-
-	//ldrb r0,[r9]	//cargamos valor de longitud
 	add r0,r0,#1	//*longitud=*longitud+1
 	strb r0,[r9]
 
@@ -95,11 +100,6 @@ llamada_recursiva:
 	mov r1,r9		//r1=@longitud
 	mov r2,r8		//r2=FA
 	mov r3,r7		//r3=CA
-	/*
-	strb r6,[sp]	//str SF
-	strb r5,[sp,#4] //str SC
- 	strb r4,[sp,#8] //str color
-	*/
 	stmdb sp!, {r4-r6}
 	bl patron_volteo_arm_c
 
@@ -107,16 +107,16 @@ return_patron_volteo_arm_c:
 	ldmdb fp,{r4-r10,fp,sp,pc}
 	bx lr
 
-#################################################################################################################
 
 #################################################################################################################
 #Funcion patron_volteo_arm_arm
+#Parametros: r0=@tablero, r1=@longitud, r2=FA, r3=CA, pila: SF,SC,color almacenados en ese orden
 #################################################################################################################
 .section .text
 .global patron_volteo_arm_arm
 patron_volteo_arm_arm:
 	mov ip, sp
-	stmdb sp!, {r4-r10,fp,ip,lr, pc}
+	stmdb sp!, {r4-r10,fp, sp, lr, pc}
 	sub fp, ip, #4
 	//Guardamos los parametros iniciales que vamos a modificar en otros registros
 	mov r10,r0 //@tablero
@@ -132,8 +132,7 @@ patron_volteo_arm_arm:
 	mov r0,r10
 	mov r1,r8
 	mov r2,r7
-	mov r6,#0 //posicion_valida=0
-	//strb r6,[sp,#-4]
+	//posicion_valida=0
 	sub r3,sp,#4 //@posicion_valida
 	mov r6,r3 //Nos guardamos la direccion para el retorno de la llamada
 
@@ -145,7 +144,7 @@ patron_volteo_arm_arm:
 	//cargamos color de la pila
 	ldrb r6,[fp,#12] //r4=color
 	cmp r0,r6 //casilla==color
-	ldrb r0,[r9]
+	ldrb r0,[r9] //cargamos el valor de longitud
 	bne llamada_recursiva_arm_arm
 	cmp r0,#0 //longitud>0
 	movgt r0,#1 //PATRON_ENCONTRADO
@@ -157,8 +156,6 @@ no_patron_arm_arm:
 	b return_patron_volteo_arm_arm
 
 llamada_recursiva_arm_arm:
-
-	//ldrb r0,[r9]	//cargamos valor de longitud
 	add r0,r0,#1	//*longitud=*longitud+1
 	strb r0,[r9]
 
@@ -166,11 +163,6 @@ llamada_recursiva_arm_arm:
 	mov r1,r9		//r1=@longitud
 	mov r2,r8		//r2=FA
 	mov r3,r7		//r3=CA
-	/*
-	strb r6,[sp]	//str SF
-	strb r5,[sp,#4] //str SC
- 	strb r4,[sp,#8] //str color
-	*/
 	stmdb sp!, {r4-r6}
 	bl patron_volteo_arm_arm
 
@@ -179,20 +171,20 @@ return_patron_volteo_arm_arm:
 	bx lr
 
 #################################################################################################################
-
 #Funcion ficha_valida_arm
+#Parametros: r0=@tablero, r1=f, r2=c, r3=@posicion_valida
 #################################################################################################################
 .section .text
-.global ficha_valida_arm //usados: r5,r6,r7,r8
+.global ficha_valida_arm
 ficha_valida_arm:
 	mov ip, sp
 	stmdb sp!, {r4-r10,fp,ip, lr, pc}
 	sub fp, ip, #4
-	mov r5, #8	//r5=DIM---> como accedo a la variable??
+	mov r5, #8	//r5=DIM, suponiendo que el tamaño del tablero es 8x8
 	mov r6, #0	//casilla vacia | valor minimo para indice de casilla
 	mov r7, #1
 	mul r8, r1,r5	//calculamos numero de casillas para acceso a la ficha del tablero
-	add r8, r8, r2	//
+	add r8, r8, r2	//r8=offset. @tablero + r8 = @ficha
 	cmp r5,r1
 	ble no_valido	//DIM <=f
 	cmp r1,#0
@@ -201,7 +193,7 @@ ficha_valida_arm:
 	ble no_valido	//DIM <=c
 	cmp r2,r7
 	blt no_valido	//c<0
-	ldrb r9,[r0,r8]	//cargo en r9 tablero[f][c]--> multiplicar por 4
+	ldrb r9,[r0,r8]	//cargo en r9 tablero[f][c]
 	cmp r9,r6 //tablero[f][c] != casilla_vacia
 	beq no_valido
 	strb r7,[r3]
