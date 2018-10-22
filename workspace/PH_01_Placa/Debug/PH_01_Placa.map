@@ -42,7 +42,7 @@ END GROUP
                 0x0c000000                . = 0xc000000
                 0x0c000000                Image_RO_Base = .
 
-.text           0x0c000000     0x3570
+.text           0x0c000000     0x3788
  *(.text)
  .text          0x0c000000      0x70c ./common/44binit.o
  .text          0x0c00070c      0x46c ./common/44blib.o
@@ -55,165 +55,166 @@ END GROUP
  .text          0x0c000b78       0x78 ./8led.o
                 0x0c000b78                D8Led_init
                 0x0c000b9c                D8Led_symbol
- .text          0x0c000bf0      0x104 ./arm_functions.o
+ .text          0x0c000bf0      0x1a0 ./arm_functions.o
                 0x0c000bf0                patron_volteo_arm_c
-                0x0c000c8c                ficha_valida_arm
- .text          0x0c000cf4      0x19c ./button.o
-                0x0c000cf4                Eint4567_ISR
-                0x0c000dac                Eint4567_init
- .text          0x0c000e90      0x23c ./led.o
-                0x0c000e90                leds_on
-                0x0c000eb0                leds_off
-                0x0c000ed0                led1_on
-                0x0c000f10                led1_off
-                0x0c000f50                led2_on
-                0x0c000f90                led2_off
-                0x0c000fd0                leds_switch
-                0x0c001010                Led_Display
- .text          0x0c0010cc       0x90 ./main.o
-                0x0c0010cc                test_timer2
-                0x0c001128                Main
- .text          0x0c00115c     0x1610 ./reversi8_2018.o
-                0x0c00115c                init_table
-                0x0c001370                esperar_mov
-                0x0c0013b0                ficha_valida
-                0x0c001464                patron_volteo
-                0x0c001578                patron_volteo_test
-                0x0c001648                voltear
-                0x0c0016d8                actualizar_tablero
-                0x0c0017d0                elegir_mov
-                0x0c0019ec                contar
-                0x0c001ae8                actualizar_candidatas
-                0x0c001e40                init_test
-                0x0c001ff8                reversi8
- .text          0x0c00276c      0x108 ./timer.o
-                0x0c00276c                timer_ISR
-                0x0c0027b4                timer_init
- .text          0x0c002874      0x2a4 ./timer2.o
-                0x0c002874                timer2_ISR
-                0x0c0028c4                timer2_inicializar
-                0x0c002988                timer2_empezar
-                0x0c0029d0                timer2_leer
-                0x0c002adc                timer2_parar
- .text          0x0c002b18      0x148 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_divsi3.o)
-                0x0c002b18                __divsi3
-                0x0c002b18                __aeabi_idiv
-                0x0c002c40                __aeabi_idivmod
- .text          0x0c002c60        0x4 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_dvmd_tls.o)
-                0x0c002c60                __aeabi_idiv0
-                0x0c002c60                __aeabi_ldiv0
- .text          0x0c002c64      0x41c d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_arm_addsubdf3.o)
-                0x0c002c64                __aeabi_drsub
-                0x0c002c6c                __aeabi_dsub
-                0x0c002c6c                __subdf3
-                0x0c002c70                __aeabi_dadd
-                0x0c002c70                __adddf3
-                0x0c002f80                __floatunsidf
-                0x0c002f80                __aeabi_ui2d
-                0x0c002fa4                __floatsidf
-                0x0c002fa4                __aeabi_i2d
-                0x0c002fcc                __aeabi_f2d
-                0x0c002fcc                __extendsfdf2
-                0x0c00300c                __floatundidf
-                0x0c00300c                __aeabi_ul2d
-                0x0c003020                __floatdidf
-                0x0c003020                __aeabi_l2d
- .text          0x0c003080      0x49c d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_arm_muldivdf3.o)
-                0x0c003080                __aeabi_dmul
-                0x0c003080                __muldf3
-                0x0c003310                __divdf3
-                0x0c003310                __aeabi_ddiv
- .text          0x0c00351c       0x54 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_arm_fixunsdfsi.o)
-                0x0c00351c                __aeabi_d2uiz
-                0x0c00351c                __fixunsdfsi
+                0x0c000c8c                patron_volteo_arm_arm
+                0x0c000d28                ficha_valida_arm
+ .text          0x0c000d90      0x19c ./button.o
+                0x0c000d90                Eint4567_ISR
+                0x0c000e48                Eint4567_init
+ .text          0x0c000f2c      0x23c ./led.o
+                0x0c000f2c                leds_on
+                0x0c000f4c                leds_off
+                0x0c000f6c                led1_on
+                0x0c000fac                led1_off
+                0x0c000fec                led2_on
+                0x0c00102c                led2_off
+                0x0c00106c                leds_switch
+                0x0c0010ac                Led_Display
+ .text          0x0c001168       0x90 ./main.o
+                0x0c001168                test_timer2
+                0x0c0011c4                Main
+ .text          0x0c0011f8     0x178c ./reversi8_2018.o
+                0x0c0011f8                init_table
+                0x0c00140c                esperar_mov
+                0x0c00144c                ficha_valida
+                0x0c001500                patron_volteo
+                0x0c001614                patron_volteo_test
+                0x0c001730                voltear
+                0x0c0017c0                actualizar_tablero
+                0x0c00193c                elegir_mov
+                0x0c001be8                contar
+                0x0c001ce4                actualizar_candidatas
+                0x0c00203c                init_test
+                0x0c0021f4                reversi8
+ .text          0x0c002984      0x108 ./timer.o
+                0x0c002984                timer_ISR
+                0x0c0029cc                timer_init
+ .text          0x0c002a8c      0x2a4 ./timer2.o
+                0x0c002a8c                timer2_ISR
+                0x0c002adc                timer2_inicializar
+                0x0c002ba0                timer2_empezar
+                0x0c002be8                timer2_leer
+                0x0c002cf4                timer2_parar
+ .text          0x0c002d30      0x148 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_divsi3.o)
+                0x0c002d30                __divsi3
+                0x0c002d30                __aeabi_idiv
+                0x0c002e58                __aeabi_idivmod
+ .text          0x0c002e78        0x4 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_dvmd_tls.o)
+                0x0c002e78                __aeabi_idiv0
+                0x0c002e78                __aeabi_ldiv0
+ .text          0x0c002e7c      0x41c d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_arm_addsubdf3.o)
+                0x0c002e7c                __aeabi_drsub
+                0x0c002e84                __aeabi_dsub
+                0x0c002e84                __subdf3
+                0x0c002e88                __aeabi_dadd
+                0x0c002e88                __adddf3
+                0x0c003198                __floatunsidf
+                0x0c003198                __aeabi_ui2d
+                0x0c0031bc                __floatsidf
+                0x0c0031bc                __aeabi_i2d
+                0x0c0031e4                __aeabi_f2d
+                0x0c0031e4                __extendsfdf2
+                0x0c003224                __floatundidf
+                0x0c003224                __aeabi_ul2d
+                0x0c003238                __floatdidf
+                0x0c003238                __aeabi_l2d
+ .text          0x0c003298      0x49c d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_arm_muldivdf3.o)
+                0x0c003298                __aeabi_dmul
+                0x0c003298                __muldf3
+                0x0c003528                __divdf3
+                0x0c003528                __aeabi_ddiv
+ .text          0x0c003734       0x54 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_arm_fixunsdfsi.o)
+                0x0c003734                __aeabi_d2uiz
+                0x0c003734                __fixunsdfsi
 
-.glue_7         0x0c003570        0x0
+.glue_7         0x0c003788        0x0
  .glue_7        0x00000000        0x0 linker stubs
 
-.glue_7t        0x0c003570        0x0
+.glue_7t        0x0c003788        0x0
  .glue_7t       0x00000000        0x0 linker stubs
 
-.vfp11_veneer   0x0c003570        0x0
+.vfp11_veneer   0x0c003788        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x0c003570        0x0
+.v4_bx          0x0c003788        0x0
  .v4_bx         0x00000000        0x0 linker stubs
-                0x0c003570                . = ALIGN (0x4)
-                0x0c003570                Image_RO_Limit = .
-                0x0c003570                Image_RW_Base = .
+                0x0c003788                . = ALIGN (0x4)
+                0x0c003788                Image_RO_Limit = .
+                0x0c003788                Image_RW_Base = .
 
-.data           0x0c003570       0x58
+.data           0x0c003788       0x58
  *(.data)
- .data          0x0c003570        0x6 ./common/44binit.o
-                0x0c003570                BDRAMTYPE
- *fill*         0x0c003576        0x2 00
- .data          0x0c003578        0xc ./common/44blib.o
-                0x0c003578                mallocPt
-                0x0c00357c                run
- .data          0x0c003584       0x44 ./8led.o
- .data          0x0c0035c8        0x0 ./arm_functions.o
- .data          0x0c0035c8        0x0 ./button.o
- .data          0x0c0035c8        0x0 ./led.o
- .data          0x0c0035c8        0x0 ./main.o
- .data          0x0c0035c8        0x0 ./reversi8_2018.o
- .data          0x0c0035c8        0x0 ./timer.o
- .data          0x0c0035c8        0x0 ./timer2.o
- .data          0x0c0035c8        0x0 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_divsi3.o)
- .data          0x0c0035c8        0x0 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_dvmd_tls.o)
- .data          0x0c0035c8        0x0 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_arm_addsubdf3.o)
- .data          0x0c0035c8        0x0 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_arm_muldivdf3.o)
- .data          0x0c0035c8        0x0 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_arm_fixunsdfsi.o)
+ .data          0x0c003788        0x6 ./common/44binit.o
+                0x0c003788                BDRAMTYPE
+ *fill*         0x0c00378e        0x2 00
+ .data          0x0c003790        0xc ./common/44blib.o
+                0x0c003790                mallocPt
+                0x0c003794                run
+ .data          0x0c00379c       0x44 ./8led.o
+ .data          0x0c0037e0        0x0 ./arm_functions.o
+ .data          0x0c0037e0        0x0 ./button.o
+ .data          0x0c0037e0        0x0 ./led.o
+ .data          0x0c0037e0        0x0 ./main.o
+ .data          0x0c0037e0        0x0 ./reversi8_2018.o
+ .data          0x0c0037e0        0x0 ./timer.o
+ .data          0x0c0037e0        0x0 ./timer2.o
+ .data          0x0c0037e0        0x0 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_divsi3.o)
+ .data          0x0c0037e0        0x0 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_dvmd_tls.o)
+ .data          0x0c0037e0        0x0 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_arm_addsubdf3.o)
+ .data          0x0c0037e0        0x0 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_arm_muldivdf3.o)
+ .data          0x0c0037e0        0x0 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_arm_fixunsdfsi.o)
 
-.rodata         0x0c0035c8       0x58
+.rodata         0x0c0037e0       0x58
  *(.rodata)
- .rodata        0x0c0035c8       0x58 ./reversi8_2018.o
-                0x0c0035c8                NO
-                0x0c0035c9                SI
-                0x0c0035ca                CASILLA_OCUPADA
-                0x0c003610                vSF
-                0x0c003618                vSC
-                0x0c003620                Image_RW_Limit = .
-                0x0c003620                . = ALIGN (0x4)
-                0x0c003620                Image_ZI_Base = .
+ .rodata        0x0c0037e0       0x58 ./reversi8_2018.o
+                0x0c0037e0                NO
+                0x0c0037e1                SI
+                0x0c0037e2                CASILLA_OCUPADA
+                0x0c003828                vSF
+                0x0c003830                vSC
+                0x0c003838                Image_RW_Limit = .
+                0x0c003838                . = ALIGN (0x4)
+                0x0c003838                Image_ZI_Base = .
 
-.bss            0x0c003620       0x68
+.bss            0x0c003838       0x68
  *(.bss)
- .bss           0x0c003620        0x0 ./common/44binit.o
- .bss           0x0c003620        0x4 ./common/44blib.o
-                0x0c003620                restart
- .bss           0x0c003624        0x0 ./8led.o
- .bss           0x0c003624        0x0 ./arm_functions.o
- .bss           0x0c003624        0x4 ./button.o
- .bss           0x0c003628        0x4 ./led.o
- .bss           0x0c00362c        0x0 ./main.o
- *fill*         0x0c00362c        0x4 00
- .bss           0x0c003630       0x48 ./reversi8_2018.o
-                0x0c003630                tablero
-                0x0c003670                fila
-                0x0c003671                columna
-                0x0c003672                ready
- .bss           0x0c003678        0x4 ./timer.o
-                0x0c003678                switch_leds
- .bss           0x0c00367c        0x0 ./timer2.o
- .bss           0x0c00367c        0x0 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_divsi3.o)
- .bss           0x0c00367c        0x0 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_dvmd_tls.o)
- .bss           0x0c00367c        0x0 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_arm_addsubdf3.o)
- .bss           0x0c00367c        0x0 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_arm_muldivdf3.o)
- .bss           0x0c00367c        0x0 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_arm_fixunsdfsi.o)
- COMMON         0x0c00367c        0x8 ./common/44blib.o
-                0x0c00367c                fileSize
-                0x0c003680                downPt
- COMMON         0x0c003684        0x0 ./main.o
- COMMON         0x0c003684        0x4 ./timer2.o
-                0x0c003684                timer2_num_int
-                0x0c003688                Image_ZI_Limit = .
-                0x0c003688                __bss_start__ = .
-                0x0c003688                __bss_end__ = .
-                0x0c003688                __EH_FRAME_BEGIN__ = .
-                0x0c003688                __EH_FRAME_END__ = .
-                0x0c003688                PROVIDE (__stack, .)
-                0x0c003688                end = .
-                0x0c003688                _end = .
+ .bss           0x0c003838        0x0 ./common/44binit.o
+ .bss           0x0c003838        0x4 ./common/44blib.o
+                0x0c003838                restart
+ .bss           0x0c00383c        0x0 ./8led.o
+ .bss           0x0c00383c        0x0 ./arm_functions.o
+ .bss           0x0c00383c        0x4 ./button.o
+ .bss           0x0c003840        0x4 ./led.o
+ .bss           0x0c003844        0x0 ./main.o
+ *fill*         0x0c003844        0x4 00
+ .bss           0x0c003848       0x48 ./reversi8_2018.o
+                0x0c003848                tablero
+                0x0c003888                fila
+                0x0c003889                columna
+                0x0c00388a                ready
+ .bss           0x0c003890        0x4 ./timer.o
+                0x0c003890                switch_leds
+ .bss           0x0c003894        0x0 ./timer2.o
+ .bss           0x0c003894        0x0 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_divsi3.o)
+ .bss           0x0c003894        0x0 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_dvmd_tls.o)
+ .bss           0x0c003894        0x0 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_arm_addsubdf3.o)
+ .bss           0x0c003894        0x0 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_arm_muldivdf3.o)
+ .bss           0x0c003894        0x0 d:/ph/eclipsearm/sourcery-g++-lite-arm-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2\libgcc.a(_arm_fixunsdfsi.o)
+ COMMON         0x0c003894        0x8 ./common/44blib.o
+                0x0c003894                fileSize
+                0x0c003898                downPt
+ COMMON         0x0c00389c        0x0 ./main.o
+ COMMON         0x0c00389c        0x4 ./timer2.o
+                0x0c00389c                timer2_num_int
+                0x0c0038a0                Image_ZI_Limit = .
+                0x0c0038a0                __bss_start__ = .
+                0x0c0038a0                __bss_end__ = .
+                0x0c0038a0                __EH_FRAME_BEGIN__ = .
+                0x0c0038a0                __EH_FRAME_END__ = .
+                0x0c0038a0                PROVIDE (__stack, .)
+                0x0c0038a0                end = .
+                0x0c0038a0                _end = .
 
 .ARM.attributes
                 0x00000000       0x2e
@@ -259,7 +260,7 @@ END GROUP
  .comment       0x00000000       0x2b ./timer.o
  .comment       0x00000000       0x2b ./timer2.o
 
-.debug_info     0x00000000      0xf65
+.debug_info     0x00000000      0xfba
  *(.debug_info)
  .debug_info    0x00000000       0x61 ./common/44binit.o
  .debug_info    0x00000061      0x229 ./common/44blib.o
@@ -268,22 +269,22 @@ END GROUP
  .debug_info    0x000003f7       0x86 ./button.o
  .debug_info    0x0000047d       0xf6 ./led.o
  .debug_info    0x00000573       0x9a ./main.o
- .debug_info    0x0000060d      0x819 ./reversi8_2018.o
- .debug_info    0x00000e26       0x7a ./timer.o
- .debug_info    0x00000ea0       0xc5 ./timer2.o
+ .debug_info    0x0000060d      0x86e ./reversi8_2018.o
+ .debug_info    0x00000e7b       0x7a ./timer.o
+ .debug_info    0x00000ef5       0xc5 ./timer2.o
 
-.debug_line     0x00000000      0xb2f
+.debug_line     0x00000000      0xb66
  *(.debug_line)
  .debug_line    0x00000000      0x10f ./common/44binit.o
  .debug_line    0x0000010f      0x37b ./common/44blib.o
  .debug_line    0x0000048a       0x97 ./8led.o
- .debug_line    0x00000521       0x84 ./arm_functions.o
- .debug_line    0x000005a5       0xc0 ./button.o
- .debug_line    0x00000665       0xaa ./led.o
- .debug_line    0x0000070f       0xd7 ./main.o
- .debug_line    0x000007e6      0x1ff ./reversi8_2018.o
- .debug_line    0x000009e5       0x9b ./timer.o
- .debug_line    0x00000a80       0xaf ./timer2.o
+ .debug_line    0x00000521       0xad ./arm_functions.o
+ .debug_line    0x000005ce       0xc0 ./button.o
+ .debug_line    0x0000068e       0xaa ./led.o
+ .debug_line    0x00000738       0xd7 ./main.o
+ .debug_line    0x0000080f      0x20d ./reversi8_2018.o
+ .debug_line    0x00000a1c       0x9b ./timer.o
+ .debug_line    0x00000ab7       0xaf ./timer2.o
 
 .debug_abbrev   0x00000000      0x5e5
  *(.debug_abbrev)
@@ -333,7 +334,7 @@ OUTPUT(PH_01_Placa.elf elf32-littlearm)
  .debug_aranges
                 0x00000120       0x20 ./timer2.o
 
-.debug_macinfo  0x00000000    0x28a08
+.debug_macinfo  0x00000000    0x289f9
  .debug_macinfo
                 0x00000000     0x8301 ./common/44blib.o
  .debug_macinfo
@@ -345,11 +346,11 @@ OUTPUT(PH_01_Placa.elf elf32-littlearm)
  .debug_macinfo
                 0x000176a6     0x50f4 ./main.o
  .debug_macinfo
-                0x0001c79a     0x210b ./reversi8_2018.o
+                0x0001c79a     0x20fc ./reversi8_2018.o
  .debug_macinfo
-                0x0001e8a5     0x50b1 ./timer.o
+                0x0001e896     0x50b1 ./timer.o
  .debug_macinfo
-                0x00023956     0x50b2 ./timer2.o
+                0x00023947     0x50b2 ./timer2.o
 
 .debug_loc      0x00000000      0x6b4
  .debug_loc     0x00000000      0x108 ./common/44blib.o
@@ -385,7 +386,7 @@ OUTPUT(PH_01_Placa.elf elf32-littlearm)
  .debug_pubtypes
                 0x00000000       0x12 ./common/44blib.o
 
-.debug_str      0x00000000      0x4ad
+.debug_str      0x00000000      0x4ed
  .debug_str     0x00000000      0x11b ./common/44blib.o
                                 0x159 (size before relaxing)
  .debug_str     0x0000011b       0x6c ./8led.o
@@ -396,9 +397,9 @@ OUTPUT(PH_01_Placa.elf elf32-littlearm)
                                  0x96 (size before relaxing)
  .debug_str     0x0000022a       0x37 ./main.o
                                  0x72 (size before relaxing)
- .debug_str     0x00000261      0x1e7 ./reversi8_2018.o
-                                0x243 (size before relaxing)
- .debug_str     0x00000448       0x20 ./timer.o
+ .debug_str     0x00000261      0x227 ./reversi8_2018.o
+                                0x291 (size before relaxing)
+ .debug_str     0x00000488       0x20 ./timer.o
                                  0x5a (size before relaxing)
- .debug_str     0x00000468       0x45 ./timer2.o
+ .debug_str     0x000004a8       0x45 ./timer2.o
                                  0x9c (size before relaxing)

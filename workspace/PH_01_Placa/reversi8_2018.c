@@ -1,6 +1,4 @@
 //Version Placa 0.1
-// Tamaño del tablero
-#include "led.h"
 enum { DIM=8 };
 enum {MODO_C=0,MODO_ARM_C=1,MODO_ARM_ARM=2}; //Seleccion de funcion patron volteo que se va a usar: 0=patron_volteo, 1=patron_volteo_arm_c, 2=patron_volteo_arm_arm
 // Valores que puede devolver la función patron_volteo())
@@ -247,9 +245,10 @@ int patron_volteo_test(char tablero[][DIM], int *longitud, char FA, char CA, cha
 
     timer2_empezar();
     int resultado_arm_arm=patron_volteo_arm_arm(tablero,longitud,FA,CA,SF,SC,color);
-    timer2_arm_arm=timer2_parar();
-	while(resultado_c != resultado_arm_c){}
-    while(resultado_c != resultado_arm_arm){}
+    int timer2_arm_arm=timer2_parar();
+
+    while(resultado_c != resultado_arm_c){}
+    while(resultado_c != resultado_arm_arm){} //Breakpoint aqui
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -378,7 +377,6 @@ int elegir_mov(char candidatas[][DIM], char tablero[][DIM], char *f, char *c, in
     }
     *f = (char) mf;
     *c = (char) mc;
-    leds_off();
     // si no se ha encontrado una posición válida devuelve -1
     return mf;
 }
@@ -449,12 +447,12 @@ int init_test(char tablero[][DIM],char candidatas[][DIM]){
 	char aux_candidatas = candidatas[2][3];
 	candidatas[2][3]=CASILLA_OCUPADA;
     int longitud=0;
-    patron_volteo_test(tablero,&longitud,'2','3','-1','0',FICHA_NEGRA);
-    patron_volteo_test(tablero,&longitud,'2','3','1','0',FICHA_NEGRA);
-    patron_volteo_test(tablero,&longitud,'2','3','1','1',FICHA_NEGRA);
-    patron_volteo_test(tablero,&longitud,'2','3','0','-1',FICHA_NEGRA);
-    patron_volteo_test(tablero,&longitud,'2','3','-1','-1',FICHA_NEGRA);
-    patron_volteo_test(tablero,&longitud,'2','3','0','1',FICHA_NEGRA);
+    patron_volteo_test(tablero,&longitud,2,3,-1,0,FICHA_NEGRA);
+    patron_volteo_test(tablero,&longitud,2,3,1,0,FICHA_NEGRA); //Patron encontrado
+    patron_volteo_test(tablero,&longitud,2,3,1,1,FICHA_NEGRA);
+    patron_volteo_test(tablero,&longitud,2,3,0,-1,FICHA_NEGRA);
+    patron_volteo_test(tablero,&longitud,2,3,-1,-1,FICHA_NEGRA);
+    patron_volteo_test(tablero,&longitud,2,3,0,1,FICHA_NEGRA);
     tablero[2][3]=aux_tablero;
     candidatas[2][3]=aux_candidatas;
 
@@ -499,15 +497,14 @@ void reversi8()
                   // y luego la máquina tampoco puede
     char f, c;    // fila y columna elegidas por la máquina para su movimiento
 
-   
-    int modo_patron_volteo = MODO_ARM_C;  //indica la funcion de patron_volteo que se va a usar para el juego.
+
+    int modo_patron_volteo = MODO_ARM_ARM;  //indica la funcion de patron_volteo que se va a usar para el juego.
 
     init_table(tablero, candidatas);
     init_test(tablero,candidatas);
     while (fin == 0)
     {
         move = 0;
-        leds_on();
         esperar_mov(&ready);
         // si la fila o columna son 8 asumimos que el jugador no puede mover
         if (((fila) != DIM) && ((columna) != DIM))

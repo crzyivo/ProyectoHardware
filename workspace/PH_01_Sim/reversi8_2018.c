@@ -1,7 +1,7 @@
 //Version simulador 0.1
 // Tamaño del tablero
 enum { DIM=8 };
-
+enum {MODO_C=0,MODO_ARM_C=1,MODO_ARM_ARM=2}; //Seleccion de funcion patron volteo que se va a usar: 0=patron_volteo, 1=patron_volteo_arm_c, 2=patron_volteo_arm_arm
 // Valores que puede devolver la función patron_volteo())
 enum {
 	NO_HAY_PATRON = 0,
@@ -70,7 +70,9 @@ char __attribute__ ((aligned (8))) tablero[DIM][DIM] = {
   char fila=0, columna=0, ready = 0;
 
 
+
 extern int patron_volteo_arm_c(char tablero[][8], int *longitud,char f, char c, char SF, char SC, char color);
+extern int patron_volteo_arm_arm(char tablero[][8], int *longitud,char f, char c, char SF, char SC, char color);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // 0 indica CASILLA_VACIA, 1 indica FICHA_BLANCA y 2 indica FICHA_NEGRA
@@ -180,6 +182,7 @@ char ficha_valida(char tablero[][DIM], char f, char c, int *posicion_valida)
     return ficha;
 }
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // La función patrón volteo es una función recursiva que busca el patrón de volteo
 // (n fichas del rival seguidas de una ficha del jugador actual) en una dirección determinada
@@ -227,6 +230,28 @@ int patron_volteo(char tablero[][DIM], int *longitud, char FA, char CA, char SF,
         //printf("NO_HAY_PATRON \n");
     }
 }
+
+//Funcion patron_volteo_test para comparar resultados entre las distintas implementaciones de patron_volteo
+int patron_volteo_test(char tablero[][DIM], int *longitud, char FA, char CA, char SF, char SC, char color)
+{
+	unsigned int timer2_c=0;
+	unsigned int timer2_arm_c=0;
+	//timer2_empezar();
+	int resultado_c=patron_volteo(tablero,longitud,FA,CA,SF,SC,color);
+	//timer2_c=timer2_parar();
+
+	//timer2_empezar();
+	int resultado_arm_c=patron_volteo_arm_c(tablero,longitud,FA,CA,SF,SC,color);
+	//timer2_arm_c=timer2_parar();
+
+    //timer2_empezar();
+    int resultado_arm_arm=patron_volteo_arm_arm(tablero,longitud,FA,CA,SF,SC,color);
+    //int timer2_arm_arm=timer2_parar();
+
+    while(resultado_c != resultado_arm_c){}
+    while(resultado_c != resultado_arm_arm){}
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // voltea n fichas en la dirección que toque
 // SF y SC son las cantidades a sumar para movernos en la dirección que toque
@@ -249,7 +274,7 @@ void voltear(char tablero[][DIM], char FA, char CA, char SF, char SC, int n, cha
 // f y c son la fila y columna a analizar
 // char vSF[DIM] = {-1,-1, 0, 1, 1, 1, 0,-1};
 // char vSC[DIM] = { 0, 1, 1, 1, 0,-1,-1,-1};
-int actualizar_tablero(char tablero[][DIM], char f, char c, char color)
+int actualizar_tablero(char tablero[][DIM], char f, char c, char color, int modo_patron_volteo)
 {
     char SF, SC; // cantidades a sumar para movernos en la dirección que toque
     int i, flip, patron;
@@ -260,7 +285,17 @@ int actualizar_tablero(char tablero[][DIM], char f, char c, char color)
         SC = vSC[i];
         // flip: numero de fichas a voltear
         flip = 0;
-        patron = patron_volteo_arm_c(tablero, &flip, f, c, SF, SC, color);
+        switch (modo_patron_volteo) {
+        case MODO_ARM_C:
+        	patron = patron_volteo_arm_c(tablero, &flip, f, c, SF, SC, color);
+        	break;
+        case MODO_ARM_ARM:
+            patron = patron_volteo_arm_arm(tablero, &flip, f, c, SF, SC, color);
+            break;
+        default:
+        	patron = patron_volteo(tablero, &flip, f, c, SF, SC, color);
+        	break;
+        }
         //printf("Flip: %d \n", flip);
         if (patron == PATRON_ENCONTRADO )
         {
@@ -280,7 +315,7 @@ int actualizar_tablero(char tablero[][DIM], char f, char c, char color)
 // NO    0
 // SI    1
 // CASILLA_OCUPADA 2
-int elegir_mov(char candidatas[][DIM], char tablero[][DIM], char *f, char *c)
+int elegir_mov(char candidatas[][DIM], char tablero[][DIM], char *f, char *c, int modo_patron_volteo)
 {
     int i, j, k, found;
     int mf = -1; // almacena la fila del mejor movimiento encontrado
@@ -311,7 +346,18 @@ int elegir_mov(char candidatas[][DIM], char tablero[][DIM], char *f, char *c)
 
                         // nos dice qué hay que voltear en cada dirección
                         longitud = 0;
-                        patron = patron_volteo_arm_c(tablero, &longitud, i, j, SF, SC, FICHA_BLANCA);
+
+                        switch (modo_patron_volteo) {
+                        case MODO_ARM_C:
+                        	patron = patron_volteo_arm_c(tablero, &longitud, i, j, SF, SC, FICHA_BLANCA);
+                        	break;
+                        case MODO_ARM_ARM:
+                            patron = patron_volteo_arm_arm(tablero, &longitud, i, j, SF, SC, FICHA_BLANCA);
+                            break;
+                        default:
+                        	patron = patron_volteo(tablero, &longitud, i, j, SF, SC, FICHA_BLANCA);
+                        	break;
+                        }
                         //  //printf("%d ", patron);
                         if (patron == PATRON_ENCONTRADO)
                         {
@@ -396,7 +442,22 @@ void actualizar_candidatas(char candidatas[][DIM], char f, char c)
         candidatas[f][c+1] = SI;
 }
 
+int init_test(char tablero[][DIM],char candidatas[][DIM]){
+	char aux_tablero = tablero[2][3];
+	tablero[2][3]=FICHA_NEGRA;
+	char aux_candidatas = candidatas[2][3];
+	candidatas[2][3]=CASILLA_OCUPADA;
+    int longitud=0;
+    patron_volteo_test(tablero,&longitud,2,3,-1,0,FICHA_NEGRA);
+    patron_volteo_test(tablero,&longitud,2,3,1,0,FICHA_NEGRA);
+    patron_volteo_test(tablero,&longitud,2,3,1,1,FICHA_NEGRA);
+    patron_volteo_test(tablero,&longitud,2,3,0,-1,FICHA_NEGRA);
+    patron_volteo_test(tablero,&longitud,2,3,-1,-1,FICHA_NEGRA);
+    patron_volteo_test(tablero,&longitud,2,3,0,1,FICHA_NEGRA);
+    tablero[2][3]=aux_tablero;
+    candidatas[2][3]=aux_candidatas;
 
+}
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -437,7 +498,11 @@ void reversi8()
                   // y luego la máquina tampoco puede
     char f, c;    // fila y columna elegidas por la máquina para su movimiento
 
+
+    int modo_patron_volteo = MODO_ARM_ARM;  //indica la funcion de patron_volteo que se va a usar para el juego.
+
     init_table(tablero, candidatas);
+    init_test(tablero,candidatas);
     while (fin == 0)
     {
         move = 0;
@@ -446,13 +511,13 @@ void reversi8()
         if (((fila) != DIM) && ((columna) != DIM))
         {
             tablero[fila][columna] = FICHA_NEGRA;
-            actualizar_tablero(tablero, fila, columna, FICHA_NEGRA);
+            actualizar_tablero(tablero, fila, columna, FICHA_NEGRA, modo_patron_volteo);
             actualizar_candidatas(candidatas, fila, columna);
             move = 1;
         }
 
         // escribe el movimiento en las variables globales fila columna
-        done = elegir_mov(candidatas, tablero, &f, &c);
+        done = elegir_mov(candidatas, tablero, &f, &c, modo_patron_volteo);
         if (done == -1)
         {
             if (move == 0)
@@ -461,7 +526,7 @@ void reversi8()
         else
         {
             tablero[f][c] = FICHA_BLANCA;
-            actualizar_tablero(tablero, f, c, FICHA_BLANCA);
+            actualizar_tablero(tablero, f, c, FICHA_BLANCA, modo_patron_volteo);
             actualizar_candidatas(candidatas, f, c);
         }
     }
