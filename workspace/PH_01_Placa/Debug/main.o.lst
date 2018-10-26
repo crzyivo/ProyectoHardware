@@ -11,10 +11,10 @@
   11              		.file	"main.c"
   21              	.Ltext0:
   22              		.file 1 "../main.c"
- 1912              		.align	2
- 1913              		.global	test_timer2
- 1915              	test_timer2:
- 1916              	.LFB0:
+ 1921              		.align	2
+ 1922              		.global	test_timer2
+ 1924              	test_timer2:
+ 1925              	.LFB0:
    1:../main.c     **** /*********************************************************************************************
    2:../main.c     **** * Fichero:	main.c
    3:../main.c     **** * Autor:
@@ -30,161 +30,247 @@
   13:../main.c     **** #include "timer2.h"
   14:../main.c     **** #include "44blib.h"
   15:../main.c     **** #include "44b.h"
-  16:../main.c     **** /*--- variables globales ---*/
-  17:../main.c     **** 
+  16:../main.c     **** #include "latido.h"
+  17:../main.c     **** /*--- variables globales ---*/
   18:../main.c     **** 
-  19:../main.c     **** /*--- codigo de funciones ---*/
-  20:../main.c     **** 
-  21:../main.c     **** void test_timer2(){
- 1917              		.loc 1 21 0
- 1918              		.cfi_startproc
- 1919              		@ Function supports interworking.
- 1920              		@ args = 0, pretend = 0, frame = 8
- 1921              		@ frame_needed = 1, uses_anonymous_args = 0
- 1922 0000 0DC0A0E1 		mov	ip, sp
- 1923              	.LCFI0:
- 1924              		.cfi_def_cfa_register 12
- 1925 0004 00D82DE9 		stmfd	sp!, {fp, ip, lr, pc}
- 1926 0008 04B04CE2 		sub	fp, ip, #4
- 1927              		.cfi_offset 14, -8
- 1928              		.cfi_offset 13, -12
- 1929              		.cfi_offset 11, -16
- 1930              	.LCFI1:
- 1931              		.cfi_def_cfa 11, 4
- 1932 000c 08D04DE2 		sub	sp, sp, #8
-  22:../main.c     **** 	timer2_empezar();
- 1933              		.loc 1 22 0
- 1934 0010 FEFFFFEB 		bl	timer2_empezar
-  23:../main.c     **** 	Delay(10);
- 1935              		.loc 1 23 0
- 1936 0014 0A00A0E3 		mov	r0, #10
- 1937 0018 FEFFFFEB 		bl	Delay
-  24:../main.c     **** 	unsigned int tiempo = timer2_parar();
- 1938              		.loc 1 24 0
- 1939 001c FEFFFFEB 		bl	timer2_parar
- 1940 0020 10000BE5 		str	r0, [fp, #-16]
-  25:../main.c     **** //	Delay(10);
-  26:../main.c     **** //	tiempo = timer2_leer();
-  27:../main.c     **** //	timer2_parar();
+  19:../main.c     **** 
+  20:../main.c     **** /*--- codigo de funciones ---*/
+  21:../main.c     **** 
+  22:../main.c     **** void test_timer2(){
+ 1926              		.loc 1 22 0
+ 1927              		.cfi_startproc
+ 1928              		@ Function supports interworking.
+ 1929              		@ args = 0, pretend = 0, frame = 56
+ 1930              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1931 0000 0DC0A0E1 		mov	ip, sp
+ 1932              	.LCFI0:
+ 1933              		.cfi_def_cfa_register 12
+ 1934 0004 00D82DE9 		stmfd	sp!, {fp, ip, lr, pc}
+ 1935 0008 04B04CE2 		sub	fp, ip, #4
+ 1936              		.cfi_offset 14, -8
+ 1937              		.cfi_offset 13, -12
+ 1938              		.cfi_offset 11, -16
+ 1939              	.LCFI1:
+ 1940              		.cfi_def_cfa 11, 4
+ 1941 000c 38D04DE2 		sub	sp, sp, #56
+  23:../main.c     **** 	unsigned int tiempos[9];	//Array para anotar tiempos del timer2
+  24:../main.c     **** 	unsigned int tiempo_medido_1ms = 0;
+ 1942              		.loc 1 24 0
+ 1943 0010 0030A0E3 		mov	r3, #0
+ 1944 0014 10300BE5 		str	r3, [fp, #-16]
+  25:../main.c     **** 	unsigned int tiempo_medido_10ms = 0;
+ 1945              		.loc 1 25 0
+ 1946 0018 0030A0E3 		mov	r3, #0
+ 1947 001c 14300BE5 		str	r3, [fp, #-20]
+  26:../main.c     **** 	unsigned int tiempo_medido_1s = 0;
+ 1948              		.loc 1 26 0
+ 1949 0020 0030A0E3 		mov	r3, #0
+ 1950 0024 18300BE5 		str	r3, [fp, #-24]
+  27:../main.c     **** 	unsigned int tiempo_medido_10s = 0;
+ 1951              		.loc 1 27 0
+ 1952 0028 0030A0E3 		mov	r3, #0
+ 1953 002c 1C300BE5 		str	r3, [fp, #-28]
   28:../main.c     **** 	timer2_empezar();
- 1941              		.loc 1 28 0
- 1942 0024 FEFFFFEB 		bl	timer2_empezar
-  29:../main.c     **** 	Delay(15);
- 1943              		.loc 1 29 0
- 1944 0028 0F00A0E3 		mov	r0, #15
- 1945 002c FEFFFFEB 		bl	Delay
-  30:../main.c     **** 	tiempo=timer2_parar();
- 1946              		.loc 1 30 0
- 1947 0030 FEFFFFEB 		bl	timer2_parar
- 1948 0034 10000BE5 		str	r0, [fp, #-16]
-  31:../main.c     **** 	timer2_empezar();
- 1949              		.loc 1 31 0
- 1950 0038 FEFFFFEB 		bl	timer2_empezar
-  32:../main.c     **** 	Delay(10000);
- 1951              		.loc 1 32 0
- 1952 003c 14009FE5 		ldr	r0, .L2
- 1953 0040 FEFFFFEB 		bl	Delay
-  33:../main.c     **** 	tiempo=timer2_parar();
- 1954              		.loc 1 33 0
- 1955 0044 FEFFFFEB 		bl	timer2_parar
- 1956 0048 10000BE5 		str	r0, [fp, #-16]
-  34:../main.c     **** }
- 1957              		.loc 1 34 0
- 1958 004c 0CD04BE2 		sub	sp, fp, #12
- 1959 0050 00689DE8 		ldmfd	sp, {fp, sp, lr}
- 1960 0054 1EFF2FE1 		bx	lr
- 1961              	.L3:
- 1962              		.align	2
- 1963              	.L2:
- 1964 0058 10270000 		.word	10000
- 1965              		.cfi_endproc
- 1966              	.LFE0:
- 1968              		.align	2
- 1969              		.global	Main
- 1971              	Main:
- 1972              	.LFB1:
-  35:../main.c     **** void Main(void)
-  36:../main.c     **** {
- 1973              		.loc 1 36 0
- 1974              		.cfi_startproc
- 1975              		@ Function supports interworking.
- 1976              		@ args = 0, pretend = 0, frame = 0
- 1977              		@ frame_needed = 1, uses_anonymous_args = 0
- 1978 005c 0DC0A0E1 		mov	ip, sp
- 1979              	.LCFI2:
- 1980              		.cfi_def_cfa_register 12
- 1981 0060 00D82DE9 		stmfd	sp!, {fp, ip, lr, pc}
- 1982 0064 04B04CE2 		sub	fp, ip, #4
- 1983              		.cfi_offset 14, -8
- 1984              		.cfi_offset 13, -12
- 1985              		.cfi_offset 11, -16
- 1986              	.LCFI3:
- 1987              		.cfi_def_cfa 11, 4
-  37:../main.c     **** 	/* Inicializa controladores */
-  38:../main.c     **** 	sys_init();         // Inicializacion de la placa, interrupciones y puertos
- 1988              		.loc 1 38 0
- 1989 0068 FEFFFFEB 		bl	sys_init
-  39:../main.c     **** 	//timer_init();	    // Inicializacion del temporizador
-  40:../main.c     **** 	Eint4567_init();	// inicializamos los pulsadores. Cada vez que se pulse se verá reflejado en el 8l
- 1990              		.loc 1 40 0
- 1991 006c FEFFFFEB 		bl	Eint4567_init
-  41:../main.c     **** 	D8Led_init();       // inicializamos el 8led
+ 1954              		.loc 1 28 0
+ 1955 0030 FEFFFFEB 		bl	timer2_empezar
+  29:../main.c     **** 
+  30:../main.c     **** 	tiempos[0] = timer2_leer();
+ 1956              		.loc 1 30 0
+ 1957 0034 FEFFFFEB 		bl	timer2_leer
+ 1958 0038 0030A0E1 		mov	r3, r0
+ 1959 003c 40300BE5 		str	r3, [fp, #-64]
+  31:../main.c     **** 	Delay(10); //1 ms
+ 1960              		.loc 1 31 0
+ 1961 0040 0A00A0E3 		mov	r0, #10
+ 1962 0044 FEFFFFEB 		bl	Delay
+  32:../main.c     **** 	tiempos[1] = timer2_leer();
+ 1963              		.loc 1 32 0
+ 1964 0048 FEFFFFEB 		bl	timer2_leer
+ 1965 004c 0030A0E1 		mov	r3, r0
+ 1966 0050 3C300BE5 		str	r3, [fp, #-60]
+  33:../main.c     **** 	tiempo_medido_1ms = tiempos[1]-tiempos[0];
+ 1967              		.loc 1 33 0
+ 1968 0054 3C201BE5 		ldr	r2, [fp, #-60]
+ 1969 0058 40301BE5 		ldr	r3, [fp, #-64]
+ 1970 005c 023063E0 		rsb	r3, r3, r2
+ 1971 0060 10300BE5 		str	r3, [fp, #-16]
+  34:../main.c     **** 
+  35:../main.c     **** 	tiempos[2] = timer2_leer();
+ 1972              		.loc 1 35 0
+ 1973 0064 FEFFFFEB 		bl	timer2_leer
+ 1974 0068 0030A0E1 		mov	r3, r0
+ 1975 006c 38300BE5 		str	r3, [fp, #-56]
+  36:../main.c     **** 	Delay(100); //10 ms
+ 1976              		.loc 1 36 0
+ 1977 0070 6400A0E3 		mov	r0, #100
+ 1978 0074 FEFFFFEB 		bl	Delay
+  37:../main.c     **** 	tiempos[3] = timer2_leer();
+ 1979              		.loc 1 37 0
+ 1980 0078 FEFFFFEB 		bl	timer2_leer
+ 1981 007c 0030A0E1 		mov	r3, r0
+ 1982 0080 34300BE5 		str	r3, [fp, #-52]
+  38:../main.c     **** 	tiempo_medido_10ms = tiempos[3]-tiempos[2];
+ 1983              		.loc 1 38 0
+ 1984 0084 34201BE5 		ldr	r2, [fp, #-52]
+ 1985 0088 38301BE5 		ldr	r3, [fp, #-56]
+ 1986 008c 023063E0 		rsb	r3, r3, r2
+ 1987 0090 14300BE5 		str	r3, [fp, #-20]
+  39:../main.c     **** 
+  40:../main.c     **** 	tiempos[4] = timer2_leer();
+ 1988              		.loc 1 40 0
+ 1989 0094 FEFFFFEB 		bl	timer2_leer
+ 1990 0098 0030A0E1 		mov	r3, r0
+ 1991 009c 30300BE5 		str	r3, [fp, #-48]
+  41:../main.c     **** 	Delay(10000); //1 s
  1992              		.loc 1 41 0
- 1993 0070 FEFFFFEB 		bl	D8Led_init
-  42:../main.c     **** 	timer2_inicializar();
- 1994              		.loc 1 42 0
- 1995 0074 FEFFFFEB 		bl	timer2_inicializar
-  43:../main.c     **** 
+ 1993 00a0 58009FE5 		ldr	r0, .L2
+ 1994 00a4 FEFFFFEB 		bl	Delay
+  42:../main.c     **** 	tiempos[5] = timer2_leer();
+ 1995              		.loc 1 42 0
+ 1996 00a8 FEFFFFEB 		bl	timer2_leer
+ 1997 00ac 0030A0E1 		mov	r3, r0
+ 1998 00b0 2C300BE5 		str	r3, [fp, #-44]
+  43:../main.c     **** 	tiempo_medido_1s = tiempos[5]-tiempos[4];
+ 1999              		.loc 1 43 0
+ 2000 00b4 2C201BE5 		ldr	r2, [fp, #-44]
+ 2001 00b8 30301BE5 		ldr	r3, [fp, #-48]
+ 2002 00bc 023063E0 		rsb	r3, r3, r2
+ 2003 00c0 18300BE5 		str	r3, [fp, #-24]
   44:../main.c     **** 
-  45:../main.c     **** 	/* Valor inicial de los leds */
-  46:../main.c     **** 	leds_off();
- 1996              		.loc 1 46 0
- 1997 0078 FEFFFFEB 		bl	leds_off
-  47:../main.c     **** 	test_timer2();
- 1998              		.loc 1 47 0
- 1999 007c FEFFFFEB 		bl	test_timer2
-  48:../main.c     **** 	//Dejamos los leds apagados
-  49:../main.c     **** 	//led1_on();
-  50:../main.c     **** 	//Iniciar reversi8;
-  51:../main.c     **** 	reversi8();
- 2000              		.loc 1 51 0
- 2001 0080 FEFFFFEB 		bl	reversi8
-  52:../main.c     **** 
-  53:../main.c     **** /*	Codigo para cambiar los leds segun el timer
-  54:../main.c     ****  * while (1)
-  55:../main.c     **** 	{
-  56:../main.c     **** 		// Cambia los leds con cada interrupcion del temporizador
-  57:../main.c     **** 		if (switch_leds == 1)
-  58:../main.c     **** 		{
-  59:../main.c     **** 			leds_switch();
-  60:../main.c     **** 			switch_leds = 0;
-  61:../main.c     **** 		}
-  62:../main.c     **** 	}*/
-  63:../main.c     **** }
- 2002              		.loc 1 63 0
- 2003 0084 0CD04BE2 		sub	sp, fp, #12
- 2004 0088 00689DE8 		ldmfd	sp, {fp, sp, lr}
- 2005 008c 1EFF2FE1 		bx	lr
- 2006              		.cfi_endproc
- 2007              	.LFE1:
- 2009              	.Letext0:
+  45:../main.c     **** 	tiempos[6] = timer2_leer();
+ 2004              		.loc 1 45 0
+ 2005 00c4 FEFFFFEB 		bl	timer2_leer
+ 2006 00c8 0030A0E1 		mov	r3, r0
+ 2007 00cc 28300BE5 		str	r3, [fp, #-40]
+  46:../main.c     **** 	Delay(100000); //10 s
+ 2008              		.loc 1 46 0
+ 2009 00d0 2C009FE5 		ldr	r0, .L2+4
+ 2010 00d4 FEFFFFEB 		bl	Delay
+  47:../main.c     **** 	tiempos[7] = timer2_leer();
+ 2011              		.loc 1 47 0
+ 2012 00d8 FEFFFFEB 		bl	timer2_leer
+ 2013 00dc 0030A0E1 		mov	r3, r0
+ 2014 00e0 24300BE5 		str	r3, [fp, #-36]
+  48:../main.c     **** 	tiempo_medido_10s = tiempos[7]-tiempos[6];
+ 2015              		.loc 1 48 0
+ 2016 00e4 24201BE5 		ldr	r2, [fp, #-36]
+ 2017 00e8 28301BE5 		ldr	r3, [fp, #-40]
+ 2018 00ec 023063E0 		rsb	r3, r3, r2
+ 2019 00f0 1C300BE5 		str	r3, [fp, #-28]
+  49:../main.c     **** }
+ 2020              		.loc 1 49 0
+ 2021 00f4 0CD04BE2 		sub	sp, fp, #12
+ 2022 00f8 00689DE8 		ldmfd	sp, {fp, sp, lr}
+ 2023 00fc 1EFF2FE1 		bx	lr
+ 2024              	.L3:
+ 2025              		.align	2
+ 2026              	.L2:
+ 2027 0100 10270000 		.word	10000
+ 2028 0104 A0860100 		.word	100000
+ 2029              		.cfi_endproc
+ 2030              	.LFE0:
+ 2032              		.align	2
+ 2033              		.global	Main
+ 2035              	Main:
+ 2036              	.LFB1:
+  50:../main.c     **** void Main(void)
+  51:../main.c     **** {
+ 2037              		.loc 1 51 0
+ 2038              		.cfi_startproc
+ 2039              		@ Function supports interworking.
+ 2040              		@ args = 0, pretend = 0, frame = 0
+ 2041              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2042 0108 0DC0A0E1 		mov	ip, sp
+ 2043              	.LCFI2:
+ 2044              		.cfi_def_cfa_register 12
+ 2045 010c 00D82DE9 		stmfd	sp!, {fp, ip, lr, pc}
+ 2046 0110 04B04CE2 		sub	fp, ip, #4
+ 2047              		.cfi_offset 14, -8
+ 2048              		.cfi_offset 13, -12
+ 2049              		.cfi_offset 11, -16
+ 2050              	.LCFI3:
+ 2051              		.cfi_def_cfa 11, 4
+  52:../main.c     **** 	/* Inicializa controladores */
+  53:../main.c     **** 	sys_init();         // Inicializacion de la placa, interrupciones y puertos
+ 2052              		.loc 1 53 0
+ 2053 0114 FEFFFFEB 		bl	sys_init
+  54:../main.c     **** 	//timer_init();	    // Inicializacion del temporizador
+  55:../main.c     **** 	Eint4567_init();	// inicializamos los pulsadores. Cada vez que se pulse se verá reflejado en el 8l
+ 2054              		.loc 1 55 0
+ 2055 0118 FEFFFFEB 		bl	Eint4567_init
+  56:../main.c     **** 	D8Led_init();       // inicializamos el 8led
+ 2056              		.loc 1 56 0
+ 2057 011c FEFFFFEB 		bl	D8Led_init
+  57:../main.c     **** 	//timer2_inicializar();
+  58:../main.c     **** 	latido_inicializar();
+ 2058              		.loc 1 58 0
+ 2059 0120 FEFFFFEB 		bl	latido_inicializar
+ 2060 0124 000000EA 		b	.L6
+ 2061              	.L7:
+  59:../main.c     **** 
+  60:../main.c     **** 
+  61:../main.c     **** 	/* Valor inicial de los leds */
+  62:../main.c     **** 	//leds_off();
+  63:../main.c     **** 	//test_timer2();
+  64:../main.c     **** 	//Dejamos los leds apagados
+  65:../main.c     **** 	//led1_on();
+  66:../main.c     **** 	//Iniciar reversi8;
+  67:../main.c     **** 	//reversi8();
+  68:../main.c     **** 
+  69:../main.c     **** 	//Codigo para cambiar los leds segun el timer
+  70:../main.c     ****   while (1)
+  71:../main.c     **** 	{
+  72:../main.c     **** 		// Cambia los leds con cada interrupcion del temporizador
+  73:../main.c     **** 		if (switch_leds == 1)
+  74:../main.c     **** 		{
+  75:../main.c     **** 			leds_switch();
+  76:../main.c     **** 			switch_leds = 0;
+  77:../main.c     **** 		}
+  78:../main.c     **** 	}
+ 2062              		.loc 1 78 0
+ 2063 0128 0000A0E1 		mov	r0, r0	@ nop
+ 2064              	.L6:
+  73:../main.c     **** 		if (switch_leds == 1)
+ 2065              		.loc 1 73 0
+ 2066 012c 1C309FE5 		ldr	r3, .L8
+ 2067 0130 003093E5 		ldr	r3, [r3, #0]
+ 2068 0134 010053E3 		cmp	r3, #1
+ 2069 0138 FAFFFF1A 		bne	.L7
+  75:../main.c     **** 			leds_switch();
+ 2070              		.loc 1 75 0
+ 2071 013c FEFFFFEB 		bl	leds_switch
+  76:../main.c     **** 			switch_leds = 0;
+ 2072              		.loc 1 76 0
+ 2073 0140 08309FE5 		ldr	r3, .L8
+ 2074 0144 0020A0E3 		mov	r2, #0
+ 2075 0148 002083E5 		str	r2, [r3, #0]
+ 2076              		.loc 1 78 0
+ 2077 014c F6FFFFEA 		b	.L6
+ 2078              	.L9:
+ 2079              		.align	2
+ 2080              	.L8:
+ 2081 0150 00000000 		.word	switch_leds
+ 2082              		.cfi_endproc
+ 2083              	.LFE1:
+ 2085              	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
                             *COM*:00000004 switch_leds
-C:\Users\Ivo\AppData\Local\Temp\ccRWXp8O.s:1912   .text:00000000 $a
-C:\Users\Ivo\AppData\Local\Temp\ccRWXp8O.s:1915   .text:00000000 test_timer2
-C:\Users\Ivo\AppData\Local\Temp\ccRWXp8O.s:1964   .text:00000058 $d
-C:\Users\Ivo\AppData\Local\Temp\ccRWXp8O.s:1968   .text:0000005c $a
-C:\Users\Ivo\AppData\Local\Temp\ccRWXp8O.s:1971   .text:0000005c Main
+                            *COM*:00000004 switch_leds_l
+C:\Users\Ivo\AppData\Local\Temp\cciAJnII.s:1921   .text:00000000 $a
+C:\Users\Ivo\AppData\Local\Temp\cciAJnII.s:1924   .text:00000000 test_timer2
+C:\Users\Ivo\AppData\Local\Temp\cciAJnII.s:2027   .text:00000100 $d
+C:\Users\Ivo\AppData\Local\Temp\cciAJnII.s:2032   .text:00000108 $a
+C:\Users\Ivo\AppData\Local\Temp\cciAJnII.s:2035   .text:00000108 Main
+C:\Users\Ivo\AppData\Local\Temp\cciAJnII.s:2081   .text:00000150 $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
 timer2_empezar
+timer2_leer
 Delay
-timer2_parar
 sys_init
 Eint4567_init
 D8Led_init
-timer2_inicializar
-leds_off
-reversi8
+latido_inicializar
+leds_switch

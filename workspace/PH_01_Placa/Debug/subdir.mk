@@ -6,6 +6,7 @@
 C_SRCS += \
 ../8led.c \
 ../button.c \
+../latido.c \
 ../led.c \
 ../main.c \
 ../reversi8_2018.c \
@@ -19,6 +20,7 @@ OBJS += \
 ./8led.o \
 ./arm_functions.o \
 ./button.o \
+./latido.o \
 ./led.o \
 ./main.o \
 ./reversi8_2018.o \
@@ -28,6 +30,7 @@ OBJS += \
 C_DEPS += \
 ./8led.d \
 ./button.d \
+./latido.d \
 ./led.d \
 ./main.d \
 ./reversi8_2018.d \

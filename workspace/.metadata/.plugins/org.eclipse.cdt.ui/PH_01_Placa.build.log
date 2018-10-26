@@ -1,68 +1,11 @@
-11:59:38 **** Incremental Build of configuration Debug for project PH_01_Placa ****
+11:41:56 **** Incremental Build of configuration Debug for project PH_01_Placa ****
 cs-make all 
-'Building file: ../arm_functions.asm'
-'Invoking: ARM Sourcery Windows GCC Assembler'
-arm-none-eabi-gcc -x assembler-with-cpp -I"D:\PH\workspace\PH_01_Placa\common" -Wall -Wa,-adhlns="arm_functions.o.lst" -c -fmessage-length=0 -MMD -MP -MF"arm_functions.d" -MT"arm_functions.d" -mcpu=arm7tdmi -g3 -gdwarf-2 -o "arm_functions.o" "../arm_functions.asm"
-../arm_functions.asm: Assembler messages:
-../arm_functions.asm:8: Warning: if writeback register is in list, it must be the lowest reg in the list
-'Finished building: ../arm_functions.asm'
-' '
-'Building file: ../reversi8_2018.c'
-'Invoking: ARM Sourcery Windows GCC C Compiler'
-arm-none-eabi-gcc -I"D:\PH\workspace\PH_01_Placa\common" -O0 -Wall -Wa,-adhlns="reversi8_2018.o.lst" -c -fmessage-length=0 -mapcs-frame -MMD -MP -MF"reversi8_2018.d" -MT"reversi8_2018.d" -mcpu=arm7tdmi -g3 -gdwarf-2 -o "reversi8_2018.o" "../reversi8_2018.c"
-../reversi8_2018.c: In function 'ficha_valida':
-../reversi8_2018.c:171:5: warning: array subscript has type 'char'
-../reversi8_2018.c:171:5: warning: array subscript has type 'char'
-../reversi8_2018.c:174:9: warning: array subscript has type 'char'
-../reversi8_2018.c:174:9: warning: array subscript has type 'char'
-../reversi8_2018.c: In function 'patron_volteo_test':
-../reversi8_2018.c:238:2: warning: implicit declaration of function 'timer2_empezar'
-../reversi8_2018.c:240:2: warning: implicit declaration of function 'timer2_parar'
-../reversi8_2018.c:248:9: warning: unused variable 'timer2_arm_arm'
-../reversi8_2018.c: In function 'voltear':
-../reversi8_2018.c:267:9: warning: array subscript has type 'char'
-../reversi8_2018.c:267:9: warning: array subscript has type 'char'
-../reversi8_2018.c: In function 'actualizar_candidatas':
-../reversi8_2018.c:414:5: warning: array subscript has type 'char'
-../reversi8_2018.c:414:5: warning: array subscript has type 'char'
-../reversi8_2018.c:417:9: warning: array subscript has type 'char'
-../reversi8_2018.c:418:13: warning: array subscript has type 'char'
-../reversi8_2018.c:428:9: warning: array subscript has type 'char'
-../reversi8_2018.c:429:13: warning: array subscript has type 'char'
-../reversi8_2018.c:437:5: warning: array subscript has type 'char'
-../reversi8_2018.c:438:9: warning: array subscript has type 'char'
-../reversi8_2018.c:440:5: warning: array subscript has type 'char'
-../reversi8_2018.c:441:9: warning: array subscript has type 'char'
-../reversi8_2018.c: In function 'reversi8':
-../reversi8_2018.c:512:13: warning: array subscript has type 'char'
-../reversi8_2018.c:512:13: warning: array subscript has type 'char'
-../reversi8_2018.c:527:13: warning: array subscript has type 'char'
-../reversi8_2018.c:527:13: warning: array subscript has type 'char'
-../reversi8_2018.c: In function 'init_test':
-../reversi8_2018.c:459:1: warning: control reaches end of non-void function
-../reversi8_2018.c: In function 'patron_volteo_test':
-../reversi8_2018.c:252:1: warning: control reaches end of non-void function
-'Finished building: ../reversi8_2018.c'
-' '
-'Building target: PH_01_Placa.elf'
-'Invoking: ARM Sourcery Windows GCC C Linker'
-arm-none-eabi-gcc -T"D:\PH\workspace\PH_01_Placa\common\ld_script.ld" -nostartfiles -Wl,-Map,PH_01_Placa.map -mcpu=arm7tdmi -g3 -gdwarf-2 -o "PH_01_Placa.elf"  ./common/44binit.o ./common/44blib.o  ./8led.o ./arm_functions.o ./button.o ./led.o ./main.o ./reversi8_2018.o ./timer.o ./timer2.o   
-'Finished building target: PH_01_Placa.elf'
-' '
-'Invoking: ARM Sourcery Windows GNU Create Flash Image'
-arm-none-eabi-objcopy -O binary PH_01_Placa.elf  "PH_01_Placa.hex"
-'Finished building: PH_01_Placa.hex'
-' '
-'Invoking: ARM Sourcery Windows GNU Create Listing'
-arm-none-eabi-objdump -h -S PH_01_Placa.elf > "PH_01_Placa.lst"
-'Finished building: PH_01_Placa.lst'
-' '
 'Invoking: ARM Sourcery Windows GNU Print Size'
 arm-none-eabi-size  --format=berkeley PH_01_Placa.elf
    text	   data	    bss	    dec	    hex	filename
-  14304	     88	    104	  14496	   38a0	PH_01_Placa.elf
+  15908	     88	    112	  16108	   3eec	PH_01_Placa.elf
 'Finished building: PH_01_Placa.siz'
 ' '
 
-11:59:40 Build Finished (took 1s.599ms)
+11:41:56 Build Finished (took 370ms)
 

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;PH_01_Placa/timer0led.c&apos; to &apos;latido.c&apos;" description="Rename resource &apos;timer0led.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="timer0led.c" name="latido.c" stamp="1540275204470" updateReferences="true"/>
+</session>
