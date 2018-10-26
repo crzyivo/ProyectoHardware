@@ -271,7 +271,7 @@ END GROUP
  .comment       0x00000000       0x2b ./timer.o
  .comment       0x00000000       0x2b ./timer2.o
 
-.debug_info     0x00000000     0x1126
+.debug_info     0x00000000     0x1123
  *(.debug_info)
  .debug_info    0x00000000       0x61 ./common/44binit.o
  .debug_info    0x00000061      0x229 ./common/44blib.o
@@ -281,9 +281,9 @@ END GROUP
  .debug_info    0x0000047d      0x12f ./latido.o
  .debug_info    0x000005ac       0xf6 ./led.o
  .debug_info    0x000006a2       0xee ./main.o
- .debug_info    0x00000790      0x857 ./reversi8_2018.o
- .debug_info    0x00000fe7       0x7a ./timer.o
- .debug_info    0x00001061       0xc5 ./timer2.o
+ .debug_info    0x00000790      0x854 ./reversi8_2018.o
+ .debug_info    0x00000fe4       0x7a ./timer.o
+ .debug_info    0x0000105e       0xc5 ./timer2.o
 
 .debug_line     0x00000000      0xc70
  *(.debug_line)

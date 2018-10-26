@@ -537,7 +537,7 @@ void reversi8()
     char f, c;    // fila y columna elegidas por la máquina para su movimiento
 
 
-    int modo_patron_volteo = MODO_C;  //indica la funcion de patron_volteo que se va a usar para el juego.
+    int modo_patron_volteo = MODO_ARM_C;  //indica la funcion de patron_volteo que se va a usar para el juego.
 
     init_table(tablero, candidatas);
     init_test(tablero,candidatas);

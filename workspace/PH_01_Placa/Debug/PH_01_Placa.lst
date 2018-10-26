@@ -15,13 +15,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .comment      0000002a  00000000  00000000  0000beae  2**0
                   CONTENTS, READONLY
-  6 .debug_info   00001126  00000000  00000000  0000bed8  2**0
+  6 .debug_info   00001123  00000000  00000000  0000bed8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00000c70  00000000  00000000  0000cffe  2**0
+  7 .debug_line   00000c70  00000000  00000000  0000cffb  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_abbrev 00000684  00000000  00000000  0000dc6e  2**0
+  8 .debug_abbrev 00000684  00000000  00000000  0000dc6b  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  0000061c  00000000  00000000  0000e2f4  2**2
+  9 .debug_frame  0000061c  00000000  00000000  0000e2f0  2**2
                   CONTENTS, READONLY, DEBUGGING
  10 .debug_aranges 00000160  00000000  00000000  0000e910  2**3
                   CONTENTS, READONLY, DEBUGGING
@@ -2738,22 +2738,22 @@ int patron_volteo_test(char tablero[][DIM], int *longitud, char FA, char CA, cha
  c00185c:	e1a0c00d 	mov	ip, sp
  c001860:	e92dd800 	push	{fp, ip, lr, pc}
  c001864:	e24cb004 	sub	fp, ip, #4
- c001868:	e24dd060 	sub	sp, sp, #96	; 0x60
- c00186c:	e50b0050 	str	r0, [fp, #-80]	; 0xffffffb0
- c001870:	e50b1054 	str	r1, [fp, #-84]	; 0xffffffac
- c001874:	e54b2055 	strb	r2, [fp, #-85]	; 0xffffffab
- c001878:	e54b3056 	strb	r3, [fp, #-86]	; 0xffffffaa
+ c001868:	e24dd050 	sub	sp, sp, #80	; 0x50
+ c00186c:	e50b0040 	str	r0, [fp, #-64]	; 0xffffffc0
+ c001870:	e50b1044 	str	r1, [fp, #-68]	; 0xffffffbc
+ c001874:	e54b2045 	strb	r2, [fp, #-69]	; 0xffffffbb
+ c001878:	e54b3046 	strb	r3, [fp, #-70]	; 0xffffffba
 
-	unsigned int tiempos[9];	//Array para anotar tiempos del timer2
+	unsigned int tiempos[6];	//Array para anotar tiempos del timer2
 	volatile unsigned int time_c=0;
  c00187c:	e3a03000 	mov	r3, #0
- c001880:	e50b3040 	str	r3, [fp, #-64]	; 0xffffffc0
+ c001880:	e50b3034 	str	r3, [fp, #-52]	; 0xffffffcc
 	volatile unsigned int time_arm_c=0;
  c001884:	e3a03000 	mov	r3, #0
- c001888:	e50b3044 	str	r3, [fp, #-68]	; 0xffffffbc
+ c001888:	e50b3038 	str	r3, [fp, #-56]	; 0xffffffc8
 	volatile unsigned int time_arm_arm=0;
  c00188c:	e3a03000 	mov	r3, #0
- c001890:	e50b3048 	str	r3, [fp, #-72]	; 0xffffffb8
+ c001890:	e50b303c 	str	r3, [fp, #-60]	; 0xffffffc4
 
 	timer2_empezar();
  c001894:	eb000652 	bl	c0031e4 <timer2_empezar>
@@ -2762,85 +2762,85 @@ int patron_volteo_test(char tablero[][DIM], int *longitud, char FA, char CA, cha
 	tiempos[0]=timer2_leer();
  c001898:	eb000663 	bl	c00322c <timer2_leer>
  c00189c:	e1a03000 	mov	r3, r0
- c0018a0:	e50b303c 	str	r3, [fp, #-60]	; 0xffffffc4
+ c0018a0:	e50b3030 	str	r3, [fp, #-48]	; 0xffffffd0
 	int resultado_c=patron_volteo(tablero,longitud,FA,CA,SF,SC,color);
- c0018a4:	e55b2055 	ldrb	r2, [fp, #-85]	; 0xffffffab
- c0018a8:	e55b3056 	ldrb	r3, [fp, #-86]	; 0xffffffaa
+ c0018a4:	e55b2045 	ldrb	r2, [fp, #-69]	; 0xffffffbb
+ c0018a8:	e55b3046 	ldrb	r3, [fp, #-70]	; 0xffffffba
  c0018ac:	e5db1004 	ldrb	r1, [fp, #4]
  c0018b0:	e58d1000 	str	r1, [sp]
  c0018b4:	e5db1008 	ldrb	r1, [fp, #8]
  c0018b8:	e58d1004 	str	r1, [sp, #4]
  c0018bc:	e5db100c 	ldrb	r1, [fp, #12]
  c0018c0:	e58d1008 	str	r1, [sp, #8]
- c0018c4:	e51b0050 	ldr	r0, [fp, #-80]	; 0xffffffb0
- c0018c8:	e51b1054 	ldr	r1, [fp, #-84]	; 0xffffffac
+ c0018c4:	e51b0040 	ldr	r0, [fp, #-64]	; 0xffffffc0
+ c0018c8:	e51b1044 	ldr	r1, [fp, #-68]	; 0xffffffbc
  c0018cc:	ebffff9d 	bl	c001748 <patron_volteo>
  c0018d0:	e50b0010 	str	r0, [fp, #-16]
 	tiempos[1]=timer2_leer();
  c0018d4:	eb000654 	bl	c00322c <timer2_leer>
  c0018d8:	e1a03000 	mov	r3, r0
- c0018dc:	e50b3038 	str	r3, [fp, #-56]	; 0xffffffc8
+ c0018dc:	e50b302c 	str	r3, [fp, #-44]	; 0xffffffd4
 	time_c=tiempos[1]-tiempos[0];
- c0018e0:	e51b2038 	ldr	r2, [fp, #-56]	; 0xffffffc8
- c0018e4:	e51b303c 	ldr	r3, [fp, #-60]	; 0xffffffc4
+ c0018e0:	e51b202c 	ldr	r2, [fp, #-44]	; 0xffffffd4
+ c0018e4:	e51b3030 	ldr	r3, [fp, #-48]	; 0xffffffd0
  c0018e8:	e0633002 	rsb	r3, r3, r2
- c0018ec:	e50b3040 	str	r3, [fp, #-64]	; 0xffffffc0
+ c0018ec:	e50b3034 	str	r3, [fp, #-52]	; 0xffffffcc
 
 	//Patron volteo arm arm
-	tiempos[6]=timer2_leer();
+	tiempos[4]=timer2_leer();
  c0018f0:	eb00064d 	bl	c00322c <timer2_leer>
  c0018f4:	e1a03000 	mov	r3, r0
- c0018f8:	e50b3024 	str	r3, [fp, #-36]	; 0xffffffdc
+ c0018f8:	e50b3020 	str	r3, [fp, #-32]	; 0xffffffe0
     int resultado_arm_arm=patron_volteo_arm_arm(tablero,longitud,FA,CA,SF,SC,color);
- c0018fc:	e55b2055 	ldrb	r2, [fp, #-85]	; 0xffffffab
- c001900:	e55b3056 	ldrb	r3, [fp, #-86]	; 0xffffffaa
+ c0018fc:	e55b2045 	ldrb	r2, [fp, #-69]	; 0xffffffbb
+ c001900:	e55b3046 	ldrb	r3, [fp, #-70]	; 0xffffffba
  c001904:	e5db1004 	ldrb	r1, [fp, #4]
  c001908:	e58d1000 	str	r1, [sp]
  c00190c:	e5db1008 	ldrb	r1, [fp, #8]
  c001910:	e58d1004 	str	r1, [sp, #4]
  c001914:	e5db100c 	ldrb	r1, [fp, #12]
  c001918:	e58d1008 	str	r1, [sp, #8]
- c00191c:	e51b0050 	ldr	r0, [fp, #-80]	; 0xffffffb0
- c001920:	e51b1054 	ldr	r1, [fp, #-84]	; 0xffffffac
+ c00191c:	e51b0040 	ldr	r0, [fp, #-64]	; 0xffffffc0
+ c001920:	e51b1044 	ldr	r1, [fp, #-68]	; 0xffffffbc
  c001924:	ebfffcd7 	bl	c000c88 <patron_volteo_arm_arm>
  c001928:	e50b0014 	str	r0, [fp, #-20]	; 0xffffffec
-    tiempos[7]=timer2_leer();
+    tiempos[5]=timer2_leer();
  c00192c:	eb00063e 	bl	c00322c <timer2_leer>
  c001930:	e1a03000 	mov	r3, r0
- c001934:	e50b3020 	str	r3, [fp, #-32]	; 0xffffffe0
-    time_arm_arm=tiempos[7]-tiempos[6];
- c001938:	e51b2020 	ldr	r2, [fp, #-32]	; 0xffffffe0
- c00193c:	e51b3024 	ldr	r3, [fp, #-36]	; 0xffffffdc
+ c001934:	e50b301c 	str	r3, [fp, #-28]	; 0xffffffe4
+    time_arm_arm=tiempos[5]-tiempos[4];
+ c001938:	e51b201c 	ldr	r2, [fp, #-28]	; 0xffffffe4
+ c00193c:	e51b3020 	ldr	r3, [fp, #-32]	; 0xffffffe0
  c001940:	e0633002 	rsb	r3, r3, r2
- c001944:	e50b3048 	str	r3, [fp, #-72]	; 0xffffffb8
+ c001944:	e50b303c 	str	r3, [fp, #-60]	; 0xffffffc4
 
 	//Patron volteo arm c
-	tiempos[3]=timer2_leer();
+	tiempos[2]=timer2_leer();
  c001948:	eb000637 	bl	c00322c <timer2_leer>
  c00194c:	e1a03000 	mov	r3, r0
- c001950:	e50b3030 	str	r3, [fp, #-48]	; 0xffffffd0
+ c001950:	e50b3028 	str	r3, [fp, #-40]	; 0xffffffd8
 	int resultado_arm_c=patron_volteo_arm_c(tablero,longitud,FA,CA,SF,SC,color);
- c001954:	e55b2055 	ldrb	r2, [fp, #-85]	; 0xffffffab
- c001958:	e55b3056 	ldrb	r3, [fp, #-86]	; 0xffffffaa
+ c001954:	e55b2045 	ldrb	r2, [fp, #-69]	; 0xffffffbb
+ c001958:	e55b3046 	ldrb	r3, [fp, #-70]	; 0xffffffba
  c00195c:	e5db1004 	ldrb	r1, [fp, #4]
  c001960:	e58d1000 	str	r1, [sp]
  c001964:	e5db1008 	ldrb	r1, [fp, #8]
  c001968:	e58d1004 	str	r1, [sp, #4]
  c00196c:	e5db100c 	ldrb	r1, [fp, #12]
  c001970:	e58d1008 	str	r1, [sp, #8]
- c001974:	e51b0050 	ldr	r0, [fp, #-80]	; 0xffffffb0
- c001978:	e51b1054 	ldr	r1, [fp, #-84]	; 0xffffffac
+ c001974:	e51b0040 	ldr	r0, [fp, #-64]	; 0xffffffc0
+ c001978:	e51b1044 	ldr	r1, [fp, #-68]	; 0xffffffbc
  c00197c:	ebfffc9b 	bl	c000bf0 <patron_volteo_arm_c>
  c001980:	e50b0018 	str	r0, [fp, #-24]	; 0xffffffe8
-	tiempos[4]=timer2_leer();
+	tiempos[3]=timer2_leer();
  c001984:	eb000628 	bl	c00322c <timer2_leer>
  c001988:	e1a03000 	mov	r3, r0
- c00198c:	e50b302c 	str	r3, [fp, #-44]	; 0xffffffd4
-	time_arm_c=tiempos[4]-tiempos[3];
- c001990:	e51b202c 	ldr	r2, [fp, #-44]	; 0xffffffd4
- c001994:	e51b3030 	ldr	r3, [fp, #-48]	; 0xffffffd0
+ c00198c:	e50b3024 	str	r3, [fp, #-36]	; 0xffffffdc
+	time_arm_c=tiempos[3]-tiempos[2];
+ c001990:	e51b2024 	ldr	r2, [fp, #-36]	; 0xffffffdc
+ c001994:	e51b3028 	ldr	r3, [fp, #-40]	; 0xffffffd8
  c001998:	e0633002 	rsb	r3, r3, r2
- c00199c:	e50b3044 	str	r3, [fp, #-68]	; 0xffffffbc
+ c00199c:	e50b3038 	str	r3, [fp, #-56]	; 0xffffffc8
 
     timer2_parar();
  c0019a0:	eb000664 	bl	c003338 <timer2_parar>

@@ -2789,9 +2789,9 @@
  537:../reversi8_2018.c ****     char f, c;    // fila y columna elegidas por la máquina para su movimiento
  538:../reversi8_2018.c **** 
  539:../reversi8_2018.c **** 
- 540:../reversi8_2018.c ****     int modo_patron_volteo = MODO_C;  //indica la funcion de patron_volteo que se va a usar para el
+ 540:../reversi8_2018.c ****     int modo_patron_volteo = MODO_ARM_C;  //indica la funcion de patron_volteo que se va a usar par
  3224              		.loc 1 540 0
- 3225 192c 0030A0E3 		mov	r3, #0
+ 3225 192c 0130A0E3 		mov	r3, #1
  3226 1930 38300BE5 		str	r3, [fp, #-56]
  541:../reversi8_2018.c **** 
  542:../reversi8_2018.c ****     init_table(tablero, candidatas);
@@ -2973,42 +2973,42 @@
  3372              	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 reversi8_2018.c
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:968    .rodata:00000000 NO
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:969    .rodata:00000000 $d
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:973    .rodata:00000001 SI
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:978    .rodata:00000002 CASILLA_OCUPADA
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:983    .rodata:00000008 tabla_valor
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:1052   .rodata:00000048 vSF
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:1065   .rodata:00000050 vSC
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:1079   .bss:00000000 tablero
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:1076   .bss:00000000 $d
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:1084   .bss:00000040 fila
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:1089   .bss:00000041 columna
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:1094   .bss:00000042 ready
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:1097   .text:00000000 $a
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:1100   .text:00000000 init_table
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:1280   .text:0000020c $d
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:1285   .text:00000214 $a
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:1288   .text:00000214 esperar_mov
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:1329   .text:00000254 ficha_valida
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:1404   .text:00000308 patron_volteo
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:1512   .text:0000041c patron_volteo_test
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:1602   .text:0000050c voltear
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:1667   .text:0000059c actualizar_tablero
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:1801   .text:00000710 $d
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:1806   .text:00000718 $a
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:1809   .text:00000718 elegir_mov
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:2041   .text:000009b4 $d
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:2048   .text:000009c4 $a
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:2051   .text:000009c4 contar
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:2153   .text:00000ac0 actualizar_candidatas
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:2416   .text:00000e10 $d
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:2421   .text:00000e18 $a
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:2424   .text:00000e18 init_test
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:2825   .text:00001368 $d
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:2829   .text:0000136c $a
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:2832   .text:0000136c reversi8
-C:\Users\Ivo\AppData\Local\Temp\ccBXciQI.s:3364   .text:00001ae8 $d
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:968    .rodata:00000000 NO
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:969    .rodata:00000000 $d
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:973    .rodata:00000001 SI
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:978    .rodata:00000002 CASILLA_OCUPADA
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:983    .rodata:00000008 tabla_valor
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:1052   .rodata:00000048 vSF
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:1065   .rodata:00000050 vSC
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:1079   .bss:00000000 tablero
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:1076   .bss:00000000 $d
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:1084   .bss:00000040 fila
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:1089   .bss:00000041 columna
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:1094   .bss:00000042 ready
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:1097   .text:00000000 $a
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:1100   .text:00000000 init_table
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:1280   .text:0000020c $d
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:1285   .text:00000214 $a
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:1288   .text:00000214 esperar_mov
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:1329   .text:00000254 ficha_valida
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:1404   .text:00000308 patron_volteo
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:1512   .text:0000041c patron_volteo_test
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:1602   .text:0000050c voltear
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:1667   .text:0000059c actualizar_tablero
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:1801   .text:00000710 $d
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:1806   .text:00000718 $a
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:1809   .text:00000718 elegir_mov
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:2041   .text:000009b4 $d
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:2048   .text:000009c4 $a
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:2051   .text:000009c4 contar
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:2153   .text:00000ac0 actualizar_candidatas
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:2416   .text:00000e10 $d
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:2421   .text:00000e18 $a
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:2424   .text:00000e18 init_test
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:2825   .text:00001368 $d
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:2829   .text:0000136c $a
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:2832   .text:0000136c reversi8
+C:\Users\Ivo\AppData\Local\Temp\ccDUi343.s:3364   .text:00001ae8 $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

@@ -1,13 +1,7 @@
-/*********************************************************************************************
-* Fichero:		reversi8_2018.c
-* Autores:		Yasmina Albero e Iván Escuín
-* Descrip:		Ejecución y lógica del juego planteado para el trabajo, reversi8
-* Version: 1.0 Placa
-*********************************************************************************************/
-#include "timer2.h"
+//Version simulador 0.1
+// Tamaño del tablero
 enum { DIM=8 };
 enum {MODO_C=0,MODO_ARM_C=1,MODO_ARM_ARM=2}; //Seleccion de funcion patron volteo que se va a usar: 0=patron_volteo, 1=patron_volteo_arm_c, 2=patron_volteo_arm_arm
-
 // Valores que puede devolver la función patron_volteo())
 enum {
 	NO_HAY_PATRON = 0,
@@ -76,7 +70,7 @@ char __attribute__ ((aligned (8))) tablero[DIM][DIM] = {
   char fila=0, columna=0, ready = 0;
 
 
-//Funciones arm de patron volteo
+
 extern int patron_volteo_arm_c(char tablero[][8], int *longitud,char f, char c, char SF, char SC, char color);
 extern int patron_volteo_arm_arm(char tablero[][8], int *longitud,char f, char c, char SF, char SC, char color);
 
@@ -237,54 +231,25 @@ int patron_volteo(char tablero[][DIM], int *longitud, char FA, char CA, char SF,
     }
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//	Funcion patron_volteo_test para comparar resultados entre las distintas implementaciones de patron_volteo.
-//	Realiza mediciones de tiempo mediante el timer2 para cada caso de la funcion patron volteo y los almacena
-//	en las variables time_c, time_arm_c y time_arm_arm para ser comprobados en debug. Estas variables deben ser
-//	volatile para que puedan ser comprobadas en -o1 en adelante.
-//
-//	Si una de las funciones obtiene un resultado que no es igual a las demas la funcion se queda indefinidamente
-//	en bucle.
-// Parametros:
-//		char tablero [][]: Array que contiene las fichas del juego
-//		int* longitud: parametro por referencia que almacena la longitud del patron que se esta analizando
-//		char FA: fila seleccionada
-//		char CA: columna seleccionada
-//		char SF: desplazamiento en la fila para buscar patron
-//		char SC: desplazamiento en la columna para buscar patron
-//		char color: tipo de ficha que ha iniciado la busqueda de patron
+//Funcion patron_volteo_test para comparar resultados entre las distintas implementaciones de patron_volteo
 int patron_volteo_test(char tablero[][DIM], int *longitud, char FA, char CA, char SF, char SC, char color)
 {
-
-	unsigned int tiempos[6];	//Array para anotar tiempos del timer2
-	volatile unsigned int time_c=0;
-	volatile unsigned int time_arm_c=0;
-	volatile unsigned int time_arm_arm=0;
-
-	timer2_empezar();
-
-	//Patron volteo c
-	tiempos[0]=timer2_leer();
+	unsigned int timer2_c=0;
+	unsigned int timer2_arm_c=0;
+	//timer2_empezar();
 	int resultado_c=patron_volteo(tablero,longitud,FA,CA,SF,SC,color);
-	tiempos[1]=timer2_leer();
-	time_c=tiempos[1]-tiempos[0];
+	//timer2_c=timer2_parar();
 
-	//Patron volteo arm arm
-	tiempos[4]=timer2_leer();
-    int resultado_arm_arm=patron_volteo_arm_arm(tablero,longitud,FA,CA,SF,SC,color);
-    tiempos[5]=timer2_leer();
-    time_arm_arm=tiempos[5]-tiempos[4];
-
-	//Patron volteo arm c
-	tiempos[2]=timer2_leer();
+	//timer2_empezar();
 	int resultado_arm_c=patron_volteo_arm_c(tablero,longitud,FA,CA,SF,SC,color);
-	tiempos[3]=timer2_leer();
-	time_arm_c=tiempos[3]-tiempos[2];
+	//timer2_arm_c=timer2_parar();
 
-    timer2_parar();
+    //timer2_empezar();
+    int resultado_arm_arm=patron_volteo_arm_arm(tablero,longitud,FA,CA,SF,SC,color);
+    //int timer2_arm_arm=timer2_parar();
 
     while(resultado_c != resultado_arm_c){}
-    while(resultado_c != resultado_arm_arm){} //Breakpoint aqui
+    while(resultado_c != resultado_arm_arm){}
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -477,20 +442,7 @@ void actualizar_candidatas(char candidatas[][DIM], char f, char c)
         candidatas[f][c+1] = SI;
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-//	Funcion que inicializa el tablero para realizar los tests necesarios y lo restaura a su estado
-//	original antes de empezar a jugar.
-// 	Los casos de prueba realizados son:
-//	· Tablero basico con ficha negra en 2,3. Usado para medir tiempos
-//	· Tablero basico con ficha negra en 0,0.
-//	· Tablero basico con ficha negra en 7,7.
-//	· Tablero con diagonal, fichas negras en 0,0 y 5,5 y fichas blancas en (1,1),(2,2),(3,3) y (4,4)
-// 	Parametros:
-//		char tablero[][]: Array que contiene las fichas del tablero de juego, al finalizar la funcion
-//						  se devuelve a su estado original tras llamar a init_table
-//		char candidatas[][]: Array que contiene el estado de las casillas del tablero de juego,
-//							 al finalizar se devuelve a su estado original tras llamar a init_table
-int init_test(char tablero[][DIM],char candidatas[][DIM]){
+void init_test(char tablero[][DIM],char candidatas[][DIM]){
 
 	//Caso de prueba basico, tablero inicial con ficha negra en 2,3
 	tablero[2][3]=FICHA_NEGRA;
@@ -585,10 +537,10 @@ void reversi8()
     char f, c;    // fila y columna elegidas por la máquina para su movimiento
 
 
-    int modo_patron_volteo = MODO_ARM_ARM;  //indica la funcion de patron_volteo que se va a usar para el juego.
+    int modo_patron_volteo = MODO_C;  //indica la funcion de patron_volteo que se va a usar para el juego.
 
     init_table(tablero, candidatas);
-    init_test(tablero,candidatas);	//Inicia los tests automaticos
+    init_test(tablero,candidatas);
     while (fin == 0)
     {
         move = 0;

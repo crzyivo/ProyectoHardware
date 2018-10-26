@@ -21,8 +21,7 @@
 
 //////////////////////////////////////////////////////////////////////
 //	Funcion que comprueba el correcto funcionamiento del timer2
-//	para ello realiza varias mediciones usando la funcion Delay,
-//  comprobandose a mano que los resultados son ranozablemente aproximados
+//
 void test_timer2(){
 	unsigned int tiempos[8];	//Array para anotar tiempos del timer2
 	unsigned int tiempo_medido_1ms = 0;

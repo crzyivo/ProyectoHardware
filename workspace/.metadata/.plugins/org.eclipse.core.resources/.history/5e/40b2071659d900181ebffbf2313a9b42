@@ -245,14 +245,6 @@ int patron_volteo(char tablero[][DIM], int *longitud, char FA, char CA, char SF,
 //
 //	Si una de las funciones obtiene un resultado que no es igual a las demas la funcion se queda indefinidamente
 //	en bucle.
-// Parametros:
-//		char tablero [][]: Array que contiene las fichas del juego
-//		int* longitud: parametro por referencia que almacena la longitud del patron que se esta analizando
-//		char FA: fila seleccionada
-//		char CA: columna seleccionada
-//		char SF: desplazamiento en la fila para buscar patron
-//		char SC: desplazamiento en la columna para buscar patron
-//		char color: tipo de ficha que ha iniciado la busqueda de patron
 int patron_volteo_test(char tablero[][DIM], int *longitud, char FA, char CA, char SF, char SC, char color)
 {
 
@@ -485,11 +477,6 @@ void actualizar_candidatas(char candidatas[][DIM], char f, char c)
 //	· Tablero basico con ficha negra en 0,0.
 //	· Tablero basico con ficha negra en 7,7.
 //	· Tablero con diagonal, fichas negras en 0,0 y 5,5 y fichas blancas en (1,1),(2,2),(3,3) y (4,4)
-// 	Parametros:
-//		char tablero[][]: Array que contiene las fichas del tablero de juego, al finalizar la funcion
-//						  se devuelve a su estado original tras llamar a init_table
-//		char candidatas[][]: Array que contiene el estado de las casillas del tablero de juego,
-//							 al finalizar se devuelve a su estado original tras llamar a init_table
 int init_test(char tablero[][DIM],char candidatas[][DIM]){
 
 	//Caso de prueba basico, tablero inicial con ficha negra en 2,3

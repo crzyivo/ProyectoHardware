@@ -1,38 +1,12 @@
-18:33:45 **** Incremental Build of configuration Debug for project PH_01_Sim ****
+17:36:23 **** Incremental Build of configuration Debug for project PH_01_Sim ****
 cs-make all 
-'Building file: ../reversi8_2018.c'
-'Invoking: ARM Sourcery Windows GCC C Compiler'
-arm-none-eabi-gcc -O0 -Wall -Wa,-adhlns="reversi8_2018.o.lst" -c -fmessage-length=0 -mapcs-frame -MMD -MP -MF"reversi8_2018.d" -MT"reversi8_2018.d" -mcpu=arm7tdmi -g3 -gdwarf-2 -o "reversi8_2018.o" "../reversi8_2018.c"
-../reversi8_2018.c: In function 'ficha_valida':
-../reversi8_2018.c:172:5: warning: array subscript has type 'char'
-../reversi8_2018.c:172:5: warning: array subscript has type 'char'
-../reversi8_2018.c:175:9: warning: array subscript has type 'char'
-../reversi8_2018.c:175:9: warning: array subscript has type 'char'
-../reversi8_2018.c: In function 'patron_volteo_test':
-../reversi8_2018.c:238:15: warning: unused variable 'timer2_arm_c'
-../reversi8_2018.c:237:15: warning: unused variable 'timer2_c'
-../reversi8_2018.c: In function 'voltear':
-../reversi8_2018.c:268:9: warning: array subscript has type 'char'
-../reversi8_2018.c:268:9: warning: array subscript has type 'char'
-../reversi8_2018.c: In function 'actualizar_candidatas':
-../reversi8_2018.c:415:5: warning: array subscript has type 'char'
-../reversi8_2018.c:415:5: warning: array subscript has type 'char'
-../reversi8_2018.c:418:9: warning: array subscript has type 'char'
-../reversi8_2018.c:419:13: warning: array subscript has type 'char'
-../reversi8_2018.c:429:9: warning: array subscript has type 'char'
-../reversi8_2018.c:430:13: warning: array subscript has type 'char'
-../reversi8_2018.c:438:5: warning: array subscript has type 'char'
-../reversi8_2018.c:439:9: warning: array subscript has type 'char'
-../reversi8_2018.c:441:5: warning: array subscript has type 'char'
-../reversi8_2018.c:442:9: warning: array subscript has type 'char'
-../reversi8_2018.c: In function 'reversi8':
-../reversi8_2018.c:551:13: warning: array subscript has type 'char'
-../reversi8_2018.c:551:13: warning: array subscript has type 'char'
-../reversi8_2018.c:566:13: warning: array subscript has type 'char'
-../reversi8_2018.c:566:13: warning: array subscript has type 'char'
-../reversi8_2018.c: In function 'patron_volteo_test':
-../reversi8_2018.c:253:1: warning: control reaches end of non-void function
-'Finished building: ../reversi8_2018.c'
+'Building file: ../init_b_2018.asm'
+'Invoking: ARM Sourcery Windows GCC Assembler'
+arm-none-eabi-gcc -x assembler-with-cpp -Wall -Wa,-adhlns="init_b_2018.o.lst" -c -fmessage-length=0 -MMD -MP -MF"init_b_2018.d" -MT"init_b_2018.d" -mcpu=arm7tdmi -g3 -gdwarf-2 -o "init_b_2018.o" "../init_b_2018.asm"
+../init_b_2018.asm: Assembler messages:
+../init_b_2018.asm:56: Warning: if writeback register is in list, it must be the lowest reg in the list
+../init_b_2018.asm:119: Warning: if writeback register is in list, it must be the lowest reg in the list
+'Finished building: ../init_b_2018.asm'
 ' '
 'Building target: PH_01_Sim.elf'
 'Invoking: ARM Sourcery Windows GCC C Linker'
@@ -54,5 +28,5 @@ arm-none-eabi-size  --format=berkeley PH_01_Sim.elf
 'Finished building: PH_01_Sim.siz'
 ' '
 
-18:33:46 Build Finished (took 1s.248ms)
+17:36:24 Build Finished (took 1s.39ms)
 
