@@ -1,37 +1,9 @@
-19:59:03 **** Incremental Build of configuration Debug for project PH_01_Placa ****
+19:57:15 **** Incremental Build of configuration Debug for project PH_01_Placa ****
 cs-make all 
-'Building file: ../reversi8_2018.c'
+'Building file: ../main.c'
 'Invoking: ARM Sourcery Windows GCC C Compiler'
-arm-none-eabi-gcc -I"D:\PH\workspace\PH_01_Placa\common" -O0 -Wall -Wa,-adhlns="reversi8_2018.o.lst" -c -fmessage-length=0 -mapcs-frame -MMD -MP -MF"reversi8_2018.d" -MT"reversi8_2018.d" -mcpu=arm7tdmi -g3 -gdwarf-2 -o "reversi8_2018.o" "../reversi8_2018.c"
-../reversi8_2018.c: In function 'ficha_valida':
-../reversi8_2018.c:178:5: warning: array subscript has type 'char'
-../reversi8_2018.c:178:5: warning: array subscript has type 'char'
-../reversi8_2018.c:181:9: warning: array subscript has type 'char'
-../reversi8_2018.c:181:9: warning: array subscript has type 'char'
-../reversi8_2018.c: In function 'voltear':
-../reversi8_2018.c:295:9: warning: array subscript has type 'char'
-../reversi8_2018.c:295:9: warning: array subscript has type 'char'
-../reversi8_2018.c: In function 'actualizar_candidatas':
-../reversi8_2018.c:442:5: warning: array subscript has type 'char'
-../reversi8_2018.c:442:5: warning: array subscript has type 'char'
-../reversi8_2018.c:445:9: warning: array subscript has type 'char'
-../reversi8_2018.c:446:13: warning: array subscript has type 'char'
-../reversi8_2018.c:456:9: warning: array subscript has type 'char'
-../reversi8_2018.c:457:13: warning: array subscript has type 'char'
-../reversi8_2018.c:465:5: warning: array subscript has type 'char'
-../reversi8_2018.c:466:9: warning: array subscript has type 'char'
-../reversi8_2018.c:468:5: warning: array subscript has type 'char'
-../reversi8_2018.c:469:9: warning: array subscript has type 'char'
-../reversi8_2018.c: In function 'reversi8':
-../reversi8_2018.c:586:13: warning: array subscript has type 'char'
-../reversi8_2018.c:586:13: warning: array subscript has type 'char'
-../reversi8_2018.c:601:13: warning: array subscript has type 'char'
-../reversi8_2018.c:601:13: warning: array subscript has type 'char'
-../reversi8_2018.c: In function 'init_test':
-../reversi8_2018.c:533:1: warning: control reaches end of non-void function
-../reversi8_2018.c: In function 'patron_volteo_test':
-../reversi8_2018.c:280:1: warning: control reaches end of non-void function
-'Finished building: ../reversi8_2018.c'
+arm-none-eabi-gcc -I"D:\PH\workspace\PH_01_Placa\common" -O0 -Wall -Wa,-adhlns="main.o.lst" -c -fmessage-length=0 -mapcs-frame -MMD -MP -MF"main.d" -MT"main.d" -mcpu=arm7tdmi -g3 -gdwarf-2 -o "main.o" "../main.c"
+'Finished building: ../main.c'
 ' '
 'Building target: PH_01_Placa.elf'
 'Invoking: ARM Sourcery Windows GCC C Linker'
@@ -49,6 +21,6 @@ arm-none-eabi-objdump -h -S PH_01_Placa.elf > "PH_01_Placa.lst"
 'Invoking: ARM Sourcery Windows GNU Print Size'
 arm-none-eabi-size  --format=berkeley PH_01_Placa.elf
    text	   data	    bss	    dec	    hex	filename
-  15908	     88	    112	  16108	   3eec	PH_01_Placa.elf
+  16112	     88	    116	  16316	   3fbc	PH_01_Placa.elf
 'Finished building: PH_01_Placa.siz'
 ' '
