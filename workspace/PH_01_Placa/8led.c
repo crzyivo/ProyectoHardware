@@ -18,15 +18,19 @@ Symbol[size_8led] = { cero, uno, dos, tres, cuatro, cinco, seis, siete, ocho, nu
 /*--- código de las funciones ---*/
 void D8Led_init(void)
 {
+#ifndef EMU
 	/* Estado inicial del display con todos los segmentos iluminados
 	   (buscar en los ficheros de cabecera la direccion implicada) */
 	LED8ADDR = (unsigned char) cero;
+#endif
 }
 
 void D8Led_symbol(int value)
 {
+#ifndef EMU
 	/* muestra el Symbol[value] en el display (analogo al caso anterior) */
 	if ((value >= 0) && (value < size_8led)) {
 		LED8ADDR = (unsigned char) Symbol[value];
 	}
+#endif
 }

@@ -1,0 +1,15 @@
+/*
+ * botones_antirebotes.h
+ *
+ *  Created on: 06/11/2018
+ *      Author: Ivo
+ */
+#ifndef BOTONES_ANTIREBOTES_H
+#define BOTONES_ANTIREBOTES_H
+
+#include "latido.h"
+#include "button.h"
+
+void callback_antirebotes(estado_button);
+
+void inicio_antirebotes();

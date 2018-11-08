@@ -18,11 +18,25 @@
  1886              		.align	2
  1889              	n_interrupt:
  1890 0004 00000000 		.space	4
- 1891              		.text
+ 1891              		.global	en_espera
  1892              		.align	2
- 1893              		.global	latido_ISR
- 1895              	latido_ISR:
- 1896              	.LFB0:
+ 1895              	en_espera:
+ 1896 0008 00000000 		.space	4
+ 1897              		.global	cuenta_espera
+ 1898              		.align	2
+ 1901              	cuenta_espera:
+ 1902 000c 00000000 		.space	4
+ 1903              		.global	espera
+ 1904              		.data
+ 1905              		.align	2
+ 1908              	espera:
+ 1909 0000 33000000 		.word	51
+ 1910              		.comm	funcion_callback,4,4
+ 1911              		.text
+ 1912              		.align	2
+ 1913              		.global	latido_ISR
+ 1915              	latido_ISR:
+ 1916              	.LFB0:
    1:../latido.c   **** /*********************************************************************************************
    2:../latido.c   **** * Fichero:		timer2.c
    3:../latido.c   **** * Autores:		Yasmina Albero e Iván Escuín
@@ -40,255 +54,383 @@
   15:../latido.c   **** volatile unsigned int n_interrupt=0;
   16:../latido.c   **** int switch_leds_l = 0;
   17:../latido.c   **** 
-  18:../latido.c   **** /* declaración de función que es rutina de servicio de interrupción
-  19:../latido.c   ****  * https://gcc.gnu.org/onlinedocs/gcc/ARM-Function-Attributes.html */
-  20:../latido.c   **** void latido_ISR(void) __attribute__((interrupt("IRQ")));
-  21:../latido.c   **** 
-  22:../latido.c   **** /*--- codigo de las funciones ---*/
-  23:../latido.c   **** /* Rutina de servicio de interrupción para timer2 */
-  24:../latido.c   **** void latido_ISR(void)
-  25:../latido.c   **** {
- 1897              		.loc 1 25 0
- 1898              		.cfi_startproc
- 1899              		@ Interrupt Service Routine.
- 1900              		@ args = 0, pretend = 0, frame = 8
- 1901              		@ frame_needed = 1, uses_anonymous_args = 0
- 1902 0000 04C02DE5 		str	ip, [sp, #-4]!
- 1903 0004 0DC0A0E1 		mov	ip, sp
- 1904              	.LCFI0:
- 1905              		.cfi_def_cfa_register 12
- 1906 0008 0FD82DE9 		stmfd	sp!, {r0, r1, r2, r3, fp, ip, lr, pc}
- 1907 000c 04B04CE2 		sub	fp, ip, #4
- 1908              		.cfi_offset 14, -8
- 1909              		.cfi_offset 13, -12
- 1910              		.cfi_offset 11, -16
- 1911              		.cfi_offset 3, -20
- 1912              		.cfi_offset 2, -24
- 1913              		.cfi_offset 1, -28
- 1914              		.cfi_offset 0, -32
- 1915              	.LCFI1:
- 1916              		.cfi_def_cfa 11, 4
- 1917 0010 08D04DE2 		sub	sp, sp, #8
-  26:../latido.c   **** 	switch_leds_l ++;
- 1918              		.loc 1 26 0
- 1919 0014 98309FE5 		ldr	r3, .L6
- 1920 0018 003093E5 		ldr	r3, [r3, #0]
- 1921 001c 012083E2 		add	r2, r3, #1
- 1922 0020 8C309FE5 		ldr	r3, .L6
- 1923 0024 002083E5 		str	r2, [r3, #0]
-  27:../latido.c   **** 	int aux=switch_leds_l;
- 1924              		.loc 1 27 0
- 1925 0028 84309FE5 		ldr	r3, .L6
- 1926 002c 003093E5 		ldr	r3, [r3, #0]
- 1927 0030 20300BE5 		str	r3, [fp, #-32]
-  28:../latido.c   **** 
-  29:../latido.c   **** 	if(switch_leds_l == 24){
- 1928              		.loc 1 29 0
- 1929 0034 78309FE5 		ldr	r3, .L6
- 1930 0038 003093E5 		ldr	r3, [r3, #0]
- 1931 003c 180053E3 		cmp	r3, #24
- 1932 0040 0000001A 		bne	.L2
- 1933              	.LBB2:
-  30:../latido.c   **** 		led1_on();
- 1934              		.loc 1 30 0
- 1935 0044 FEFFFFEB 		bl	led1_on
- 1936              	.L2:
- 1937              	.LBE2:
-  31:../latido.c   **** 	}
-  32:../latido.c   **** 	if(switch_leds_l == 25){
- 1938              		.loc 1 32 0
- 1939 0048 64309FE5 		ldr	r3, .L6
- 1940 004c 003093E5 		ldr	r3, [r3, #0]
- 1941 0050 190053E3 		cmp	r3, #25
- 1942 0054 0000001A 		bne	.L3
- 1943              	.LBB3:
-  33:../latido.c   **** 		led1_off();
- 1944              		.loc 1 33 0
- 1945 0058 FEFFFFEB 		bl	led1_off
- 1946              	.L3:
- 1947              	.LBE3:
-  34:../latido.c   **** 	}
-  35:../latido.c   **** 
-  36:../latido.c   **** 	if(switch_leds_l==49){
- 1948              		.loc 1 36 0
- 1949 005c 50309FE5 		ldr	r3, .L6
- 1950 0060 003093E5 		ldr	r3, [r3, #0]
- 1951 0064 310053E3 		cmp	r3, #49
- 1952 0068 0000001A 		bne	.L4
- 1953              	.LBB4:
-  37:../latido.c   **** 		led1_on();
- 1954              		.loc 1 37 0
- 1955 006c FEFFFFEB 		bl	led1_on
- 1956              	.L4:
- 1957              	.LBE4:
+  18:../latido.c   **** //Variables para la gestion de esperas de rebotes
+  19:../latido.c   **** int en_espera = 0;
+  20:../latido.c   **** int cuenta_espera = 0;
+  21:../latido.c   **** int espera = 51; //Como solo se cuentan 50 interrupciones, a 51 nunca llega
+  22:../latido.c   **** 
+  23:../latido.c   **** //Funcion de callback para las esperas de retardo
+  24:../latido.c   **** void (*funcion_callback)(void);
+  25:../latido.c   **** 
+  26:../latido.c   **** /* declaración de función que es rutina de servicio de interrupción
+  27:../latido.c   ****  * https://gcc.gnu.org/onlinedocs/gcc/ARM-Function-Attributes.html */
+  28:../latido.c   **** void latido_ISR(void) __attribute__((interrupt("IRQ")));
+  29:../latido.c   **** 
+  30:../latido.c   **** /*--- codigo de las funciones ---*/
+  31:../latido.c   **** /* Rutina de servicio de interrupción para timer2 */
+  32:../latido.c   **** void latido_ISR(void)
+  33:../latido.c   **** {
+ 1917              		.loc 1 33 0
+ 1918              		.cfi_startproc
+ 1919              		@ Interrupt Service Routine.
+ 1920              		@ args = 0, pretend = 0, frame = 8
+ 1921              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1922 0000 04C02DE5 		str	ip, [sp, #-4]!
+ 1923 0004 0DC0A0E1 		mov	ip, sp
+ 1924              	.LCFI0:
+ 1925              		.cfi_def_cfa_register 12
+ 1926 0008 0FD82DE9 		stmfd	sp!, {r0, r1, r2, r3, fp, ip, lr, pc}
+ 1927 000c 04B04CE2 		sub	fp, ip, #4
+ 1928              		.cfi_offset 14, -8
+ 1929              		.cfi_offset 13, -12
+ 1930              		.cfi_offset 11, -16
+ 1931              		.cfi_offset 3, -20
+ 1932              		.cfi_offset 2, -24
+ 1933              		.cfi_offset 1, -28
+ 1934              		.cfi_offset 0, -32
+ 1935              	.LCFI1:
+ 1936              		.cfi_def_cfa 11, 4
+ 1937 0010 08D04DE2 		sub	sp, sp, #8
+  34:../latido.c   **** #ifndef EMU
+  35:../latido.c   **** 	switch_leds_l ++;
+ 1938              		.loc 1 35 0
+ 1939 0014 08319FE5 		ldr	r3, .L8
+ 1940 0018 003093E5 		ldr	r3, [r3, #0]
+ 1941 001c 012083E2 		add	r2, r3, #1
+ 1942 0020 FC309FE5 		ldr	r3, .L8
+ 1943 0024 002083E5 		str	r2, [r3, #0]
+  36:../latido.c   **** 	if(en_espera){ // Si estoy esperando ticks, aumento la cuenta
+ 1944              		.loc 1 36 0
+ 1945 0028 F8309FE5 		ldr	r3, .L8+4
+ 1946 002c 003093E5 		ldr	r3, [r3, #0]
+ 1947 0030 000053E3 		cmp	r3, #0
+ 1948 0034 0400000A 		beq	.L2
+  37:../latido.c   **** 		cuenta_espera++;
+ 1949              		.loc 1 37 0
+ 1950 0038 EC309FE5 		ldr	r3, .L8+8
+ 1951 003c 003093E5 		ldr	r3, [r3, #0]
+ 1952 0040 012083E2 		add	r2, r3, #1
+ 1953 0044 E0309FE5 		ldr	r3, .L8+8
+ 1954 0048 002083E5 		str	r2, [r3, #0]
+ 1955              	.L2:
   38:../latido.c   **** 	}
-  39:../latido.c   **** 	if(switch_leds_l==50){
- 1958              		.loc 1 39 0
- 1959 0070 3C309FE5 		ldr	r3, .L6
- 1960 0074 003093E5 		ldr	r3, [r3, #0]
- 1961 0078 320053E3 		cmp	r3, #50
- 1962 007c 0300001A 		bne	.L5
- 1963              	.LBB5:
-  40:../latido.c   **** 		led1_off();
- 1964              		.loc 1 40 0
- 1965 0080 FEFFFFEB 		bl	led1_off
-  41:../latido.c   **** 		switch_leds_l=0;
- 1966              		.loc 1 41 0
- 1967 0084 28309FE5 		ldr	r3, .L6
- 1968 0088 0020A0E3 		mov	r2, #0
- 1969 008c 002083E5 		str	r2, [r3, #0]
- 1970              	.L5:
- 1971              	.LBE5:
-  42:../latido.c   **** 	}
-  43:../latido.c   **** 	/* borrar bit en I_ISPC para desactivar la solicitud de interrupción*/
-  44:../latido.c   **** 	rI_ISPC |= BIT_TIMER0; // BIT_TIMER0 está definido en 44b.h y pone un uno en el bit 11 que correpo
- 1972              		.loc 1 44 0
- 1973 0090 20309FE5 		ldr	r3, .L6+4
- 1974 0094 1C209FE5 		ldr	r2, .L6+4
- 1975 0098 002092E5 		ldr	r2, [r2, #0]
- 1976 009c 022A82E3 		orr	r2, r2, #8192
- 1977 00a0 002083E5 		str	r2, [r3, #0]
-  45:../latido.c   **** }
- 1978              		.loc 1 45 0
- 1979 00a4 1CD04BE2 		sub	sp, fp, #28
- 1980 00a8 0F689DE8 		ldmfd	sp, {r0, r1, r2, r3, fp, sp, lr}
- 1981 00ac 04C09DE4 		ldmfd	sp!, {ip}
- 1982 00b0 04F05EE2 		subs	pc, lr, #4
- 1983              	.L7:
- 1984              		.align	2
- 1985              	.L6:
- 1986 00b4 00000000 		.word	switch_leds_l
- 1987 00b8 2400E001 		.word	31457316
- 1988              		.cfi_endproc
- 1989              	.LFE0:
- 1991              		.align	2
- 1992              		.global	latido_inicializar
- 1994              	latido_inicializar:
- 1995              	.LFB1:
-  46:../latido.c   **** 
-  47:../latido.c   **** /* Función que inicializa el timer2, dejandolo listo para empezar la cuenta con timer2_empezar() */
-  48:../latido.c   **** void latido_inicializar(void)
-  49:../latido.c   **** {
- 1996              		.loc 1 49 0
- 1997              		.cfi_startproc
- 1998              		@ Function supports interworking.
- 1999              		@ args = 0, pretend = 0, frame = 0
- 2000              		@ frame_needed = 1, uses_anonymous_args = 0
- 2001 00bc 0DC0A0E1 		mov	ip, sp
- 2002              	.LCFI2:
- 2003              		.cfi_def_cfa_register 12
- 2004 00c0 00D82DE9 		stmfd	sp!, {fp, ip, lr, pc}
- 2005 00c4 04B04CE2 		sub	fp, ip, #4
- 2006              		.cfi_offset 14, -8
- 2007              		.cfi_offset 13, -12
- 2008              		.cfi_offset 11, -16
- 2009              	.LCFI3:
- 2010              		.cfi_def_cfa 11, 4
-  50:../latido.c   **** 	led1_off();
- 2011              		.loc 1 50 0
- 2012 00c8 FEFFFFEB 		bl	led1_off
-  51:../latido.c   **** 	/* Configuraion controlador de interrupciones */
-  52:../latido.c   **** 	rINTMOD = 0x0; // Configura las linas como de tipo IRQ
- 2013              		.loc 1 52 0
- 2014 00cc 8C309FE5 		ldr	r3, .L9
- 2015 00d0 0020A0E3 		mov	r2, #0
- 2016 00d4 002083E5 		str	r2, [r3, #0]
-  53:../latido.c   **** 	rINTCON = 0x1; // Habilita int. vectorizadas y la linea IRQ (FIQ no)
- 2017              		.loc 1 53 0
- 2018 00d8 1E36A0E3 		mov	r3, #31457280
- 2019 00dc 0120A0E3 		mov	r2, #1
- 2020 00e0 002083E5 		str	r2, [r3, #0]
-  54:../latido.c   **** 	rINTMSK &= ~(BIT_TIMER0); // habilitamos en vector de mascaras de interrupcion el Timer2 (bits 26 
- 2021              		.loc 1 54 0
- 2022 00e4 78309FE5 		ldr	r3, .L9+4
- 2023 00e8 74209FE5 		ldr	r2, .L9+4
- 2024 00ec 002092E5 		ldr	r2, [r2, #0]
- 2025 00f0 022AC2E3 		bic	r2, r2, #8192
- 2026 00f4 002083E5 		str	r2, [r3, #0]
-  55:../latido.c   **** 
-  56:../latido.c   **** 	/* Establece la rutina de servicio para TIMER2 */
-  57:../latido.c   **** 	pISR_TIMER0 = (unsigned) latido_ISR;
- 2027              		.loc 1 57 0
- 2028 00f8 68309FE5 		ldr	r3, .L9+8
- 2029 00fc 68209FE5 		ldr	r2, .L9+12
- 2030 0100 002083E5 		str	r2, [r3, #0]
-  58:../latido.c   **** 
-  59:../latido.c   **** 	/* Configura el Timer0 */
-  60:../latido.c   **** 	rTCFG0 = 0x00000009; // Preescalado del timer2 en bits [7:0] de TCFG0. Dividimos entre 1 para el m
- 2031              		.loc 1 60 0
- 2032 0104 64309FE5 		ldr	r3, .L9+16
- 2033 0108 0920A0E3 		mov	r2, #9
- 2034 010c 002083E5 		str	r2, [r3, #0]
-  61:../latido.c   **** 
-  62:../latido.c   **** 	/*****************************************
-  63:../latido.c   **** 	 * Bits de seleccion del MUX timer 0:	 *
-  64:../latido.c   **** 	 * 1/2 -> 0000	1/4-> 0001				 *
-  65:../latido.c   **** 	 * 1/8 -> 0010	1/16-> 0011	1/32 -> 0100 *
-  66:../latido.c   **** 	 *****************************************/
-  67:../latido.c   **** 	rTCFG1 = rTCFG1 & 0xfffffff4; // Selección del mux para el divisor de frecuencia, bits [3:0] para 
+  39:../latido.c   **** 	if(cuenta_espera == espera){ //Compruebo si he esperado los ticks suficientes
+ 1956              		.loc 1 39 0
+ 1957 004c D8309FE5 		ldr	r3, .L8+8
+ 1958 0050 002093E5 		ldr	r2, [r3, #0]
+ 1959 0054 D4309FE5 		ldr	r3, .L8+12
+ 1960 0058 003093E5 		ldr	r3, [r3, #0]
+ 1961 005c 030052E1 		cmp	r2, r3
+ 1962 0060 0C00001A 		bne	.L3
+  40:../latido.c   **** 		//Reseteo los contadores y llamo a la funcion de callback
+  41:../latido.c   **** 		espera=51;
+ 1963              		.loc 1 41 0
+ 1964 0064 C4309FE5 		ldr	r3, .L8+12
+ 1965 0068 3320A0E3 		mov	r2, #51
+ 1966 006c 002083E5 		str	r2, [r3, #0]
+  42:../latido.c   **** 		en_espera=0;
+ 1967              		.loc 1 42 0
+ 1968 0070 B0309FE5 		ldr	r3, .L8+4
+ 1969 0074 0020A0E3 		mov	r2, #0
+ 1970 0078 002083E5 		str	r2, [r3, #0]
+  43:../latido.c   **** 		cuenta_espera=0;
+ 1971              		.loc 1 43 0
+ 1972 007c A8309FE5 		ldr	r3, .L8+8
+ 1973 0080 0020A0E3 		mov	r2, #0
+ 1974 0084 002083E5 		str	r2, [r3, #0]
+  44:../latido.c   **** 		funcion_callback();
+ 1975              		.loc 1 44 0
+ 1976 0088 A4309FE5 		ldr	r3, .L8+16
+ 1977 008c 003093E5 		ldr	r3, [r3, #0]
+ 1978 0090 0FE0A0E1 		mov	lr, pc
+ 1979 0094 13FF2FE1 		bx	r3
+ 1980              	.L3:
+  45:../latido.c   **** 	}
+  46:../latido.c   **** 	int aux=switch_leds_l;
+ 1981              		.loc 1 46 0
+ 1982 0098 84309FE5 		ldr	r3, .L8
+ 1983 009c 003093E5 		ldr	r3, [r3, #0]
+ 1984 00a0 20300BE5 		str	r3, [fp, #-32]
+  47:../latido.c   **** 
+  48:../latido.c   **** 	if(switch_leds_l == 24){
+ 1985              		.loc 1 48 0
+ 1986 00a4 78309FE5 		ldr	r3, .L8
+ 1987 00a8 003093E5 		ldr	r3, [r3, #0]
+ 1988 00ac 180053E3 		cmp	r3, #24
+ 1989 00b0 0000001A 		bne	.L4
+ 1990              	.LBB2:
+  49:../latido.c   **** 		led1_on();
+ 1991              		.loc 1 49 0
+ 1992 00b4 FEFFFFEB 		bl	led1_on
+ 1993              	.L4:
+ 1994              	.LBE2:
+  50:../latido.c   **** 	}
+  51:../latido.c   **** 	if(switch_leds_l == 25){
+ 1995              		.loc 1 51 0
+ 1996 00b8 64309FE5 		ldr	r3, .L8
+ 1997 00bc 003093E5 		ldr	r3, [r3, #0]
+ 1998 00c0 190053E3 		cmp	r3, #25
+ 1999 00c4 0000001A 		bne	.L5
+ 2000              	.LBB3:
+  52:../latido.c   **** 		led1_off();
+ 2001              		.loc 1 52 0
+ 2002 00c8 FEFFFFEB 		bl	led1_off
+ 2003              	.L5:
+ 2004              	.LBE3:
+  53:../latido.c   **** 	}
+  54:../latido.c   **** 
+  55:../latido.c   **** 	if(switch_leds_l==49){
+ 2005              		.loc 1 55 0
+ 2006 00cc 50309FE5 		ldr	r3, .L8
+ 2007 00d0 003093E5 		ldr	r3, [r3, #0]
+ 2008 00d4 310053E3 		cmp	r3, #49
+ 2009 00d8 0000001A 		bne	.L6
+ 2010              	.LBB4:
+  56:../latido.c   **** 		led1_on();
+ 2011              		.loc 1 56 0
+ 2012 00dc FEFFFFEB 		bl	led1_on
+ 2013              	.L6:
+ 2014              	.LBE4:
+  57:../latido.c   **** 	}
+  58:../latido.c   **** 	if(switch_leds_l==50){
+ 2015              		.loc 1 58 0
+ 2016 00e0 3C309FE5 		ldr	r3, .L8
+ 2017 00e4 003093E5 		ldr	r3, [r3, #0]
+ 2018 00e8 320053E3 		cmp	r3, #50
+ 2019 00ec 0300001A 		bne	.L7
+ 2020              	.LBB5:
+  59:../latido.c   **** 		led1_off();
+ 2021              		.loc 1 59 0
+ 2022 00f0 FEFFFFEB 		bl	led1_off
+  60:../latido.c   **** 		switch_leds_l=0;
+ 2023              		.loc 1 60 0
+ 2024 00f4 28309FE5 		ldr	r3, .L8
+ 2025 00f8 0020A0E3 		mov	r2, #0
+ 2026 00fc 002083E5 		str	r2, [r3, #0]
+ 2027              	.L7:
+ 2028              	.LBE5:
+  61:../latido.c   **** 	}
+  62:../latido.c   **** 	/* borrar bit en I_ISPC para desactivar la solicitud de interrupción*/
+  63:../latido.c   **** 
+  64:../latido.c   **** 	rI_ISPC |= BIT_TIMER0; // BIT_TIMER0 está definido en 44b.h y pone un uno en el bit 11 que correpo
+ 2029              		.loc 1 64 0
+ 2030 0100 30309FE5 		ldr	r3, .L8+20
+ 2031 0104 2C209FE5 		ldr	r2, .L8+20
+ 2032 0108 002092E5 		ldr	r2, [r2, #0]
+ 2033 010c 022A82E3 		orr	r2, r2, #8192
+ 2034 0110 002083E5 		str	r2, [r3, #0]
+  65:../latido.c   **** #endif
+  66:../latido.c   **** 
+  67:../latido.c   **** }
  2035              		.loc 1 67 0
- 2036 0110 5C309FE5 		ldr	r3, .L9+20
- 2037 0114 58209FE5 		ldr	r2, .L9+20
- 2038 0118 002092E5 		ldr	r2, [r2, #0]
- 2039 011c 0B20C2E3 		bic	r2, r2, #11
- 2040 0120 002083E5 		str	r2, [r3, #0]
-  68:../latido.c   **** 	rTCNTB0 = 65535;// valor inicial de cuenta (la cuenta es descendente)
- 2041              		.loc 1 68 0
- 2042 0124 4C309FE5 		ldr	r3, .L9+24
- 2043 0128 4C209FE5 		ldr	r2, .L9+28
- 2044 012c 002083E5 		str	r2, [r3, #0]
-  69:../latido.c   **** 	rTCMPB0 = 64535 ;// valor de comparación (valor original 12800)
- 2045              		.loc 1 69 0
- 2046 0130 48309FE5 		ldr	r3, .L9+32
- 2047 0134 48209FE5 		ldr	r2, .L9+36
- 2048 0138 002083E5 		str	r2, [r3, #0]
-  70:../latido.c   **** 	//Timer control register, para timer0 bits [3:0] -> [3] auto-reload, [2] output inverter, [1] manu
-  71:../latido.c   **** 	/* establecer update=manual (bit 1), inverter=off (0 en bit 2)*/
-  72:../latido.c   **** 	rTCON = 0x2;
- 2049              		.loc 1 72 0
- 2050 013c 44309FE5 		ldr	r3, .L9+40
- 2051 0140 0220A0E3 		mov	r2, #2
- 2052 0144 002083E5 		str	r2, [r3, #0]
-  73:../latido.c   **** 
-  74:../latido.c   **** 	//Iniciamos el latido
-  75:../latido.c   **** 	rTCON = 0x09;
- 2053              		.loc 1 75 0
- 2054 0148 38309FE5 		ldr	r3, .L9+40
- 2055 014c 0920A0E3 		mov	r2, #9
- 2056 0150 002083E5 		str	r2, [r3, #0]
-  76:../latido.c   **** }
- 2057              		.loc 1 76 0
- 2058 0154 0CD04BE2 		sub	sp, fp, #12
- 2059 0158 00689DE8 		ldmfd	sp, {fp, sp, lr}
- 2060 015c 1EFF2FE1 		bx	lr
- 2061              	.L10:
- 2062              		.align	2
- 2063              	.L9:
- 2064 0160 0800E001 		.word	31457288
- 2065 0164 0C00E001 		.word	31457292
- 2066 0168 54FF7F0C 		.word	209715028
- 2067 016c 00000000 		.word	latido_ISR
- 2068 0170 0000D501 		.word	30736384
- 2069 0174 0400D501 		.word	30736388
- 2070 0178 0C00D501 		.word	30736396
- 2071 017c FFFF0000 		.word	65535
- 2072 0180 1000D501 		.word	30736400
- 2073 0184 17FC0000 		.word	64535
- 2074 0188 0800D501 		.word	30736392
- 2075              		.cfi_endproc
- 2076              	.LFE1:
- 2078              	.Letext0:
+ 2036 0114 1CD04BE2 		sub	sp, fp, #28
+ 2037 0118 0F689DE8 		ldmfd	sp, {r0, r1, r2, r3, fp, sp, lr}
+ 2038 011c 04C09DE4 		ldmfd	sp!, {ip}
+ 2039 0120 04F05EE2 		subs	pc, lr, #4
+ 2040              	.L9:
+ 2041              		.align	2
+ 2042              	.L8:
+ 2043 0124 00000000 		.word	switch_leds_l
+ 2044 0128 00000000 		.word	en_espera
+ 2045 012c 00000000 		.word	cuenta_espera
+ 2046 0130 00000000 		.word	espera
+ 2047 0134 00000000 		.word	funcion_callback
+ 2048 0138 2400E001 		.word	31457316
+ 2049              		.cfi_endproc
+ 2050              	.LFE0:
+ 2052              		.align	2
+ 2053              		.global	latido_inicializar
+ 2055              	latido_inicializar:
+ 2056              	.LFB1:
+  68:../latido.c   **** 
+  69:../latido.c   **** /* Función que inicializa el timer2, dejandolo listo para empezar la cuenta con timer2_empezar() */
+  70:../latido.c   **** void latido_inicializar(void)
+  71:../latido.c   **** {
+ 2057              		.loc 1 71 0
+ 2058              		.cfi_startproc
+ 2059              		@ Function supports interworking.
+ 2060              		@ args = 0, pretend = 0, frame = 0
+ 2061              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2062 013c 0DC0A0E1 		mov	ip, sp
+ 2063              	.LCFI2:
+ 2064              		.cfi_def_cfa_register 12
+ 2065 0140 00D82DE9 		stmfd	sp!, {fp, ip, lr, pc}
+ 2066 0144 04B04CE2 		sub	fp, ip, #4
+ 2067              		.cfi_offset 14, -8
+ 2068              		.cfi_offset 13, -12
+ 2069              		.cfi_offset 11, -16
+ 2070              	.LCFI3:
+ 2071              		.cfi_def_cfa 11, 4
+  72:../latido.c   **** #ifndef EMU
+  73:../latido.c   **** 	led1_off();
+ 2072              		.loc 1 73 0
+ 2073 0148 FEFFFFEB 		bl	led1_off
+  74:../latido.c   **** 	/* Configuraion controlador de interrupciones */
+  75:../latido.c   **** 	rINTMOD = 0x0; // Configura las linas como de tipo IRQ
+ 2074              		.loc 1 75 0
+ 2075 014c 8C309FE5 		ldr	r3, .L11
+ 2076 0150 0020A0E3 		mov	r2, #0
+ 2077 0154 002083E5 		str	r2, [r3, #0]
+  76:../latido.c   **** 	rINTCON = 0x1; // Habilita int. vectorizadas y la linea IRQ (FIQ no)
+ 2078              		.loc 1 76 0
+ 2079 0158 1E36A0E3 		mov	r3, #31457280
+ 2080 015c 0120A0E3 		mov	r2, #1
+ 2081 0160 002083E5 		str	r2, [r3, #0]
+  77:../latido.c   **** 	rINTMSK &= ~(BIT_TIMER0); // habilitamos en vector de mascaras de interrupcion el Timer2 (bits 26 
+ 2082              		.loc 1 77 0
+ 2083 0164 78309FE5 		ldr	r3, .L11+4
+ 2084 0168 74209FE5 		ldr	r2, .L11+4
+ 2085 016c 002092E5 		ldr	r2, [r2, #0]
+ 2086 0170 022AC2E3 		bic	r2, r2, #8192
+ 2087 0174 002083E5 		str	r2, [r3, #0]
+  78:../latido.c   **** 
+  79:../latido.c   **** 	/* Establece la rutina de servicio para TIMER2 */
+  80:../latido.c   **** 	pISR_TIMER0 = (unsigned) latido_ISR;
+ 2088              		.loc 1 80 0
+ 2089 0178 68309FE5 		ldr	r3, .L11+8
+ 2090 017c 68209FE5 		ldr	r2, .L11+12
+ 2091 0180 002083E5 		str	r2, [r3, #0]
+  81:../latido.c   **** 
+  82:../latido.c   **** 	/* Configura el Timer0 */
+  83:../latido.c   **** 	rTCFG0 = 0x00000009; // Preescalado del timer2 en bits [7:0] de TCFG0. Dividimos entre 1 para el m
+ 2092              		.loc 1 83 0
+ 2093 0184 64309FE5 		ldr	r3, .L11+16
+ 2094 0188 0920A0E3 		mov	r2, #9
+ 2095 018c 002083E5 		str	r2, [r3, #0]
+  84:../latido.c   **** 
+  85:../latido.c   **** 	/*****************************************
+  86:../latido.c   **** 	 * Bits de seleccion del MUX timer 0:	 *
+  87:../latido.c   **** 	 * 1/2 -> 0000	1/4-> 0001				 *
+  88:../latido.c   **** 	 * 1/8 -> 0010	1/16-> 0011	1/32 -> 0100 *
+  89:../latido.c   **** 	 *****************************************/
+  90:../latido.c   **** 	rTCFG1 = rTCFG1 & 0xfffffff4; // Selección del mux para el divisor de frecuencia, bits [3:0] para 
+ 2096              		.loc 1 90 0
+ 2097 0190 5C309FE5 		ldr	r3, .L11+20
+ 2098 0194 58209FE5 		ldr	r2, .L11+20
+ 2099 0198 002092E5 		ldr	r2, [r2, #0]
+ 2100 019c 0B20C2E3 		bic	r2, r2, #11
+ 2101 01a0 002083E5 		str	r2, [r3, #0]
+  91:../latido.c   **** 	rTCNTB0 = 65535;// valor inicial de cuenta (la cuenta es descendente)
+ 2102              		.loc 1 91 0
+ 2103 01a4 4C309FE5 		ldr	r3, .L11+24
+ 2104 01a8 4C209FE5 		ldr	r2, .L11+28
+ 2105 01ac 002083E5 		str	r2, [r3, #0]
+  92:../latido.c   **** 	rTCMPB0 = 64535 ;// valor de comparación (valor original 12800)
+ 2106              		.loc 1 92 0
+ 2107 01b0 48309FE5 		ldr	r3, .L11+32
+ 2108 01b4 48209FE5 		ldr	r2, .L11+36
+ 2109 01b8 002083E5 		str	r2, [r3, #0]
+  93:../latido.c   **** 	//Timer control register, para timer0 bits [3:0] -> [3] auto-reload, [2] output inverter, [1] manu
+  94:../latido.c   **** 	/* establecer update=manual (bit 1), inverter=off (0 en bit 2)*/
+  95:../latido.c   **** 	rTCON = 0x2;
+ 2110              		.loc 1 95 0
+ 2111 01bc 44309FE5 		ldr	r3, .L11+40
+ 2112 01c0 0220A0E3 		mov	r2, #2
+ 2113 01c4 002083E5 		str	r2, [r3, #0]
+  96:../latido.c   **** 
+  97:../latido.c   **** 	//Iniciamos el latido
+  98:../latido.c   **** 	rTCON = 0x09;
+ 2114              		.loc 1 98 0
+ 2115 01c8 38309FE5 		ldr	r3, .L11+40
+ 2116 01cc 0920A0E3 		mov	r2, #9
+ 2117 01d0 002083E5 		str	r2, [r3, #0]
+  99:../latido.c   **** #endif
+ 100:../latido.c   **** }
+ 2118              		.loc 1 100 0
+ 2119 01d4 0CD04BE2 		sub	sp, fp, #12
+ 2120 01d8 00689DE8 		ldmfd	sp, {fp, sp, lr}
+ 2121 01dc 1EFF2FE1 		bx	lr
+ 2122              	.L12:
+ 2123              		.align	2
+ 2124              	.L11:
+ 2125 01e0 0800E001 		.word	31457288
+ 2126 01e4 0C00E001 		.word	31457292
+ 2127 01e8 54FF7F0C 		.word	209715028
+ 2128 01ec 00000000 		.word	latido_ISR
+ 2129 01f0 0000D501 		.word	30736384
+ 2130 01f4 0400D501 		.word	30736388
+ 2131 01f8 0C00D501 		.word	30736396
+ 2132 01fc FFFF0000 		.word	65535
+ 2133 0200 1000D501 		.word	30736400
+ 2134 0204 17FC0000 		.word	64535
+ 2135 0208 0800D501 		.word	30736392
+ 2136              		.cfi_endproc
+ 2137              	.LFE1:
+ 2139              		.align	2
+ 2140              		.global	espera_ticks
+ 2142              	espera_ticks:
+ 2143              	.LFB2:
+ 101:../latido.c   **** 
+ 102:../latido.c   **** void espera_ticks(int ticks,void (*callback_espera)()){
+ 2144              		.loc 1 102 0
+ 2145              		.cfi_startproc
+ 2146              		@ Function supports interworking.
+ 2147              		@ args = 0, pretend = 0, frame = 8
+ 2148              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2149 020c 0DC0A0E1 		mov	ip, sp
+ 2150              	.LCFI4:
+ 2151              		.cfi_def_cfa_register 12
+ 2152 0210 00D82DE9 		stmfd	sp!, {fp, ip, lr, pc}
+ 2153 0214 04B04CE2 		sub	fp, ip, #4
+ 2154              		.cfi_offset 14, -8
+ 2155              		.cfi_offset 13, -12
+ 2156              		.cfi_offset 11, -16
+ 2157              	.LCFI5:
+ 2158              		.cfi_def_cfa 11, 4
+ 2159 0218 08D04DE2 		sub	sp, sp, #8
+ 2160 021c 10000BE5 		str	r0, [fp, #-16]
+ 2161 0220 14100BE5 		str	r1, [fp, #-20]
+ 103:../latido.c   **** 	en_espera=1;
+ 2162              		.loc 1 103 0
+ 2163 0224 28309FE5 		ldr	r3, .L14
+ 2164 0228 0120A0E3 		mov	r2, #1
+ 2165 022c 002083E5 		str	r2, [r3, #0]
+ 104:../latido.c   **** 	funcion_callback = callback_espera;
+ 2166              		.loc 1 104 0
+ 2167 0230 14201BE5 		ldr	r2, [fp, #-20]
+ 2168 0234 1C309FE5 		ldr	r3, .L14+4
+ 2169 0238 002083E5 		str	r2, [r3, #0]
+ 105:../latido.c   **** 	espera=ticks;
+ 2170              		.loc 1 105 0
+ 2171 023c 18309FE5 		ldr	r3, .L14+8
+ 2172 0240 10201BE5 		ldr	r2, [fp, #-16]
+ 2173 0244 002083E5 		str	r2, [r3, #0]
+ 106:../latido.c   **** #ifdef EMU
+ 107:../latido.c   **** 	funcion_callback();
+ 108:../latido.c   **** #endif
+ 109:../latido.c   **** }
+ 2174              		.loc 1 109 0
+ 2175 0248 0CD04BE2 		sub	sp, fp, #12
+ 2176 024c 00689DE8 		ldmfd	sp, {fp, sp, lr}
+ 2177 0250 1EFF2FE1 		bx	lr
+ 2178              	.L15:
+ 2179              		.align	2
+ 2180              	.L14:
+ 2181 0254 00000000 		.word	en_espera
+ 2182 0258 00000000 		.word	funcion_callback
+ 2183 025c 00000000 		.word	espera
+ 2184              		.cfi_endproc
+ 2185              	.LFE2:
+ 2187              	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 latido.c
-C:\Users\Ivo\AppData\Local\Temp\ccsf32Tb.s:1883   .bss:00000000 switch_leds_l
-C:\Users\Ivo\AppData\Local\Temp\ccsf32Tb.s:1880   .bss:00000000 $d
-C:\Users\Ivo\AppData\Local\Temp\ccsf32Tb.s:1889   .bss:00000004 n_interrupt
-C:\Users\Ivo\AppData\Local\Temp\ccsf32Tb.s:1892   .text:00000000 $a
-C:\Users\Ivo\AppData\Local\Temp\ccsf32Tb.s:1895   .text:00000000 latido_ISR
-C:\Users\Ivo\AppData\Local\Temp\ccsf32Tb.s:1986   .text:000000b4 $d
-C:\Users\Ivo\AppData\Local\Temp\ccsf32Tb.s:1991   .text:000000bc $a
-C:\Users\Ivo\AppData\Local\Temp\ccsf32Tb.s:1994   .text:000000bc latido_inicializar
-C:\Users\Ivo\AppData\Local\Temp\ccsf32Tb.s:2064   .text:00000160 $d
+C:\Users\Ivo\AppData\Local\Temp\ccH1Q0AT.s:1883   .bss:00000000 switch_leds_l
+C:\Users\Ivo\AppData\Local\Temp\ccH1Q0AT.s:1880   .bss:00000000 $d
+C:\Users\Ivo\AppData\Local\Temp\ccH1Q0AT.s:1889   .bss:00000004 n_interrupt
+C:\Users\Ivo\AppData\Local\Temp\ccH1Q0AT.s:1895   .bss:00000008 en_espera
+C:\Users\Ivo\AppData\Local\Temp\ccH1Q0AT.s:1901   .bss:0000000c cuenta_espera
+C:\Users\Ivo\AppData\Local\Temp\ccH1Q0AT.s:1908   .data:00000000 espera
+C:\Users\Ivo\AppData\Local\Temp\ccH1Q0AT.s:1905   .data:00000000 $d
+                            *COM*:00000004 funcion_callback
+C:\Users\Ivo\AppData\Local\Temp\ccH1Q0AT.s:1912   .text:00000000 $a
+C:\Users\Ivo\AppData\Local\Temp\ccH1Q0AT.s:1915   .text:00000000 latido_ISR
+C:\Users\Ivo\AppData\Local\Temp\ccH1Q0AT.s:2043   .text:00000124 $d
+C:\Users\Ivo\AppData\Local\Temp\ccH1Q0AT.s:2052   .text:0000013c $a
+C:\Users\Ivo\AppData\Local\Temp\ccH1Q0AT.s:2055   .text:0000013c latido_inicializar
+C:\Users\Ivo\AppData\Local\Temp\ccH1Q0AT.s:2125   .text:000001e0 $d
+C:\Users\Ivo\AppData\Local\Temp\ccH1Q0AT.s:2139   .text:0000020c $a
+C:\Users\Ivo\AppData\Local\Temp\ccH1Q0AT.s:2142   .text:0000020c espera_ticks
+C:\Users\Ivo\AppData\Local\Temp\ccH1Q0AT.s:2181   .text:00000254 $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

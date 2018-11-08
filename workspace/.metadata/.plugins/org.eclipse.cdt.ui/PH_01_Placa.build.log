@@ -1,29 +1,11 @@
-19:57:15 **** Incremental Build of configuration Debug for project PH_01_Placa ****
+18:43:30 **** Incremental Build of configuration Debug for project PH_01_Placa ****
 cs-make all 
-'Building file: ../main.c'
-'Invoking: ARM Sourcery Windows GCC C Compiler'
-arm-none-eabi-gcc -I"D:\PH\workspace\PH_01_Placa\common" -O0 -Wall -Wa,-adhlns="main.o.lst" -c -fmessage-length=0 -mapcs-frame -MMD -MP -MF"main.d" -MT"main.d" -mcpu=arm7tdmi -g3 -gdwarf-2 -o "main.o" "../main.c"
-'Finished building: ../main.c'
-' '
-'Building target: PH_01_Placa.elf'
-'Invoking: ARM Sourcery Windows GCC C Linker'
-arm-none-eabi-gcc -T"D:\PH\workspace\PH_01_Placa\common\ld_script.ld" -nostartfiles -Wl,-Map,PH_01_Placa.map -mcpu=arm7tdmi -g3 -gdwarf-2 -o "PH_01_Placa.elf"  ./common/44binit.o ./common/44blib.o  ./8led.o ./arm_functions.o ./button.o ./latido.o ./led.o ./main.o ./reversi8_2018.o ./timer.o ./timer2.o   
-'Finished building target: PH_01_Placa.elf'
-' '
-'Invoking: ARM Sourcery Windows GNU Create Flash Image'
-arm-none-eabi-objcopy -O binary PH_01_Placa.elf  "PH_01_Placa.hex"
-'Finished building: PH_01_Placa.hex'
-' '
-'Invoking: ARM Sourcery Windows GNU Create Listing'
-arm-none-eabi-objdump -h -S PH_01_Placa.elf > "PH_01_Placa.lst"
-'Finished building: PH_01_Placa.lst'
-' '
 'Invoking: ARM Sourcery Windows GNU Print Size'
 arm-none-eabi-size  --format=berkeley PH_01_Placa.elf
    text	   data	    bss	    dec	    hex	filename
-  16112	     88	    116	  16316	   3fbc	PH_01_Placa.elf
+  16676	    100	    140	  16916	   4214	PH_01_Placa.elf
 'Finished building: PH_01_Placa.siz'
 ' '
 
-19:57:20 Build Finished (took 5s.326ms)
+18:43:31 Build Finished (took 360ms)
 

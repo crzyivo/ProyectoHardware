@@ -50,15 +50,11 @@ void Eint4567_ISR(void)
 	rINTMSK |= BIT_EINT4567; // deshabilitar interrupciones de botones
 
 	funcion_callback(rEXTINTPND);
-
-	/* Finalizar ISR */
-	rINTMSK    &= ~(BIT_EINT4567); //habilitar interrupciones de botones
-	rEXTINTPND = 0xf;				// borra los bits en EXTINTPND
-	rI_ISPC   |= BIT_EINT4567;		// borra el bit pendiente en INTPND
 }
 
 void button_iniciar(void)
 {
+#ifndef EMU
 	/* Configuracion del controlador de interrupciones. Estos registros están definidos en 44b.h */
 	rI_ISPC    = 0x3ffffff;	// Borra INTPND escribiendo 1s en I_ISPC
 	rEXTINTPND = 0xf;       // Borra EXTINTPND escribiendo 1s en el propio registro
@@ -73,33 +69,31 @@ void button_iniciar(void)
 	/* Por precaucion, se vuelven a borrar los bits de INTPND y EXTINTPND */
 	rI_ISPC    |= (BIT_EINT4567);
 	rEXTINTPND = 0xf;
+#endif
 }
 void button_empezar (void (*callback)(estado_button)){
-
-	rINTMSK    &= ~(BIT_EINT4567); // habilitamos interrupcion linea eint4567 en vector de mascaras
+#ifndef EMU
+	/* Finalizar ISR */
+	rINTMSK    &= ~(BIT_EINT4567); //habilitar interrupciones de botones
+	rEXTINTPND = 0xf;				// borra los bits en EXTINTPND
+	rI_ISPC   |= BIT_EINT4567;		// borra el bit pendiente en INTPND
 	funcion_callback = callback;
 	/* Establece la rutina de servicio para Eint4567 */
 	pISR_EINT4567 = (int)Eint4567_ISR;
+#else
+	callback(button_iz);
+#endif
 }
 
 estado_button button_estado(){
- return boton_pulsado;
-}
-
-void callback(estado_button pulsado){
-	/* Identificar la interrupcion (hay dos pulsadores)*/
-	int which_int = rEXTINTPND;
-	switch (which_int)
-	{
-		case 4:
-			int_count++; // incrementamos el contador
-			break;
-		case 8:
-			int_count--; // decrementamos el contador
-			break;
-		default:
-			break;
+#ifndef EMU
+	if((rPDATG & 0x40) ==0){
+		return button_iz;
 	}
-	// }
-	D8Led_symbol(int_count & 0x000f); // sacamos el valor por pantalla (módulo 16)
+	if((rPDATG & 0x80) ==0){
+		return button_dr;
+	}
+#endif
+ return button_none;
+
 }

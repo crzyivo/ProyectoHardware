@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;PH_01_Placa/botones_antirebotes.c&apos;" deleteContents="false" description="Delete resource &apos;PH_01_Placa/botones_antirebotes.c&apos;" element1="/PH_01_Placa/botones_antirebotes.c" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1541489668698"/>
+</session>

@@ -1,0 +1,38 @@
+/*
+ * botones_antirebotes.c
+ *
+ *  Created on: 06/11/2018
+ *      Author: Ivo
+ */
+
+//Estados de la maquina
+typedef enum{sin_pulsar,ret_inicio,monitorizacion,retardo_salida}
+estado_botones_antirebotes;
+
+int trp = 20;
+int trd = 20;
+estado_button boton_pulsado = button_none;
+estado_botones_antirebotes maquina = sin_pulsar;
+
+int trp_realizado=0;
+int trd_realizado=0;
+
+void callback_antirebotes(estado_button e){
+	 boton_pulsado = e;
+	 switch(maquina){
+	 case sin_pulsar: //Se ha pulsado un boton por primera vez
+		 esperar_ticks(trp,callback_espera); //Esperamos un retardo
+		 maquina = ret_inicio;
+		 break;
+}
+
+void callback_espera(){
+	switch(maquina){
+	case ret_inicio:
+		trp_realizado=1;
+		maquina=monitorizacion;
+		break;
+	case monitorizacion:
+
+	}
+}

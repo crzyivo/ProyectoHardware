@@ -5,6 +5,7 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../8led.c \
+../botones_antirebotes.c \
 ../button.c \
 ../latido.c \
 ../led.c \
@@ -19,6 +20,7 @@ ASM_SRCS += \
 OBJS += \
 ./8led.o \
 ./arm_functions.o \
+./botones_antirebotes.o \
 ./button.o \
 ./latido.o \
 ./led.o \
@@ -29,6 +31,7 @@ OBJS += \
 
 C_DEPS += \
 ./8led.d \
+./botones_antirebotes.d \
 ./button.d \
 ./latido.d \
 ./led.d \

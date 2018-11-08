@@ -5,6 +5,7 @@
 * Version:  <P4-ARM.timer-leds>
 *********************************************************************************************/
 
+#define EMU
 /*--- ficheros de cabecera ---*/
 #include "8led.h"
 #include "button.h"
@@ -14,11 +15,13 @@
 #include "44blib.h"
 #include "44b.h"
 #include "latido.h"
+#include "botones_antirebotes.h"
 /*--- variables globales ---*/
 
 
 /*--- codigo de funciones ---*/
 
+void reverse_main();
 //////////////////////////////////////////////////////////////////////
 //	Funcion que comprueba el correcto funcionamiento del timer2
 //	para ello realiza varias mediciones usando la funcion Delay,
@@ -58,7 +61,8 @@ void Main(void)
 	//timer_init();	    // Inicializacion del temporizador
 	button_iniciar();	// inicializamos los pulsadores. Cada vez que se pulse se verá reflejado en el 8led
 	D8Led_init();       // inicializamos el 8led
-	//timer2_inicializar();
+	timer2_inicializar();
+	inicio_antirebotes();
 	latido_inicializar();
 
 
@@ -69,15 +73,13 @@ void Main(void)
 	//led1_on();
 	//Iniciar reversi8;
 	//reversi8();
-
+	//button_empezar(button_callback);
 	//Codigo para cambiar los leds segun el timer
-  while (1)
-	{
-		// Cambia los leds con cada interrupcion del temporizador
-		if (switch_leds == 1)
-		{
-			leds_switch();
-			switch_leds = 0;
-		}
+	reversi_main();
+}
+
+void reversi_main(){
+	while(1){
+		//Por ahora nada
 	}
 }

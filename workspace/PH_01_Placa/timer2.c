@@ -30,6 +30,7 @@ void timer2_ISR(void)
 /* Función que inicializa el timer2, dejandolo listo para empezar la cuenta con timer2_empezar() */
 void timer2_inicializar(void)
 {
+#ifndef EMU
 	/* Configuraion controlador de interrupciones */
 	rINTMOD = 0x0; // Configura las linas como de tipo IRQ
 	rINTCON = 0x1; // Habilita int. vectorizadas y la linea IRQ (FIQ no)
@@ -52,17 +53,20 @@ void timer2_inicializar(void)
 	//Timer control register, para timer2 bits [15:12] -> [15] auto-reload, [14] output inverter, [13] manual update, [12] start/stop
 	/* establecer update=manual (bit 13), inverter=off (0 en bit 14)*/
 	rTCON = 0x00002000;
+#endif
 }
 
 /* Funcion que inicia la cuenta mediante timer2*/
 void timer2_empezar(void)
 {
+#ifndef EMU
 	// Reiniciar variable contador
 	timer2_num_int=0;
 	//Reiniciar registro intermedio
 	rTCNTO2 = 0;
 	/* iniciar timer2 (bit 12) y auto-reload (bit 15)*/
 	rTCON = 0x00009000;
+#endif
 }
 /* Funcion que obtiene el tiempo en microsegundos que se ha contado mediante el timer2.
  * Para obtener el tiempo sumaremos las veces que se ha realizado la resta con la fraccion de resta
@@ -72,15 +76,22 @@ void timer2_empezar(void)
  */
 unsigned int timer2_leer()
 {
+#ifndef EMU
 	return timer2_num_int * (rTCNTB2 * 0.03125)	//Cuentas completas
 	        + ((rTCNTB2 - rTCNTO2) * 0.03125);	//Cuenta en el momento de lectura
+#else
+	timer2_num_int++;
+	retrun timer2_num_int;
+#endif
 }
 
 /* Funcion que para el timer y devuelve el tiempo transcurrido, pero no lo reinicia*/
 unsigned int timer2_parar(void)
 {
+#ifndef EMU
 	/*parar timer2, desactivamos bit 12 en TCON*/
 	rTCON = rTCON & 0xffffEfff;
 	return timer2_leer();
+#endif
 }
 

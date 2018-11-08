@@ -15,6 +15,5 @@ typedef enum{
 void button_iniciar(void);
 void button_empezar(void (*callback)(estado_button));
 estado_button button_estado(void);
-void callback(estado_button);
 
 #endif /* _BUTTON_H_ */

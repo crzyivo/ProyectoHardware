@@ -15,6 +15,14 @@
 volatile unsigned int n_interrupt=0;
 int switch_leds_l = 0;
 
+//Variables para la gestion de esperas de rebotes
+int en_espera = 0;
+int cuenta_espera = 0;
+int espera = 51; //Como solo se cuentan 50 interrupciones, a 51 nunca llega
+
+//Funcion de callback para las esperas de retardo
+void (*funcion_callback)(void);
+
 /* declaración de función que es rutina de servicio de interrupción
  * https://gcc.gnu.org/onlinedocs/gcc/ARM-Function-Attributes.html */
 void latido_ISR(void) __attribute__((interrupt("IRQ")));
@@ -23,7 +31,18 @@ void latido_ISR(void) __attribute__((interrupt("IRQ")));
 /* Rutina de servicio de interrupción para timer2 */
 void latido_ISR(void)
 {
+#ifndef EMU
 	switch_leds_l ++;
+	if(en_espera){ // Si estoy esperando ticks, aumento la cuenta
+		cuenta_espera++;
+	}
+	if(cuenta_espera == espera){ //Compruebo si he esperado los ticks suficientes
+		//Reseteo los contadores y llamo a la funcion de callback
+		espera=51;
+		en_espera=0;
+		cuenta_espera=0;
+		funcion_callback();
+	}
 	int aux=switch_leds_l;
 
 	if(switch_leds_l == 24){
@@ -41,12 +60,16 @@ void latido_ISR(void)
 		switch_leds_l=0;
 	}
 	/* borrar bit en I_ISPC para desactivar la solicitud de interrupción*/
+
 	rI_ISPC |= BIT_TIMER0; // BIT_TIMER0 está definido en 44b.h y pone un uno en el bit 11 que correponde al Timer0
+#endif
+
 }
 
 /* Función que inicializa el timer2, dejandolo listo para empezar la cuenta con timer2_empezar() */
 void latido_inicializar(void)
 {
+#ifndef EMU
 	led1_off();
 	/* Configuraion controlador de interrupciones */
 	rINTMOD = 0x0; // Configura las linas como de tipo IRQ
@@ -73,4 +96,15 @@ void latido_inicializar(void)
 
 	//Iniciamos el latido
 	rTCON = 0x09;
+#endif
 }
+
+void espera_ticks(int ticks,void (*callback_espera)()){
+	en_espera=1;
+	funcion_callback = callback_espera;
+	espera=ticks;
+#ifdef EMU
+	funcion_callback();
+#endif
+}
+
