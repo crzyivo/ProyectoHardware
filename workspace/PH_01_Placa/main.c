@@ -5,7 +5,7 @@
 * Version:  <P4-ARM.timer-leds>
 *********************************************************************************************/
 
-#define EMU
+//#define EMU  //Descomentar para compilacion en emulador
 /*--- ficheros de cabecera ---*/
 #include "8led.h"
 #include "button.h"
@@ -59,7 +59,7 @@ void Main(void)
 	/* Inicializa controladores */
 	sys_init();         // Inicializacion de la placa, interrupciones y puertos
 	//timer_init();	    // Inicializacion del temporizador
-	button_iniciar();	// inicializamos los pulsadores. Cada vez que se pulse se ver· reflejado en el 8led
+	button_iniciar();	// inicializamos los pulsadores. Cada vez que se pulse se ver√° reflejado en el 8led
 	D8Led_init();       // inicializamos el 8led
 	timer2_inicializar();
 	inicio_antirebotes();
