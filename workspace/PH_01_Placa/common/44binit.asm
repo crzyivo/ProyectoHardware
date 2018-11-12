@@ -144,7 +144,8 @@ VECTOR_BRANCH:
    .align
 
 HandlerFIQ:		HANDLER HandleFIQ
-HandlerIRQ:		HANDLER HandleIRQ
+HandlerIRQ:		mov r0,#0
+				b push_debug
 HandlerUndef:	HANDLER HandleUndef
 HandlerSWI:		HANDLER HandleSWI
 HandlerDabort:	HANDLER HandleDabort

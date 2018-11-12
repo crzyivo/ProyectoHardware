@@ -9,8 +9,11 @@
 #include "8led.h"
 #include "44b.h"
 #include "44blib.h"
+#include "latido.h"
 
 /*--- variables globales del módulo ---*/
+int blink=0;
+int blink_number=blank;
 /* tabla de segmentos */
 static int
 Symbol[size_8led] = { cero, uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, A, B, C, D, E, F, blank};
@@ -33,4 +36,24 @@ void D8Led_symbol(int value)
 		LED8ADDR = (unsigned char) Symbol[value];
 	}
 #endif
+}
+
+void D8Led_blink(int value)
+{
+#ifndef EMU
+	blink_number=value;
+	espera_ticks(25,timer_callback);
+#endif
+}
+
+void timer_callback()
+{
+	if(blink){
+		D8Led_symbol(blink_number);
+		blink=0;
+	}else{
+		D8Led_symbol(blank);
+		blink=1;
+	}
+	D8Led_blink(value);
 }
