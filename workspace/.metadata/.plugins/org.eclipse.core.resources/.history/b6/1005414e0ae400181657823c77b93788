@@ -166,6 +166,7 @@ void free(void *pt)
 //--------------------------------INIT---------------------------------//
 void sys_init()// Interrupt & Port
 {
+#ifdef EMU
 	/* enable interrupt */
 	rINTMOD = 0x0;
 	rINTCON = 0x1;
@@ -174,5 +175,6 @@ void sys_init()// Interrupt & Port
 	Port_Init();					    // Initial 44B0X's I/O port
 	Delay(0);						      // delay time				
 	rINTMSK = ~(BIT_GLOBAL);  //enable interrupt mask vector
+#endif
 }
 

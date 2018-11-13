@@ -17,8 +17,8 @@ static unsigned int int_count = 0;
 typedef enum{sin_pulsar,ret_inicio,monitorizacion,ret_salida}
 estado_botones_antirebotes;
 
-int trp = 5;
-int trd = 5;
+int trp = 20;
+int trd = 20;
 estado_button boton_pulsado_antirebotes = button_none;
 estado_botones_antirebotes maquina = sin_pulsar;
 
@@ -30,7 +30,6 @@ void incrementa();
 
 void callback_antirebotes(estado_button e){
 	boton_pulsado_antirebotes = e;
-	estado_botones_antirebotes aux = maquina;
 	 switch(maquina){
 	 case sin_pulsar: //Se ha pulsado un boton por primera vez
 		 espera_ticks(trp,callback_espera); //Esperamos un retardo

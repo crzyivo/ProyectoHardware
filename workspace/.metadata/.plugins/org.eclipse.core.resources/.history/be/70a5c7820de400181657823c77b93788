@@ -36,7 +36,7 @@ void latido_ISR(void)
 	if(en_espera){ // Si estoy esperando ticks, aumento la cuenta
 		cuenta_espera++;
 	}
-	if(cuenta_espera == espera && en_espera ){ //Compruebo si he esperado los ticks suficientes
+	if(cuenta_espera == espera ){ //Compruebo si he esperado los ticks suficientes
 		//Reseteo los contadores y llamo a la funcion de callback
 		espera=51;
 		en_espera=0;

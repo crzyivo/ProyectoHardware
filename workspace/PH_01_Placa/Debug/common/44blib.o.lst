@@ -639,49 +639,82 @@
  3602              		.cfi_offset 11, -16
  3603              	.LCFI11:
  3604              		.cfi_def_cfa 11, 4
- 169:../common/44blib.c **** #ifdef EMU
+ 169:../common/44blib.c **** #ifndef EMU
  170:../common/44blib.c **** 	/* enable interrupt */
  171:../common/44blib.c **** 	rINTMOD = 0x0;
+ 3605              		.loc 1 171 0
+ 3606 0408 4C309FE5 		ldr	r3, .L25
+ 3607 040c 0020A0E3 		mov	r2, #0
+ 3608 0410 002083E5 		str	r2, [r3, #0]
  172:../common/44blib.c **** 	rINTCON = 0x1;
+ 3609              		.loc 1 172 0
+ 3610 0414 1E36A0E3 		mov	r3, #31457280
+ 3611 0418 0120A0E3 		mov	r2, #1
+ 3612 041c 002083E5 		str	r2, [r3, #0]
  173:../common/44blib.c **** 	rI_ISPC = 0xffffffff;			// clear all interrupt pend
+ 3613              		.loc 1 173 0
+ 3614 0420 38309FE5 		ldr	r3, .L25+4
+ 3615 0424 0020E0E3 		mvn	r2, #0
+ 3616 0428 002083E5 		str	r2, [r3, #0]
  174:../common/44blib.c **** 	rEXTINTPND = 0xf;				  // clear EXTINTPND reg
+ 3617              		.loc 1 174 0
+ 3618 042c 30309FE5 		ldr	r3, .L25+8
+ 3619 0430 0F20A0E3 		mov	r2, #15
+ 3620 0434 002083E5 		str	r2, [r3, #0]
  175:../common/44blib.c **** 	Port_Init();					    // Initial 44B0X's I/O port
+ 3621              		.loc 1 175 0
+ 3622 0438 FEFFFFEB 		bl	Port_Init
  176:../common/44blib.c **** 	Delay(0);						      // delay time				
+ 3623              		.loc 1 176 0
+ 3624 043c 0000A0E3 		mov	r0, #0
+ 3625 0440 FEFFFFEB 		bl	Delay
  177:../common/44blib.c **** 	rINTMSK = ~(BIT_GLOBAL);  //enable interrupt mask vector
+ 3626              		.loc 1 177 0
+ 3627 0444 1C309FE5 		ldr	r3, .L25+12
+ 3628 0448 0123E0E3 		mvn	r2, #67108864
+ 3629 044c 002083E5 		str	r2, [r3, #0]
  178:../common/44blib.c **** #endif
  179:../common/44blib.c **** }
- 3605              		.loc 1 179 0
- 3606 0408 0CD04BE2 		sub	sp, fp, #12
- 3607 040c 00689DE8 		ldmfd	sp, {fp, sp, lr}
- 3608 0410 1EFF2FE1 		bx	lr
- 3609              		.cfi_endproc
- 3610              	.LFE5:
- 3612              	.Letext0:
+ 3630              		.loc 1 179 0
+ 3631 0450 0CD04BE2 		sub	sp, fp, #12
+ 3632 0454 00689DE8 		ldmfd	sp, {fp, sp, lr}
+ 3633 0458 1EFF2FE1 		bx	lr
+ 3634              	.L26:
+ 3635              		.align	2
+ 3636              	.L25:
+ 3637 045c 0800E001 		.word	31457288
+ 3638 0460 2400E001 		.word	31457316
+ 3639 0464 5400D201 		.word	30539860
+ 3640 0468 0C00E001 		.word	31457292
+ 3641              		.cfi_endproc
+ 3642              	.LFE5:
+ 3644              	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 44blib.c
                             *COM*:00000004 downPt
                             *COM*:00000004 fileSize
-C:\Users\Ivo\AppData\Local\Temp\ccaMWafo.s:3131   .data:00000000 mallocPt
-C:\Users\Ivo\AppData\Local\Temp\ccaMWafo.s:3128   .data:00000000 $d
-C:\Users\Ivo\AppData\Local\Temp\ccaMWafo.s:3138   .bss:00000000 restart
-C:\Users\Ivo\AppData\Local\Temp\ccaMWafo.s:3135   .bss:00000000 $d
-C:\Users\Ivo\AppData\Local\Temp\ccaMWafo.s:3145   .data:00000004 run
-C:\Users\Ivo\AppData\Local\Temp\ccaMWafo.s:3150   .data:00000008 delayLoopCount
-C:\Users\Ivo\AppData\Local\Temp\ccaMWafo.s:3154   .text:00000000 $a
-C:\Users\Ivo\AppData\Local\Temp\ccaMWafo.s:3157   .text:00000000 Delay
-C:\Users\Ivo\AppData\Local\Temp\ccaMWafo.s:3269   .text:00000118 $d
-C:\Users\Ivo\AppData\Local\Temp\ccaMWafo.s:3280   .text:00000138 $a
-C:\Users\Ivo\AppData\Local\Temp\ccaMWafo.s:3283   .text:00000138 DelayMs
-C:\Users\Ivo\AppData\Local\Temp\ccaMWafo.s:3334   .text:0000019c Port_Init
-C:\Users\Ivo\AppData\Local\Temp\ccaMWafo.s:3442   .text:000002b0 $d
-C:\Users\Ivo\AppData\Local\Temp\ccaMWafo.s:3476   .text:0000032c $a
-C:\Users\Ivo\AppData\Local\Temp\ccaMWafo.s:3479   .text:0000032c malloc
-C:\Users\Ivo\AppData\Local\Temp\ccaMWafo.s:3543   .text:000003c4 $d
-C:\Users\Ivo\AppData\Local\Temp\ccaMWafo.s:3548   .text:000003cc $a
-C:\Users\Ivo\AppData\Local\Temp\ccaMWafo.s:3551   .text:000003cc free
-C:\Users\Ivo\AppData\Local\Temp\ccaMWafo.s:3581   .text:000003f8 $d
-C:\Users\Ivo\AppData\Local\Temp\ccaMWafo.s:3585   .text:000003fc $a
-C:\Users\Ivo\AppData\Local\Temp\ccaMWafo.s:3588   .text:000003fc sys_init
+C:\Users\Ivo\AppData\Local\Temp\ccxXZAbQ.s:3131   .data:00000000 mallocPt
+C:\Users\Ivo\AppData\Local\Temp\ccxXZAbQ.s:3128   .data:00000000 $d
+C:\Users\Ivo\AppData\Local\Temp\ccxXZAbQ.s:3138   .bss:00000000 restart
+C:\Users\Ivo\AppData\Local\Temp\ccxXZAbQ.s:3135   .bss:00000000 $d
+C:\Users\Ivo\AppData\Local\Temp\ccxXZAbQ.s:3145   .data:00000004 run
+C:\Users\Ivo\AppData\Local\Temp\ccxXZAbQ.s:3150   .data:00000008 delayLoopCount
+C:\Users\Ivo\AppData\Local\Temp\ccxXZAbQ.s:3154   .text:00000000 $a
+C:\Users\Ivo\AppData\Local\Temp\ccxXZAbQ.s:3157   .text:00000000 Delay
+C:\Users\Ivo\AppData\Local\Temp\ccxXZAbQ.s:3269   .text:00000118 $d
+C:\Users\Ivo\AppData\Local\Temp\ccxXZAbQ.s:3280   .text:00000138 $a
+C:\Users\Ivo\AppData\Local\Temp\ccxXZAbQ.s:3283   .text:00000138 DelayMs
+C:\Users\Ivo\AppData\Local\Temp\ccxXZAbQ.s:3334   .text:0000019c Port_Init
+C:\Users\Ivo\AppData\Local\Temp\ccxXZAbQ.s:3442   .text:000002b0 $d
+C:\Users\Ivo\AppData\Local\Temp\ccxXZAbQ.s:3476   .text:0000032c $a
+C:\Users\Ivo\AppData\Local\Temp\ccxXZAbQ.s:3479   .text:0000032c malloc
+C:\Users\Ivo\AppData\Local\Temp\ccxXZAbQ.s:3543   .text:000003c4 $d
+C:\Users\Ivo\AppData\Local\Temp\ccxXZAbQ.s:3548   .text:000003cc $a
+C:\Users\Ivo\AppData\Local\Temp\ccxXZAbQ.s:3551   .text:000003cc free
+C:\Users\Ivo\AppData\Local\Temp\ccxXZAbQ.s:3581   .text:000003f8 $d
+C:\Users\Ivo\AppData\Local\Temp\ccxXZAbQ.s:3585   .text:000003fc $a
+C:\Users\Ivo\AppData\Local\Temp\ccxXZAbQ.s:3588   .text:000003fc sys_init
+C:\Users\Ivo\AppData\Local\Temp\ccxXZAbQ.s:3637   .text:0000045c $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

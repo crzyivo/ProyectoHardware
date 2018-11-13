@@ -50,6 +50,7 @@ void Eint4567_ISR(void)
 	rINTMSK |= BIT_EINT4567; // deshabilitar interrupciones de botones
 
 	funcion_callback(rEXTINTPND);
+	rI_ISPC   |= BIT_EINT4567;		// borra el bit pendiente en INTPND
 }
 
 void button_iniciar(void)
@@ -76,7 +77,6 @@ void button_empezar (void (*callback)(estado_button)){
 	/* Finalizar ISR */
 	rINTMSK    &= ~(BIT_EINT4567); //habilitar interrupciones de botones
 	rEXTINTPND = 0xf;				// borra los bits en EXTINTPND
-	rI_ISPC   |= BIT_EINT4567;		// borra el bit pendiente en INTPND
 	funcion_callback = callback;
 	/* Establece la rutina de servicio para Eint4567 */
 	pISR_EINT4567 = (int)Eint4567_ISR;

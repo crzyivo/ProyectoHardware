@@ -166,7 +166,7 @@ void free(void *pt)
 //--------------------------------INIT---------------------------------//
 void sys_init()// Interrupt & Port
 {
-#ifdef EMU
+#ifndef EMU
 	/* enable interrupt */
 	rINTMOD = 0x0;
 	rINTCON = 0x1;

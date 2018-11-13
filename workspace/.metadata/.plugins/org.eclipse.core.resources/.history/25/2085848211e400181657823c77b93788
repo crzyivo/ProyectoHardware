@@ -18,7 +18,7 @@ typedef enum{sin_pulsar,ret_inicio,monitorizacion,ret_salida}
 estado_botones_antirebotes;
 
 int trp = 5;
-int trd = 5;
+int trd = 10;
 estado_button boton_pulsado_antirebotes = button_none;
 estado_botones_antirebotes maquina = sin_pulsar;
 
