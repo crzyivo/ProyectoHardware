@@ -405,27 +405,27 @@
 DEFINED SYMBOLS
                             *ABS*:00000000 botones_antirebotes.c
                             *COM*:00000004 switch_leds_l
-C:\Users\Ivo\AppData\Local\Temp\cchRFPMv.s:998    .bss:00000000 $d
-C:\Users\Ivo\AppData\Local\Temp\cchRFPMv.s:999    .bss:00000000 int_count
-C:\Users\Ivo\AppData\Local\Temp\cchRFPMv.s:1006   .data:00000000 trp
-C:\Users\Ivo\AppData\Local\Temp\cchRFPMv.s:1003   .data:00000000 $d
-C:\Users\Ivo\AppData\Local\Temp\cchRFPMv.s:1012   .data:00000004 trd
-C:\Users\Ivo\AppData\Local\Temp\cchRFPMv.s:1018   .bss:00000004 boton_pulsado_antirebotes
-C:\Users\Ivo\AppData\Local\Temp\cchRFPMv.s:1023   .bss:00000005 maquina
-C:\Users\Ivo\AppData\Local\Temp\cchRFPMv.s:1029   .bss:00000008 trp_realizado
-C:\Users\Ivo\AppData\Local\Temp\cchRFPMv.s:1035   .bss:0000000c trd_realizado
-C:\Users\Ivo\AppData\Local\Temp\cchRFPMv.s:1038   .text:00000000 $a
-C:\Users\Ivo\AppData\Local\Temp\cchRFPMv.s:1041   .text:00000000 callback_antirebotes
-C:\Users\Ivo\AppData\Local\Temp\cchRFPMv.s:1254   .text:000001b0 incrementa
-C:\Users\Ivo\AppData\Local\Temp\cchRFPMv.s:1111   .text:000000a0 $d
-C:\Users\Ivo\AppData\Local\Temp\cchRFPMv.s:1122   .text:000000b4 callback_espera
-C:\Users\Ivo\AppData\Local\Temp\cchRFPMv.s:1119   .text:000000b4 $a
-C:\Users\Ivo\AppData\Local\Temp\cchRFPMv.s:1207   .text:00000174 $d
-C:\Users\Ivo\AppData\Local\Temp\cchRFPMv.s:1215   .text:00000188 $a
-C:\Users\Ivo\AppData\Local\Temp\cchRFPMv.s:1218   .text:00000188 inicio_antirebotes
-C:\Users\Ivo\AppData\Local\Temp\cchRFPMv.s:1247   .text:000001ac $d
-C:\Users\Ivo\AppData\Local\Temp\cchRFPMv.s:1251   .text:000001b0 $a
-C:\Users\Ivo\AppData\Local\Temp\cchRFPMv.s:1312   .text:00000228 $d
+C:\Users\Ivo\AppData\Local\Temp\ccUOVcAd.s:998    .bss:00000000 $d
+C:\Users\Ivo\AppData\Local\Temp\ccUOVcAd.s:999    .bss:00000000 int_count
+C:\Users\Ivo\AppData\Local\Temp\ccUOVcAd.s:1006   .data:00000000 trp
+C:\Users\Ivo\AppData\Local\Temp\ccUOVcAd.s:1003   .data:00000000 $d
+C:\Users\Ivo\AppData\Local\Temp\ccUOVcAd.s:1012   .data:00000004 trd
+C:\Users\Ivo\AppData\Local\Temp\ccUOVcAd.s:1018   .bss:00000004 boton_pulsado_antirebotes
+C:\Users\Ivo\AppData\Local\Temp\ccUOVcAd.s:1023   .bss:00000005 maquina
+C:\Users\Ivo\AppData\Local\Temp\ccUOVcAd.s:1029   .bss:00000008 trp_realizado
+C:\Users\Ivo\AppData\Local\Temp\ccUOVcAd.s:1035   .bss:0000000c trd_realizado
+C:\Users\Ivo\AppData\Local\Temp\ccUOVcAd.s:1038   .text:00000000 $a
+C:\Users\Ivo\AppData\Local\Temp\ccUOVcAd.s:1041   .text:00000000 callback_antirebotes
+C:\Users\Ivo\AppData\Local\Temp\ccUOVcAd.s:1254   .text:000001b0 incrementa
+C:\Users\Ivo\AppData\Local\Temp\ccUOVcAd.s:1111   .text:000000a0 $d
+C:\Users\Ivo\AppData\Local\Temp\ccUOVcAd.s:1122   .text:000000b4 callback_espera
+C:\Users\Ivo\AppData\Local\Temp\ccUOVcAd.s:1119   .text:000000b4 $a
+C:\Users\Ivo\AppData\Local\Temp\ccUOVcAd.s:1207   .text:00000174 $d
+C:\Users\Ivo\AppData\Local\Temp\ccUOVcAd.s:1215   .text:00000188 $a
+C:\Users\Ivo\AppData\Local\Temp\ccUOVcAd.s:1218   .text:00000188 inicio_antirebotes
+C:\Users\Ivo\AppData\Local\Temp\ccUOVcAd.s:1247   .text:000001ac $d
+C:\Users\Ivo\AppData\Local\Temp\ccUOVcAd.s:1251   .text:000001b0 $a
+C:\Users\Ivo\AppData\Local\Temp\ccUOVcAd.s:1312   .text:00000228 $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

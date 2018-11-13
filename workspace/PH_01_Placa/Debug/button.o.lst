@@ -363,22 +363,22 @@
  2224              	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 button.c
-C:\Users\Ivo\AppData\Local\Temp\cc6r03cQ.s:1964   .bss:00000000 $d
-C:\Users\Ivo\AppData\Local\Temp\cc6r03cQ.s:1965   .bss:00000000 int_count
-C:\Users\Ivo\AppData\Local\Temp\cc6r03cQ.s:1970   .bss:00000004 boton_pulsado
+C:\Users\Ivo\AppData\Local\Temp\ccUs7Kuu.s:1964   .bss:00000000 $d
+C:\Users\Ivo\AppData\Local\Temp\ccUs7Kuu.s:1965   .bss:00000000 int_count
+C:\Users\Ivo\AppData\Local\Temp\ccUs7Kuu.s:1970   .bss:00000004 boton_pulsado
                             *COM*:00000004 funcion_callback
-C:\Users\Ivo\AppData\Local\Temp\cc6r03cQ.s:1974   .text:00000000 $a
-C:\Users\Ivo\AppData\Local\Temp\cc6r03cQ.s:1977   .text:00000000 Eint4567_ISR
-C:\Users\Ivo\AppData\Local\Temp\cc6r03cQ.s:2028   .text:00000068 $d
-C:\Users\Ivo\AppData\Local\Temp\cc6r03cQ.s:2035   .text:00000078 $a
-C:\Users\Ivo\AppData\Local\Temp\cc6r03cQ.s:2038   .text:00000078 button_iniciar
-C:\Users\Ivo\AppData\Local\Temp\cc6r03cQ.s:2103   .text:00000110 $d
-C:\Users\Ivo\AppData\Local\Temp\cc6r03cQ.s:2114   .text:00000130 $a
-C:\Users\Ivo\AppData\Local\Temp\cc6r03cQ.s:2117   .text:00000130 button_empezar
-C:\Users\Ivo\AppData\Local\Temp\cc6r03cQ.s:2161   .text:00000188 $d
-C:\Users\Ivo\AppData\Local\Temp\cc6r03cQ.s:2169   .text:0000019c $a
-C:\Users\Ivo\AppData\Local\Temp\cc6r03cQ.s:2172   .text:0000019c button_estado
-C:\Users\Ivo\AppData\Local\Temp\cc6r03cQ.s:2220   .text:000001f4 $d
+C:\Users\Ivo\AppData\Local\Temp\ccUs7Kuu.s:1974   .text:00000000 $a
+C:\Users\Ivo\AppData\Local\Temp\ccUs7Kuu.s:1977   .text:00000000 Eint4567_ISR
+C:\Users\Ivo\AppData\Local\Temp\ccUs7Kuu.s:2028   .text:00000068 $d
+C:\Users\Ivo\AppData\Local\Temp\ccUs7Kuu.s:2035   .text:00000078 $a
+C:\Users\Ivo\AppData\Local\Temp\ccUs7Kuu.s:2038   .text:00000078 button_iniciar
+C:\Users\Ivo\AppData\Local\Temp\ccUs7Kuu.s:2103   .text:00000110 $d
+C:\Users\Ivo\AppData\Local\Temp\ccUs7Kuu.s:2114   .text:00000130 $a
+C:\Users\Ivo\AppData\Local\Temp\ccUs7Kuu.s:2117   .text:00000130 button_empezar
+C:\Users\Ivo\AppData\Local\Temp\ccUs7Kuu.s:2161   .text:00000188 $d
+C:\Users\Ivo\AppData\Local\Temp\ccUs7Kuu.s:2169   .text:0000019c $a
+C:\Users\Ivo\AppData\Local\Temp\ccUs7Kuu.s:2172   .text:0000019c button_estado
+C:\Users\Ivo\AppData\Local\Temp\ccUs7Kuu.s:2220   .text:000001f4 $d
                      .debug_frame:00000010 $d
 
 NO UNDEFINED SYMBOLS

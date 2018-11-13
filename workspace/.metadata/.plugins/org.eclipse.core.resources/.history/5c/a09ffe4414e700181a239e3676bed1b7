@@ -38,6 +38,14 @@ void D8Led_symbol(int value)
 #endif
 }
 
+void D8Led_blink(int value)
+{
+#ifndef EMU
+	blink_number=value;
+	espera_ticks(25,timer_callback);
+#endif
+}
+
 void timer_callback()
 {
 	if(blink){
@@ -48,12 +56,4 @@ void timer_callback()
 		blink=1;
 	}
 	D8Led_blink(blink_number);
-}
-
-void D8Led_blink(int value)
-{
-#ifndef EMU
-	blink_number=value;
-	espera_ticks(25,timer_callback);
-#endif
 }

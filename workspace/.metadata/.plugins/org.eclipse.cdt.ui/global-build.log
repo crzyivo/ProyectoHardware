@@ -1,8 +1,56 @@
-08:10:41 **** Incremental Build of configuration Debug for project PH_01_Placa ****
+08:18:13 **** Incremental Build of configuration Debug for project PH_01_Placa ****
 cs-make all 
+'Building file: ../8led.c'
+'Invoking: ARM Sourcery Windows GCC C Compiler'
+arm-none-eabi-gcc -I"D:\PH\workspace\PH_01_Placa\common" -O0 -Wall -Wa,-adhlns="8led.o.lst" -c -fmessage-length=0 -mapcs-frame -MMD -MP -MF"8led.d" -MT"8led.d" -mcpu=arm7tdmi -g3 -gdwarf-2 -o "8led.o" "../8led.c"
+'Finished building: ../8led.c'
+' '
+'Building file: ../botones_antirebotes.c'
+'Invoking: ARM Sourcery Windows GCC C Compiler'
+arm-none-eabi-gcc -I"D:\PH\workspace\PH_01_Placa\common" -O0 -Wall -Wa,-adhlns="botones_antirebotes.o.lst" -c -fmessage-length=0 -mapcs-frame -MMD -MP -MF"botones_antirebotes.d" -MT"botones_antirebotes.d" -mcpu=arm7tdmi -g3 -gdwarf-2 -o "botones_antirebotes.o" "../botones_antirebotes.c"
+../botones_antirebotes.c: In function 'callback_antirebotes':
+../botones_antirebotes.c:34:3: warning: enumeration value 'ret_inicio' not handled in switch
+../botones_antirebotes.c:34:3: warning: enumeration value 'monitorizacion' not handled in switch
+../botones_antirebotes.c:33:29: warning: unused variable 'aux'
+../botones_antirebotes.c: In function 'callback_espera':
+../botones_antirebotes.c:47:2: warning: enumeration value 'sin_pulsar' not handled in switch
+'Finished building: ../botones_antirebotes.c'
+' '
+'Building file: ../button.c'
+'Invoking: ARM Sourcery Windows GCC C Compiler'
+arm-none-eabi-gcc -I"D:\PH\workspace\PH_01_Placa\common" -O0 -Wall -Wa,-adhlns="button.o.lst" -c -fmessage-length=0 -mapcs-frame -MMD -MP -MF"button.d" -MT"button.d" -mcpu=arm7tdmi -g3 -gdwarf-2 -o "button.o" "../button.c"
+../button.c:18:21: warning: 'int_count' defined but not used
+'Finished building: ../button.c'
+' '
+'Building file: ../main.c'
+'Invoking: ARM Sourcery Windows GCC C Compiler'
+arm-none-eabi-gcc -I"D:\PH\workspace\PH_01_Placa\common" -O0 -Wall -Wa,-adhlns="main.o.lst" -c -fmessage-length=0 -mapcs-frame -MMD -MP -MF"main.d" -MT"main.d" -mcpu=arm7tdmi -g3 -gdwarf-2 -o "main.o" "../main.c"
+../main.c:22:31: warning: initialization makes pointer from integer without a cast
+../main.c:23:31: warning: initialization makes pointer from integer without a cast
+../main.c:24:30: warning: initialization makes pointer from integer without a cast
+../main.c: In function 'Main':
+../main.c:111:2: warning: implicit declaration of function 'reversi_main'
+../main.c: At top level:
+../main.c:114:6: warning: conflicting types for 'reversi_main'
+../main.c:111:2: note: previous implicit declaration of 'reversi_main' was here
+'Finished building: ../main.c'
+' '
+'Building target: PH_01_Placa.elf'
+'Invoking: ARM Sourcery Windows GCC C Linker'
+arm-none-eabi-gcc -T"D:\PH\workspace\PH_01_Placa\common\ld_script.ld" -nostartfiles -Wl,-Map,PH_01_Placa.map -mcpu=arm7tdmi -g3 -gdwarf-2 -o "PH_01_Placa.elf"  ./common/44binit.o ./common/44blib.o  ./8led.o ./arm_functions.o ./botones_antirebotes.o ./button.o ./latido.o ./led.o ./main.o ./reversi8_2018.o ./timer.o ./timer2.o   
+'Finished building target: PH_01_Placa.elf'
+' '
+'Invoking: ARM Sourcery Windows GNU Create Flash Image'
+arm-none-eabi-objcopy -O binary PH_01_Placa.elf  "PH_01_Placa.hex"
+'Finished building: PH_01_Placa.hex'
+' '
+'Invoking: ARM Sourcery Windows GNU Create Listing'
+arm-none-eabi-objdump -h -S PH_01_Placa.elf > "PH_01_Placa.lst"
+'Finished building: PH_01_Placa.lst'
+' '
 'Invoking: ARM Sourcery Windows GNU Print Size'
 arm-none-eabi-size  --format=berkeley PH_01_Placa.elf
    text	   data	    bss	    dec	    hex	filename
-  16788	    100	    140	  17028	   4284	PH_01_Placa.elf
+  17304	    116	    164	  17584	   44b0	PH_01_Placa.elf
 'Finished building: PH_01_Placa.siz'
 ' '
