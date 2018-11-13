@@ -55,5 +55,5 @@ void timer_callback()
 		D8Led_symbol(blank);
 		blink=1;
 	}
-	D8Led_blink(blink_number);
+	D8Led_blink(value);
 }

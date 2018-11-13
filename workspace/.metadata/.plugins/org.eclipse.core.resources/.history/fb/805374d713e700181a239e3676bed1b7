@@ -5,8 +5,11 @@
 * Version:  <P4-ARM.timer-leds>
 *********************************************************************************************/
 
+<<<<<<< HEAD
+//#define EMU
+=======
 //#define EMU  //Descomentar para compilacion en emulador
-
+>>>>>>> 2739d73113dc897afef6f04b3aed21929a328027
 /*--- ficheros de cabecera ---*/
 #include "8led.h"
 #include "button.h"
